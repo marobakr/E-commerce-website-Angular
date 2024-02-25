@@ -1,0 +1,49 @@
+<div class="slider my-5">
+  <div class="container">
+    <div class="row g-0">
+      <div class="col-lg-9" @slidLeft>
+        <owl-carousel-o [options]="customOptions">
+          <ng-template carouselSlide>
+            <img
+              class="w-100"
+              [src]="'./assets/images/main-slider-2.jpeg'"
+              height="400"
+            />
+          </ng-template>
+          <ng-template carouselSlide>
+            <img
+              class="w-100"
+              [src]="'./assets/images/main-slider-1.jpeg'"
+              height="400"
+            />
+          </ng-template>
+          <ng-template carouselSlide>
+            <img
+              class="w-100"
+              [src]="'./assets/images/main-slider-3.jpeg'"
+              height="400"
+            />
+          </ng-template>
+        </owl-carousel-o>
+      </div>
+      <div @slidRight class="col-lg-3 d-none d-lg-flex flex-column">
+        <figure class="mb-0">
+          <img
+            class="w-100"
+            [src]="'./assets/images/slide-1.jpeg'"
+            alt=""
+            height="200"
+          />
+        </figure>
+        <figure class="mb-0">
+          <img
+            class="w-100"
+            [src]="'./assets/images/main-slider-3.jpeg'"
+            alt=""
+            height="200"
+          />
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>

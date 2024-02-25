@@ -1,0 +1,85 @@
+<div class="products py-5">
+  <div class="">
+    <div class="row gy-5">
+      <div
+        class="col-md-3"
+        @fead
+        *ngFor="
+          let item of allProducts
+            | paginate
+              : {
+                  id: 'productPaginations',
+                  itemsPerPage: pageSize,
+                  currentPage: currentPage,
+                  totalItems: totalItems
+                }
+        "
+      >
+        <div class="inner position-relative">
+          <owl-carousel-o #owlElement [options]="customOptions">
+            <ng-container *ngFor="let imge of item.images">
+              <ng-template carouselSlide>
+                <figure class="imge-slider">
+                  <img
+                    role="button"
+                    class="w-100 mb-3 img-thumbnail rounded-3"
+                    height="200"
+                    [src]="imge"
+                    [routerLink]="['/details', item._id]"
+                  />
+                </figure>
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+          <div class="foooter-info p-2 rounded">
+            <h5 class="h6 text-main">{{ item.category.name }}</h5>
+            <h3 class="h6">
+              {{ item.title.split(" ").splice(0, 2).join(" ") }}
+            </h3>
+            <div
+              class="rating-price d-flex justify-content-between align-items-center"
+            >
+              <span>{{ item.price }} EGP</span>
+              <div class="rating">
+                <span>
+                  <i
+                    [ngClass]="{ 'rating-color': item.ratingsAverage >= star }"
+                    class="fas fa-star fa-star"
+                    *ngFor="let star of [1, 2, 3, 4, 5]"
+                  ></i>
+                  {{ item.ratingsAverage }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-btncart
+          class="w-100"
+          #componentBtn
+          (click)="addProduct(item._id, componentBtn)"
+          [text]="'add to cart'"
+          [fullWidth]="true"
+          [bgMain]="true"
+          [loderBgMain]="true"
+        ></app-btncart>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="showPaginations">
+  <pagination-controls
+    id="productPaginations"
+    (pageChange)="pageChanged($event)"
+    (pageBoundsCorrection)="pageChanged($event)"
+    [maxSize]="9"
+    [directionLinks]="true"
+    [autoHide]="true"
+    [responsive]="true"
+    previousLabel="Previous"
+    nextLabel="Next"
+    screenReaderPaginationLabel="Pagination"
+    screenReaderPageLabel="page"
+    screenReaderCurrentLabel="You're on page"
+  >
+  </pagination-controls>
+</div>

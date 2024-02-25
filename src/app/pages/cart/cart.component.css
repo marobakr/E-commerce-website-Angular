@@ -1,0 +1,42 @@
+.trashIcon {
+  border: 2px solid #4f6f52;
+}
+.trashIcon {
+  border-radius: 2px;
+  letter-spacing: 2px;
+  overflow: hidden;
+  padding: 15px 50px;
+  text-align: center;
+  transition: all 0.5s ease;
+  background-color: #4f6f52;
+  width: 220px;
+}
+
+#i-cart {
+  opacity: 0;
+  position: absolute;
+  transition: all 0.5s ease;
+  height: 100%;
+  margin-top: 10px;
+}
+
+#i-cart {
+  right: -30px;
+}
+.trashIcon:hover {
+  background-color: red;
+  padding-left: 0;
+  border: 2px solid red;
+}
+.trashIcon:hover #i-cart {
+  opacity: 1;
+  right: 20px;
+}
+.bg-even {
+  background-color: #5f7464;
+  color: white;
+}
+.bg-odd {
+  background-color: #99a799;
+  color: black;
+}

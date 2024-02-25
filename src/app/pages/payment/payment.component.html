@@ -1,0 +1,83 @@
+<form class="" [formGroup]="payMentForm">
+  <h2 class="py-3">Checkout session</h2>
+  <!-- user details -->
+  <div class="form-floating mb-3">
+    <input
+      type="text"
+      class="form-control shadow-0"
+      id="floatingInputstreet"
+      placeholder="your street"
+      [ngClass]="{
+        'is-valid': !details.errors,
+        'is-invalid': details.errors && details.touched
+      }"
+      formControlName="details"
+    />
+    <label for="floatingInputstreet"> your street</label>
+    <div *ngIf="details.dirty" class="errorGroupe my-3">
+      <p *ngIf="details.getError('required')" class="alert alert-danger">
+        your street is required
+      </p>
+      <p *ngIf="details.getError('minlength')" class="alert alert-danger">
+        your street not valid
+      </p>
+    </div>
+  </div>
+
+  <!-- user city -->
+  <div class="form-floating mb-3">
+    <input
+      type="text"
+      class="form-control shadow-0"
+      id="floatingInputcity"
+      placeholder="city"
+      [ngClass]="{
+        'is-valid': !city.errors,
+        'is-invalid': city.errors && city.touched
+      }"
+      formControlName="city"
+    />
+    <label for="floatingInputpassword"> city</label>
+    <div *ngIf="city.dirty" class="errorGroupe my-3">
+      <p *ngIf="city.getError('required')" class="alert alert-danger">
+        your city is required
+      </p>
+      <p *ngIf="city.getError('minlength')" class="alert alert-danger">
+        your city not valid
+      </p>
+    </div>
+  </div>
+  <!-- user phone -->
+  <div class="form-floating mb-3">
+    <input
+      type="tel"
+      class="form-control shadow-0"
+      id="floatingInputphone"
+      placeholder="phone"
+      [ngClass]="{
+        'is-valid': !phone.errors,
+        'is-invalid': phone.errors && phone.touched
+      }"
+      formControlName="phone"
+    />
+    <label for="floatingInputphone"> phone</label>
+    <div *ngIf="phone.dirty" class="errorGroupe my-3">
+      <p *ngIf="phone.getError('required')" class="alert alert-danger">
+        your phone is required
+      </p>
+      <p *ngIf="phone.getError('pattern')" class="alert alert-danger">
+        your phone not valid
+      </p>
+    </div>
+  </div>
+  <app-btncart
+    (click)="CheckoutOnLine(payMentForm)"
+    [fullWidth]="true"
+    [text]="'Checkout online'"
+    [outLine]="true"
+    [isLoding]="isLoding"
+    [loderBgMain]="true"
+  >
+    <img src="./assets/images/visa-1.svg" alt="" />
+  </app-btncart>
+</form>

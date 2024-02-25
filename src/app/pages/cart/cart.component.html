@@ -1,0 +1,102 @@
+<section *ngIf="cartProduct; else empty">
+  <h1 class="text-capitalize fw-bolder">shop cart</h1>
+  <p class="text-main">
+    totla price: {{ cartProduct.data?.totalCartPrice | currency }}
+  </p>
+  <div class="clear d-flex mb-5 justify-content-between align-items-center">
+    <h3 class="mb-0 text-capitalize fw-bold">
+      all orders {{ cartProduct.numOfCartItems }}
+    </h3>
+    <div
+      (click)="removeAllItem()"
+      class="trashIcon rounded-2 text-white position-relative text-center"
+      role="button"
+    >
+      <span class="fw-bolder"> Clear All</span>
+      <i id="i-cart" class="fa-solid fa-trash fa-lg"></i>
+    </div>
+  </div>
+  <div cdkDropList (cdkDropListDropped)="drop($event)">
+    <div
+      *ngFor="
+        let item of cartProduct.data.products;
+        let even = even;
+        let odd = odd
+      "
+      [ngClass]="{ 'bg-even': even, 'bg-odd': odd }"
+      @fade
+      class="row mb-4 py-2 rounded"
+      cdkDrag
+    >
+      <div class="col-lg-1 col-md-2">
+        <figure>
+          <img
+            class="w-100"
+            [src]="item.product.imageCover"
+            [alt]="item.product.title"
+          />
+        </figure>
+      </div>
+      <div class="col-lg-11 col-md-10">
+        <div class="inner d-flex justify-content-between align-items-center">
+          <div class="info">
+            <h4 class="h5 mb-3">{{ item.product.title }}</h4>
+            <p class="text-white mb-3">price {{ item.price | currency }}</p>
+            <app-btncart
+              #btnItem
+              (click)="removeCartItem(item.product._id, btnItem)"
+              [text]="'Remove '"
+              [even]="even"
+              [odd]="odd"
+            >
+              <i class="fas fa-trash-can"></i>
+            </app-btncart>
+          </div>
+          <div class="counter">
+            <button
+              [ngClass]="{ 'bg-odd': even, 'bg-even': odd }"
+              (click)="
+                updateCountItem(
+                  item.product._id,
+                  item.count - 1,
+                  'warning',
+                  'Item removed from the cart'
+                )
+              "
+              class="btn btn-sm"
+            >
+              -
+            </button>
+            <span class="px-2 mb-0">{{ item.count }}</span>
+            <button
+              [ngClass]="{ 'bg-odd': even, 'bg-even': odd }"
+              (click)="
+                updateCountItem(
+                  item.product._id,
+                  item.count + 1,
+                  'success',
+                  'Item added from the cart'
+                )
+              "
+              class="btn btn-sm"
+            >
+              +
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+  </div>
+  <app-btncart
+    [routerLink]="['/payment', cartProduct.data?._id]"
+    [fullWidth]="true"
+    [text]="'Checkout'"
+    [isLoding]="false"
+    [bgdark]="true"
+  ></app-btncart>
+</section>
+
+<ng-template #empty class="text-center">
+  <h2>no products to show</h2>
+</ng-template>

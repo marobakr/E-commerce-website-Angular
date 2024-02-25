@@ -1,0 +1,21 @@
+.foooter-info {
+  background-color: #d2e3c8;
+}
+.loding {
+  display: none;
+}
+button.isLoding .loding {
+  display: block;
+}
+button.isLoding .text {
+  display: none;
+}
+.imge-slider {
+  overflow: hidden;
+}
+.imge-slider img {
+  transition: all 0.5s;
+}
+.imge-slider:hover img {
+  transform: scale(1.25);
+}

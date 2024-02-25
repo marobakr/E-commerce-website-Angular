@@ -1,0 +1,141 @@
+<div class="form py-5">
+  <h1 class="mat-headline-3 mb-0 text-capitalize py-5">register Form</h1>
+  <form
+    [@streatch]
+    (ngSubmit)="handleForm(registerForm)"
+    [formGroup]="registerForm"
+  >
+    <!-- user name -->
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control shadow-0"
+        id="floatingInput"
+        placeholder=" name"
+        [ngClass]="{
+          'is-valid': !name?.errors,
+          'is-invalid': name?.errors && name?.touched
+        }"
+        formControlName="name"
+      />
+      <label for="floatingInput"> name</label>
+      <div *ngIf="name?.dirty" class="errorGroupe my-3">
+        <p *ngIf="name?.getError('required')" class="alert alert-danger">
+          your name is required
+        </p>
+        <p *ngIf="name?.getError('maxlength')" class="alert alert-danger">
+          maxlength
+        </p>
+        <p
+          *ngIf="registerForm.get('name')?.getError('minlength')"
+          class="alert alert-danger"
+        >
+          minlength
+        </p>
+      </div>
+    </div>
+
+    <!-- user email -->
+    <div class="form-floating mb-3">
+      <input
+        type="email"
+        class="form-control shadow-0"
+        id="floatingInputemail"
+        placeholder=" email"
+        [ngClass]="{
+          'is-valid': !email?.errors,
+          'is-invalid': email?.errors && email?.touched
+        }"
+        formControlName="email"
+      />
+      <label for="floatingInputemail"> email</label>
+      <div *ngIf="email?.dirty" class="errorGroupe my-3">
+        <p *ngIf="email?.getError('required')" class="alert alert-danger">
+          your email is required
+        </p>
+        <p *ngIf="email?.getError('email')" class="alert alert-danger">
+          your email not valid
+        </p>
+      </div>
+    </div>
+
+    <!-- user password -->
+    <div class="form-floating mb-3">
+      <input
+        type="password"
+        class="form-control shadow-0"
+        id="floatingInputPassword"
+        placeholder="Password"
+        [ngClass]="{
+          'is-valid': !password?.errors,
+          'is-invalid': password?.errors && password?.touched
+        }"
+        formControlName="password"
+      />
+      <label for="floatingInputpassword"> password</label>
+      <div *ngIf="password?.dirty" class="errorGroupe my-3">
+        <p *ngIf="password?.getError('required')" class="alert alert-danger">
+          your password is required
+        </p>
+        <p *ngIf="password?.getError('pattern')" class="alert alert-danger">
+          your password not valid
+        </p>
+      </div>
+    </div>
+
+    <!-- user rePassword -->
+    <div class="form-floating mb-3">
+      <input
+        type="password"
+        class="form-control shadow-0"
+        id="floatingInputrePassword"
+        placeholder="rePassword"
+        [ngClass]="{
+          'is-valid': !rePassword?.errors,
+          'is-invalid': rePassword?.errors && rePassword?.touched
+        }"
+        formControlName="rePassword"
+      />
+      <label for="floatingInputrePassword"> rePassword</label>
+      <div *ngIf="rePassword?.dirty" class="errorGroupe my-3">
+        <p *ngIf="rePassword?.getError('required')" class="alert alert-danger">
+          your rePassword is required
+        </p>
+        <p *ngIf="rePassword?.getError('pattern')" class="alert alert-danger">
+          your rePassword not valid
+        </p>
+      </div>
+    </div>
+
+    <!-- user phone -->
+    <div class="form-floating mb-3">
+      <input
+        type="tel"
+        class="form-control shadow-0"
+        id="floatingInputphone"
+        placeholder="phone"
+        [ngClass]="{
+          'is-valid': !phone?.errors,
+          'is-invalid': phone?.errors && phone?.touched
+        }"
+        formControlName="phone"
+      />
+      <label for="floatingInputphone"> phone</label>
+      <div *ngIf="phone?.dirty" class="errorGroupe my-3">
+        <p *ngIf="phone?.getError('required')" class="alert alert-danger">
+          your phone is required
+        </p>
+        <p *ngIf="phone?.getError('pattern')" class="alert alert-danger">
+          your phone not valid
+        </p>
+      </div>
+    </div>
+    <app-btncart
+      [formValid]="registerForm.valid"
+      [isLoding]="isLoding"
+      text="register"
+      [bgMain]="true"
+      [loderBgMain]="true"
+    ></app-btncart>
+  </form>
+</div>

@@ -1,0 +1,58 @@
+<h1 class="mat-headline-3 mb-0 text-capitalize py-5">Login in</h1>
+<form [@streatch] (ngSubmit)="signIn(loginForm)" [formGroup]="loginForm">
+  <!-- user email -->
+  <div class="form-floating mb-3">
+    <input
+      type="email"
+      class="form-control shadow-0"
+      id="floatingInputemail"
+      placeholder=" email"
+      [ngClass]="{
+        'is-valid': !email.errors,
+        'is-invalid': email.errors && email.touched
+      }"
+      formControlName="email"
+    />
+    <label for="floatingInputemail"> email</label>
+    <div *ngIf="email.dirty" class="errorGroupe my-3">
+      <p *ngIf="email.getError('required')" class="alert alert-danger">
+        your email is required
+      </p>
+      <p *ngIf="email.getError('email')" class="alert alert-danger">
+        your email not valid
+      </p>
+    </div>
+  </div>
+
+  <!-- user password -->
+  <div class="form-floating mb-3">
+    <input
+      type="password"
+      class="form-control shadow-0"
+      id="floatingInputPassword"
+      placeholder="Password"
+      [ngClass]="{
+        'is-valid': !password.errors,
+        'is-invalid': password.errors && password.touched
+      }"
+      formControlName="password"
+    />
+    <label for="floatingInputpassword"> password</label>
+    <div *ngIf="password.dirty" class="errorGroupe my-3">
+      <p *ngIf="password.getError('required')" class="alert alert-danger">
+        your password is required
+      </p>
+      <p *ngIf="password.getError('pattern')" class="alert alert-danger">
+        your password not valid
+      </p>
+    </div>
+  </div>
+
+  <app-btncart
+    [formValid]="loginForm.valid"
+    [isLoding]="isLoding"
+    [text]="'login'"
+    [bgMain]="true"
+    [loderBgMain]="true"
+  ></app-btncart>
+</form>

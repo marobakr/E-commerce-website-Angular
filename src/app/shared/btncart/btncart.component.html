@@ -1,0 +1,28 @@
+<button
+  [ngClass]="{
+    'w-100': fullWidth,
+    'bg-main-outline': outLine,
+    'bg-main': bgMain,
+    alarmTrue: formValid,
+    odd: odd,
+    even: even,
+    'btn-dark': bgdark
+  }"
+  class="my-3 btn py-2 ms-auto text-white text-capitalize"
+>
+  <span @fade *ngIf="isLoding" class="d-flex justify-content-center">
+    <i
+      [ngClass]="{
+      odd: odd,
+    even: even,
+    'loader-bg-main': loderBgMain,
+
+    }"
+      class="loader"
+    ></i>
+  </span>
+  <ng-container *ngIf="!isLoding">
+    <span class="fw-bolder">{{ text }}</span>
+    <ng-content></ng-content>
+  </ng-container>
+</button>
