@@ -101,8 +101,8 @@
         <p *ngIf="rePassword?.getError('required')" class="alert alert-danger">
           your rePassword is required
         </p>
-        <p *ngIf="rePassword?.getError('pattern')" class="alert alert-danger">
-          your rePassword not valid
+        <p *ngIf="rePassword?.getError('noMatch')" class="alert alert-danger">
+          your rePassword not mathces
         </p>
       </div>
     </div>

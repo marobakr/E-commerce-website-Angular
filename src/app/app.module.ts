@@ -16,7 +16,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LayoutauthComponent } from './layouts/layoutauth/layoutauth.component';
 import { LayoutblankComponent } from './layouts/layoutblank/layoutblank.component';
 import { ProductsComponent } from './pages/products/products.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <-- #1 import module
 import { HttpClientModule } from '@angular/common/http';
 import { notifierDefaultOptions } from './settings/notfications';
 import { MainSliderComponent } from './pages/home/components/main-slider/main-slider.component';
@@ -41,6 +41,7 @@ import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
     CartComponent,
     HomeComponent,
     LoginComponent,
+
     NotfoundComponent,
     RegisterComponent,
     LayoutauthComponent,

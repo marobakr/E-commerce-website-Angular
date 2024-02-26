@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
+  FormControlOptions,
   FormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { AuthService } from 'src/app/core/auth.service';
@@ -23,27 +25,38 @@ export class RegisterComponent {
     private _notifierService: NotifierService,
     private _router: Router
   ) {}
-
   isLoding: boolean = false;
-  registerForm: FormGroup = this._formBuilder.group({
-    name: [
-      '',
-      [Validators.required, Validators.maxLength(20), Validators.minLength(3)],
-    ],
-    email: [null, [Validators.required, Validators.email]],
-    password: [
-      null,
-      [Validators.required, Validators.pattern(/^[A-Z][a-z0-9]{6,20}$/)],
-    ],
-    rePassword: [
-      null,
-      [Validators.required, Validators.pattern(/^[A-Z][a-z0-9]{6,20}$/)],
-    ],
-    phone: [
-      null,
-      [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)],
-    ],
-  });
+
+  confirmPassword = (control: AbstractControl) => {
+    const password = control.get('password')?.value;
+    const rePassword = control.get('rePassword')?.value;
+    if (rePassword !== password) {
+      control.get('rePassword')?.setErrors({ noMatch: true });
+    }
+  };
+  registerForm: FormGroup = this._formBuilder.group(
+    {
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.minLength(3),
+        ],
+      ],
+      email: [null, [Validators.required, Validators.email]],
+      password: [
+        null,
+        [Validators.required, Validators.pattern(/^[A-Z][a-z0-9]{6,20}$/)],
+      ],
+      rePassword: [null, [Validators.required]],
+      phone: [
+        null,
+        [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)],
+      ],
+    },
+    { validators: [this.confirmPassword] }
+  );
 
   //^ suger syntax
   get name(): AbstractControl<any, any> | null {
@@ -83,6 +96,7 @@ export class RegisterComponent {
       });
     } else {
       registerForm.markAllAsTouched();
+      console.log(this.registerForm.get('rePassword')?.getError('required'));
     }
   }
 }
