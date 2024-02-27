@@ -21,6 +21,8 @@
               <ng-template carouselSlide>
                 <figure class="imge-slider">
                   <img
+                    (mouseenter)="startAutoplay()"
+                    (mouseleave)="stopAutoplay()"
                     role="button"
                     class="w-100 mb-3 img-thumbnail rounded-3"
                     height="200"
@@ -53,6 +55,7 @@
             </div>
           </div>
         </div>
+
         <app-btncart
           class="w-100"
           #componentBtn

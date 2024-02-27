@@ -1,12 +1,7 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnInit,
-  Renderer2,
-} from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { BehaviorSubject } from 'rxjs';
 import { CartService } from 'src/app/core/cart.service';
 import { ProductsDataService } from 'src/app/core/products-data.service';
 import { Products } from 'src/app/interfaces/products';
@@ -23,16 +18,15 @@ export class ProductsComponent implements OnInit {
   constructor(
     private _productsDataService: ProductsDataService,
     private _cartService: CartService,
-    private _notifierService: NotifierService,
-    private changeDetectorRef: ChangeDetectorRef
+    private _notifierService: NotifierService
   ) {}
   @Input() showPaginations: boolean = true;
+  @ViewChild('owlElement') owlElement: any;
 
   allProducts: Products[] = [];
   pageSize: number = 10;
   currentPage: number = 0;
   totalItems: number = 0;
-  autoplaySlider: boolean = false;
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -41,7 +35,7 @@ export class ProductsComponent implements OnInit {
     dots: false,
     navSpeed: 600,
     margin: 8,
-    autoplay: this.autoplaySlider,
+    autoplay: false,
     responsive: {
       0: {
         items: 1,
@@ -56,16 +50,15 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.displayAllProducts();
   }
-  // ❌ in prooogress
-  // startAutoplay() {
-  //   this.autoplaySlider = true;
-  //   this.changeDetectorRef.detectChanges();
-  // }
+  startAutoplay() {
+    this.owlElement.options.dots = true;
+    console.log(this.owlElement.options.dots);
+  }
 
-  // stopAutoplay() {
-  //   this.autoplaySlider = false;
-  //   this.changeDetectorRef.detectChanges();
-  // }
+  stopAutoplay() {
+    this.owlElement.options.dots = false;
+    console.log(this.owlElement.options.dots);
+  }
 
   displayAllProducts(): void {
     this._productsDataService.allProducts().subscribe({

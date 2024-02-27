@@ -24,13 +24,13 @@
           your name is required
         </p>
         <p *ngIf="name?.getError('maxlength')" class="alert alert-danger">
-          maxlength
+          Username must be at least 20
         </p>
         <p
           *ngIf="registerForm.get('name')?.getError('minlength')"
           class="alert alert-danger"
         >
-          minlength
+          Username must be at least 3 characters long
         </p>
       </div>
     </div>
@@ -78,7 +78,8 @@
           your password is required
         </p>
         <p *ngIf="password?.getError('pattern')" class="alert alert-danger">
-          your password not valid
+          Password must start with an uppercase letter, followed by 6 to 20
+          lowercase letters or digits.
         </p>
       </div>
     </div>
@@ -126,7 +127,7 @@
           your phone is required
         </p>
         <p *ngIf="phone?.getError('pattern')" class="alert alert-danger">
-          your phone not valid
+          Please enter a valid Egyptian phone number
         </p>
       </div>
     </div>
