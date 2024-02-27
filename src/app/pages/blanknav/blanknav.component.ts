@@ -21,6 +21,8 @@ export class BlanknavComponent implements OnInit {
   ) {}
   @ViewChild('cartIcon') cartIcon!: ElementRef;
   itemCount: number = 0;
+  urlImage: any = '';
+
   allLInks: string[] = ['home', 'products', 'categories', 'brands'];
   allIcons: string[] = [
     'fa-brands fa-facebook',
@@ -32,6 +34,9 @@ export class BlanknavComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.listenerCartItem();
+    if (localStorage.getItem('imageUser') !== null) {
+      this.urlImage = localStorage.getItem('imageUser');
+    }
   }
 
   listenerCartItem(): void {
@@ -60,5 +65,16 @@ export class BlanknavComponent implements OnInit {
 
   sinOut(): void {
     this._authService.sinOut();
+  }
+  uploadImgeUser(event: any) {
+    if (event.target?.files) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event) => {
+        this.urlImage = event.target?.result;
+        console.log(this.urlImage);
+        localStorage.setItem('imageUser', this.urlImage);
+      };
+    }
   }
 }

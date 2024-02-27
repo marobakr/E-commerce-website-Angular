@@ -1,3 +1,76 @@
 .badge {
   background-color: var(--main-color);
 }
+
+.user-info img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+.user-info .hoverable {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  height: 55px;
+  width: 55px;
+}
+.user-info .hoverable .hover-text {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+.hoverable .background {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 1;
+}
+.user-info .hoverable:hover .hover-text {
+  display: block;
+}
+.user-info .hoverable:hover .background {
+  display: block;
+}
+
+.user-info #fileInput {
+  display: none;
+}
+.user-info {
+  cursor: pointer;
+}
+
+.user-info::before {
+  position: absolute;
+  left: 50%;
+  bottom: -30px;
+  transform: translateX(-50%);
+  content: "";
+  border-width: 15px;
+  border-style: solid;
+  border-color: var(--main-color) transparent transparent transparent;
+}
+.sinOut {
+  text-align: center;
+  bottom: -48px;
+  left: 0;
+  right: 0;
+  background-color: var(--main-color);
+  width: fit-content;
+  color: white;
+}
+
+.sinOut {
+  display: none;
+}
+.user-info:hover .sinOut {
+  display: block;
+}

@@ -26,7 +26,7 @@
           >
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
         <li class="nav-item" routerLink="/cart" role="button">
           <a class="nav-link position-relative" aria-current="page">
             <i #cartIcon class="fa-solid fa-cart-shopping fa- fa-2x"></i>
@@ -37,17 +37,32 @@
           </a>
         </li>
 
-        <li *ngFor="let icon of allIcons" class="nav-item">
+        <li *ngFor="let icon of allIcons" class="px-1 nav-item">
           <a class="nav-link" aria-current="page"><i [class]="icon"></i></a>
         </li>
-        <li class="nav-item">
-          <a
-            class="nav-link text-capitalize"
-            aria-current="page"
-            routerLinkActive="active"
-            (click)="sinOut()"
-            >sinOut</a
-          >
+      </ul>
+      <ul
+        class="user-info bg-main text-white mb-2 mb-lg-0 mx-2 rounded-5 navbar-nav align-items-center p-1 position-relative"
+      >
+        <label class="hoverable" for="fileInput">
+          <img
+            class="w-100"
+            [src]="
+              urlImage
+                ? urlImage
+                : 'https://www.w3schools.com/howto/img_avatar.png'
+            "
+          />
+          <div class="background"></div>
+        </label>
+        <br />
+        <input id="fileInput" type="file" (change)="uploadImgeUser($event)" />
+        <li class="username px-3 fw-bold">Marwan Abubakr</li>
+        <li
+          (click)="sinOut()"
+          class="sinOut mx-auto px-5 py-1 text-capitalize position-absolute rounded-pill"
+        >
+          sinOut
         </li>
       </ul>
     </div>
