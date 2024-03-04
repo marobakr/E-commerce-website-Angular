@@ -14,6 +14,11 @@ import { CategoriesComponent } from './pages/categories/categories.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { AllordersComponent } from './pages/allorders/allorders.component';
+import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+import { SpecificCategoryComponent } from './pages/specific-category/specific-category.component';
+import { SpecificBrandComponent } from './pages/specific-brand/specific-brand.component';
+import { CashOrderComponent } from './pages/cash-order/cash-order.component';
+import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
 
 const routes: Routes = [
   {
@@ -26,10 +31,19 @@ const routes: Routes = [
       { path: 'cart', component: CartComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'brands', component: BrandsComponent },
-      { path: 'categoreis', component: CategoriesComponent },
+      { path: 'categories', component: CategoriesComponent },
       { path: 'details/:id', component: DetailsComponent },
       { path: 'payment/:idcart', component: PaymentComponent },
-      { path: 'allorders', component: AllordersComponent },
+      { path: 'cash-order/:idcart', component: CashOrderComponent },
+      {
+        path: 'specificBrand/:id/:brand-name',
+        component: SpecificBrandComponent,
+      },
+      {
+        path: 'specificCategory/:id-category/:name',
+        component: SpecificCategoryComponent,
+      },
+      { path: 'allorders', component: UserOrdersComponent },
     ],
   },
   {
@@ -38,6 +52,7 @@ const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
+      { path: 'forgetpassword', component: ForgetPasswordComponent },
     ],
   },
 

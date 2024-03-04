@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { CartService } from 'src/app/core/cart.service';
-// import { Country } from '@angular-material-extensions/select-country';
 
 @Component({
   selector: 'app-payment',
@@ -62,11 +61,12 @@ export class PaymentComponent implements OnInit {
       this.isLoding = true;
       this._cartService.PaymentOnline(userInfo.value, this._idCart).subscribe({
         next: (respons) => {
+          this._cartService.cartNumber.next(0);
           window.open(respons.session.url);
           this.isLoding = false;
         },
         error: (err) => {
-          console.log(err);
+          this.isLoding = false;
         },
       });
     } else {

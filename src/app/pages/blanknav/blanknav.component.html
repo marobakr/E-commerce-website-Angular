@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
-    <a class="navbar-brand">
+    <a class="navbar-brand" routerLink="/home">
       <img src="./assets/images/freshcart-logo.svg" alt="" />
     </a>
     <button
@@ -15,15 +15,73 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li *ngFor="let link of allLInks" class="nav-item">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center gap-1">
+        <li class="nav-item">
           <a
             class="nav-link text-capitalize"
             aria-current="page"
             routerLinkActive="active-link"
-            routerLink="{{ link }}"
-            >{{ link }}</a
+            routerLink="home"
+            >home</a
           >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-capitalize"
+            aria-current="page"
+            routerLinkActive="active-link"
+            routerLink="products"
+          >
+            products
+          </a>
+        </li>
+        <li class="nav-item d-flex align-items-center position-relative gap-1">
+          <a
+            class="nav-link text-capitalize"
+            aria-current="page"
+            routerLinkActive="active-link"
+            routerLink="categories"
+          >
+            categories
+          </a>
+          <span
+            (click)="getCategoriesUl()"
+            role="button"
+            class="arrowCateg bg-main p-2 rounded text-white overflow-hidden"
+          >
+            <i class="fa-solid fa-caret-down down-bottom"></i>
+          </span>
+          <ul
+            #categoriesLinks
+            class="categoriesLinks d-none navbar-nav position-absolute flex-column w-100 g-2 px-1 py-2"
+          >
+            <li class="nav-item text-center bg-main rounded mb-3">
+              <a class="nav-link text-capitalize fw-medium text-white"
+                >all categories
+              </a>
+            </li>
+            <li
+              (click)="subCategorie(category._id)"
+              *ngFor="let category of ulCategories"
+              class="nav-item d-flex align-items-center justify-content-between mb-2"
+              role="button"
+              [routerLink]="['specificCategory', category._id, category.name]"
+            >
+              <a class="nav-link text-capitalize" aria-current="page"
+                >{{ category.name }}
+              </a>
+              <img class="w-15" [src]="category.image" [alt]="category.name" />
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-capitalize"
+            aria-current="page"
+            routerLinkActive="active-link"
+            routerLink="brands"
+            >brands
+          </a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
@@ -38,7 +96,9 @@
         </li>
 
         <li *ngFor="let icon of allIcons" class="px-1 nav-item">
-          <a class="nav-link" aria-current="page"><i [class]="icon"></i></a>
+          <a class="nav-link fa-xl" aria-current="page"
+            ><i [class]="icon"></i
+          ></a>
         </li>
       </ul>
       <ul
@@ -57,7 +117,7 @@
         </label>
         <br />
         <input id="fileInput" type="file" (change)="uploadImgeUser($event)" />
-        <li class="username px-3 fw-bold">Marwan Abubakr</li>
+        <li class="username px-3 fw-bold">{{ userName }}</li>
         <li
           (click)="sinOut()"
           class="sinOut mx-auto px-5 py-1 text-capitalize position-absolute rounded-pill"

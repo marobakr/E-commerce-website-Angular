@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControlOptions,
   FormGroup,
-  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { AuthService } from 'src/app/core/auth.service';
 import { NotifierService } from 'angular-notifier';
 import { Router } from '@angular/router';
 import { streatch } from 'src/app/shared/animations/toggle-fade';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -25,6 +24,7 @@ export class RegisterComponent {
     private _notifierService: NotifierService,
     private _router: Router
   ) {}
+  private subscription!: Subscription;
   isLoding: boolean = false;
 
   confirmPassword = (control: AbstractControl) => {
@@ -79,6 +79,7 @@ export class RegisterComponent {
       this.isLoding = true;
       this._authService.signUp(registerForm.value).subscribe({
         next: (respons) => {
+          console.log(respons);
           this._notifierService.notify(
             'success',
             `${respons.message} register`
@@ -88,6 +89,7 @@ export class RegisterComponent {
             this._router.navigate(['/login']);
           }, 1000);
           this.isLoding = false;
+          registerForm.reset();
         },
         error: (er) => {
           this.isLoding = false;
@@ -96,7 +98,6 @@ export class RegisterComponent {
       });
     } else {
       registerForm.markAllAsTouched();
-      console.log(this.registerForm.get('rePassword')?.getError('required'));
     }
   }
 }

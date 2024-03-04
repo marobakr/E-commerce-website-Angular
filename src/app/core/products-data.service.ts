@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { baseUrl } from '../shared/paseApi';
 
 @Injectable({
@@ -14,10 +14,21 @@ export class ProductsDataService {
     );
   }
 
+  lengthProducts: BehaviorSubject<number> = new BehaviorSubject(0);
+
+  getDetails(id: string): Observable<any> {
+    return this._httpClient.get(`${baseUrl}/api/v1/products/${id}`);
+  }
   allCategories(): Observable<any> {
     return this._httpClient.get(`${baseUrl}/api/v1/categories`);
   }
-  getDetails(id: string): Observable<any> {
-    return this._httpClient.get(`${baseUrl}/api/v1/products/${id}`);
+  specificCategories(id: string | null): Observable<any> {
+    return this._httpClient.get(`${baseUrl}/api/v1/categories/${id}`);
+  }
+  allBrand(numOfPadge: number = 1): Observable<any> {
+    return this._httpClient.get(`${baseUrl}/api/v1/brands?page=${numOfPadge}`);
+  }
+  specificBrand(id: string | null): Observable<any> {
+    return this._httpClient.get(`${baseUrl}/api/v1/brands/${id}`);
   }
 }

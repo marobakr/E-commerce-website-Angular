@@ -9,3 +9,38 @@
     transform: scale(1.2);
   }
 }
+@keyframes bouncingLaing {
+  0%,
+  10%,
+  20%,
+  50%,
+  100% {
+    transform: translateY(0);
+  }
+  40%,
+  60% {
+    transform: translateY(-20px);
+  }
+}
+@keyframes bouncingLaingLeftRight {
+  0%,
+  10%,
+  20%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  40%,
+  60% {
+    transform: translateX(-20px);
+  }
+}
+@keyframes up-down {
+  0%,
+  100% {
+    top: 0;
+  }
+  50% {
+    top: -50px;
+  }
+}

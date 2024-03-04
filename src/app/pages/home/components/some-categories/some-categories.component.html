@@ -1,0 +1,21 @@
+<section class="my-5">
+  <h1 class="baseTitle mb-4">Shop Popular Categories</h1>
+  <div class="container">
+    <div class="row" @slidDown>
+      <owl-carousel-o [options]="customOptions" class="text-center">
+        <ng-container *ngFor="let categore of allcategories">
+          <ng-template carouselSlide [id]="categore._id">
+            <img
+              class="w-100 mb-3"
+              height="200"
+              [src]="categore.image"
+              [alt]="categore.name"
+              [title]="categore.name"
+            />
+            <h4 class="subtitle-2">{{ categore.name }}</h4>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+  </div>
+</section>

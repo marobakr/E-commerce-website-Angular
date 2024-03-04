@@ -1,0 +1,171 @@
+.empty-cart {
+  width: 50vw;
+  margin: 0 auto;
+  text-align: center;
+}
+svg {
+  max-width: 60%;
+  padding: 1rem;
+}
+svg #oval,
+svg #plus,
+svg #diamond,
+svg #bubble-rounded {
+  -webkit-animation: plopp 4s ease-out infinite;
+  animation: plopp 4s ease-out infinite;
+}
+svg #oval:nth-child(1),
+svg #plus:nth-child(1),
+svg #diamond:nth-child(1),
+svg #bubble-rounded:nth-child(1) {
+  -webkit-animation-delay: -240ms;
+  animation-delay: -240ms;
+}
+svg #oval:nth-child(2),
+svg #plus:nth-child(2),
+svg #diamond:nth-child(2),
+svg #bubble-rounded:nth-child(2) {
+  -webkit-animation-delay: -480ms;
+  animation-delay: -480ms;
+}
+svg #oval:nth-child(3),
+svg #plus:nth-child(3),
+svg #diamond:nth-child(3),
+svg #bubble-rounded:nth-child(3) {
+  -webkit-animation-delay: -720ms;
+  animation-delay: -720ms;
+}
+svg #oval:nth-child(4),
+svg #plus:nth-child(4),
+svg #diamond:nth-child(4),
+svg #bubble-rounded:nth-child(4) {
+  -webkit-animation-delay: -960ms;
+  animation-delay: -960ms;
+}
+svg #oval:nth-child(5),
+svg #plus:nth-child(5),
+svg #diamond:nth-child(5),
+svg #bubble-rounded:nth-child(5) {
+  -webkit-animation-delay: -1200ms;
+  animation-delay: -1200ms;
+}
+svg #oval:nth-child(6),
+svg #plus:nth-child(6),
+svg #diamond:nth-child(6),
+svg #bubble-rounded:nth-child(6) {
+  -webkit-animation-delay: -1440ms;
+  animation-delay: -1440ms;
+}
+svg #oval:nth-child(7),
+svg #plus:nth-child(7),
+svg #diamond:nth-child(7),
+svg #bubble-rounded:nth-child(7) {
+  -webkit-animation-delay: -1680ms;
+  animation-delay: -1680ms;
+}
+svg #oval:nth-child(8),
+svg #plus:nth-child(8),
+svg #diamond:nth-child(8),
+svg #bubble-rounded:nth-child(8) {
+  -webkit-animation-delay: -1920ms;
+  animation-delay: -1920ms;
+}
+svg #oval:nth-child(9),
+svg #plus:nth-child(9),
+svg #diamond:nth-child(9),
+svg #bubble-rounded:nth-child(9) {
+  -webkit-animation-delay: -2160ms;
+  animation-delay: -2160ms;
+}
+svg #oval:nth-child(10),
+svg #plus:nth-child(10),
+svg #diamond:nth-child(10),
+svg #bubble-rounded:nth-child(10) {
+  -webkit-animation-delay: -2400ms;
+  animation-delay: -2400ms;
+}
+svg #oval:nth-child(11),
+svg #plus:nth-child(11),
+svg #diamond:nth-child(11),
+svg #bubble-rounded:nth-child(11) {
+  -webkit-animation-delay: -2640ms;
+  animation-delay: -2640ms;
+}
+svg #oval:nth-child(12),
+svg #plus:nth-child(12),
+svg #diamond:nth-child(12),
+svg #bubble-rounded:nth-child(12) {
+  -webkit-animation-delay: -2880ms;
+  animation-delay: -2880ms;
+}
+svg #oval:nth-child(13),
+svg #plus:nth-child(13),
+svg #diamond:nth-child(13),
+svg #bubble-rounded:nth-child(13) {
+  -webkit-animation-delay: -3120ms;
+  animation-delay: -3120ms;
+}
+svg #oval:nth-child(14),
+svg #plus:nth-child(14),
+svg #diamond:nth-child(14),
+svg #bubble-rounded:nth-child(14) {
+  -webkit-animation-delay: -3360ms;
+  animation-delay: -3360ms;
+}
+svg #oval:nth-child(15),
+svg #plus:nth-child(15),
+svg #diamond:nth-child(15),
+svg #bubble-rounded:nth-child(15) {
+  -webkit-animation-delay: -3600ms;
+  animation-delay: -3600ms;
+}
+svg #oval:nth-child(16),
+svg #plus:nth-child(16),
+svg #diamond:nth-child(16),
+svg #bubble-rounded:nth-child(16) {
+  -webkit-animation-delay: -3840ms;
+  animation-delay: -3840ms;
+}
+svg #bg-line:nth-child(2) {
+  fill-opacity: 0.3;
+}
+svg #bg-line:nth-child(3) {
+  fill-opacity: 0.4;
+}
+h3 {
+  font-size: 2rem;
+  line-height: 2rem;
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+}
+p {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 18px;
+  line-height: 24px;
+  max-width: 80%;
+  margin: 1.25rem auto 0 auto;
+}
+body {
+  background: #f2f2f2;
+}
+@-webkit-keyframes plopp {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -10px);
+    opacity: 0;
+  }
+}
+@keyframes plopp {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -10px);
+    opacity: 0;
+  }
+}

@@ -74,3 +74,34 @@
 .user-info:hover .sinOut {
   display: block;
 }
+
+/* categories Links */
+.categoriesLinks {
+  min-width: 200px;
+  right: 0;
+  bottom: 0;
+  transform: translate(50%, 100%);
+  z-index: 9999;
+  background-color: #f1f1f1;
+}
+.categoriesLinks li {
+  transition: all 0.5s;
+}
+.categoriesLinks li:hover {
+  background-color: var(--main-color);
+  color: white;
+}
+.categoriesLinks li:hover a {
+  color: white;
+}
+.categoriesLinks .w-15 {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.arrowCateg {
+  transition: 0.3s;
+}
+.arrowCateg i {
+  animation: bouncingLaing 1.5s infinite;
+}

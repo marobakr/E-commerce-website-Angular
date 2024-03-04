@@ -1,6 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap");
-@import url(./app/shared/keyframes/keyframes.css);
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&family=Karla:wght@200..800&family=Rubik:wght@300..900&display=swap");
+@import url("./app/shared/keyframes/keyframes.css");
 :root {
   --main-color: #0aad0a;
   --light-color: #f0f3f2;
@@ -11,7 +10,21 @@
   --rating-color: #ffc908;
   --layer-bg: #25957aa1;
 }
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+span,
+p,
+div {
+  font-family: "Rubik", sans-serif !important;
+}
 
+/* Global Style */
 .nav-link {
   transition: unset !important;
 }
@@ -111,6 +124,82 @@ input:-internal-autofill-selected {
 .ngx-pagination .current,
 .ngx-pagination a,
 .ngx-pagination button {
-  /* font-size: 10px; */
   font-weight: bold;
+}
+
+/* Options Select */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: no;
+  outline: 0;
+  font: inherit;
+  width: 20rem;
+  padding: 1rem 4rem 1rem 1rem;
+  background: var(--main-color);
+  color: white;
+  border-radius: 0.25em;
+  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+select::-ms-expand {
+  display: none;
+}
+select:focus {
+  outline: none;
+}
+select option {
+  color: inherit;
+  background-color: var(--main-color);
+}
+
+.baseTitle {
+  font-weight: 700 !important ;
+  font-family: "Encode Sans Expanded", sans-serif !important;
+  text-transform: capitalize;
+}
+
+/* Item Product Col */
+.baseSlideItem {
+  overflow: hidden;
+  transition: all 0.3s;
+  border: 3px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.baseSlideItem img {
+  transition: all 0.5s;
+}
+.baseSlideItem:hover {
+  border: 3px solid var(--main-color);
+}
+.baseSlideItem:hover img {
+  transform: scale(1.25);
+}
+.foooter-info {
+  background-color: #d2e3c8;
+}
+
+/* Item Products Offer*/
+.item .offer-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  top: 10px;
+  right: 20px;
+  z-index: 99999;
+}
+
+/* btn cashOrder Payment */
+.w-40 {
+  width: 40px;
+  height: 40px;
+}
+/* image cashOrder Payment and onDelivary*/
+
+.up-down-animation {
+  position: relative;
+  animation: up-down 5s linear infinite;
 }

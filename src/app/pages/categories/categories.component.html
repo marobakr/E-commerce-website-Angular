@@ -1,20 +1,26 @@
-<section class="my-5">
-  <div class="container">
-    <div class="row" @slidDown>
-      <owl-carousel-o [options]="customOptions" class="text-center">
-        <ng-container *ngFor="let categore of allcategories">
-          <ng-template carouselSlide [id]="categore._id">
-            <img
-              class="w-100 mb-3"
-              height="200"
-              [src]="categore.image"
-              [alt]="categore.name"
-              [title]="categore.name"
-            />
-            <h4 class="subtitle-2">{{ categore.name }}</h4>
-          </ng-template>
-        </ng-container>
-      </owl-carousel-o>
+<section class="categories" *ngIf="categoriesLength > 0">
+  <h1 class="baseTitle mb-4">all Popular Products</h1>
+  <div class="mb-4 text-main fw-medium">
+    <span class="">{{ categoriesLength }} </span>
+    <span>products found</span>
+  </div>
+  <div class="row gy-4">
+    <div *ngFor="let item of allCategories" class="col-lg-3 col-md-6 item">
+      <div
+        class="inner"
+        [routerLink]="['/specificCategory', item._id, item.name]"
+      >
+        <h4 class="">{{ item.name }}</h4>
+        <figure class="baseSlideItem">
+          <img
+            height="300"
+            class="w-100 rounded"
+            [src]="item.image"
+            [alt]="item.name"
+          />
+        </figure>
+        <hr />
+      </div>
     </div>
   </div>
 </section>

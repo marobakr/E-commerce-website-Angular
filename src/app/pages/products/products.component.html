@@ -1,75 +1,126 @@
 <div class="products py-5">
-  <div class="">
-    <div class="row gy-5">
-      <div
-        class="col-md-3"
-        @fead
-        *ngFor="
-          let item of allProducts
-            | paginate
-              : {
-                  id: 'productPaginations',
-                  itemsPerPage: pageSize,
-                  currentPage: currentPage,
-                  totalItems: totalItems
-                }
-        "
-      >
-        <div class="inner position-relative">
-          <owl-carousel-o #owlElement [options]="customOptions">
-            <ng-container *ngFor="let imge of item.images">
-              <ng-template carouselSlide>
-                <figure class="imge-slider">
-                  <img
-                    (mouseenter)="startAutoplay()"
-                    (mouseleave)="stopAutoplay()"
-                    role="button"
-                    class="w-100 mb-3 img-thumbnail rounded-3"
-                    height="200"
-                    [src]="imge"
-                    [routerLink]="['/details', item._id]"
-                  />
-                </figure>
-              </ng-template>
-            </ng-container>
-          </owl-carousel-o>
-          <div class="foooter-info p-2 rounded">
-            <h5 class="h6 text-main">{{ item.category.name }}</h5>
-            <h3 class="h6">
-              {{ item.title.split(" ").splice(0, 2).join(" ") }}
-            </h3>
-            <div
-              class="rating-price d-flex justify-content-between align-items-center"
-            >
-              <span>{{ item.price }} EGP</span>
-              <div class="rating">
-                <span>
-                  <i
-                    [ngClass]="{ 'rating-color': item.ratingsAverage >= star }"
-                    class="fas fa-star fa-star"
-                    *ngFor="let star of [1, 2, 3, 4, 5]"
-                  ></i>
-                  {{ item.ratingsAverage }}
-                </span>
-              </div>
-            </div>
-          </div>
+  <h1 class="baseTitle mb-4">all Popular Products</h1>
+
+  <div class="row g-2 justify-content-around">
+    <div class="col-lg-3 col-md-4">
+      <div class="fixed-side">
+        <input
+          class="form-control mb-3"
+          [(ngModel)]="inputSearch"
+          type="text"
+          placeholder="Search"
+        />
+        <div class="category mb-3">
+          <h3 class="mat-h2 text-capitalize">category</h3>
+          <ul
+            #categories
+            class="navbar-nav categories"
+            (click)="filterCategory((selectedCategoryName = $event.target))"
+          >
+            <li class="nav-item text-capitalize" role="button">
+              <a class="nav-link selectActive">all</a>
+            </li>
+            <li class="nav-item text-capitalize" role="button">
+              <a class="nav-link">Women's Fashion</a>
+            </li>
+            <li class="nav-item text-capitalize" role="button">
+              <a class="nav-link">Men's Fashion</a>
+            </li>
+            <li class="nav-item text-capitalize" role="button">
+              <a class="nav-link">Electronics</a>
+            </li>
+          </ul>
+        </div>
+        <div class="company mb-3">
+          <h3 class="mat-h2">Brand</h3>
+          <mat-form-field>
+            <mat-label>Favorite Brand</mat-label>
+            <mat-select [(ngModel)]="selectedOption">
+              <mat-option value="all"> all </mat-option>
+              <mat-option *ngFor="let brand of uniqeBrands" [value]="brand">
+                {{ brand }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="price mb-4">
+          <h3 class="mat-h2">Price</h3>
+
+          <input
+            [(ngModel)]="priceRange"
+            id="slider"
+            name="slider"
+            type="range"
+            min="149"
+            max="45000"
+            id="customRange2"
+          />
+          <label for="customRange2  " class="form-label fw-bold text-main">
+            {{ priceRange | currency : "EG" }}</label
+          >
         </div>
 
-        <app-btncart
-          class="w-100"
-          #componentBtn
-          (click)="addProduct(item._id, componentBtn)"
-          [text]="'add to cart'"
-          [fullWidth]="true"
-          [bgMain]="true"
-          [loderBgMain]="true"
-        ></app-btncart>
+        <h3 class="mat-h2">Rating</h3>
+        <div #stars class="rating d-flex align-items-center gap-2 mb-5">
+          <i
+            role="button"
+            *ngFor="let stat of [1, 2, 3, 4, 5]"
+            class="fa-solid fa-star fa-xl avctiveStart starts"
+            (click)="onStarClick(stat)"
+          ></i>
+        </div>
+        <div
+          (click)="resetAllOptions()"
+          class="trashIcon rounded-2 text-white position-relative text-center"
+          role="button"
+        >
+          <span class="fw-bolder"> Clear All</span>
+          <i id="i-cart" class="fa-solid fa-trash fa-lg"></i>
+        </div>
       </div>
+    </div>
+    <div class="col-lg-9 col-md-8">
+      <div class="row mb-2 gy-4 justify-content-between align-items-center">
+        <div class="col-5 col-xl-2">
+          <div class="mb-0 text-main fw-bold">
+            <span class="">{{ productLength }} </span>
+            <span>products found</span>
+          </div>
+        </div>
+        <div class="d-none col-xl-8 d-xl-block">
+          <hr />
+        </div>
+        <div
+          class="col-5 col-xl-2 sortby d-flex justify-content-sm-center gap-1 justify-content-xl-between align-items-center"
+        >
+          <p class="mb-0 text-main fw-bold">sortBy</p>
+          <select [(ngModel)]="sortBy" class="mb-0" name="" id="">
+            <option value="sort">name(A-Z)</option>
+            <option value="reverse">name(Z-A)</option>
+            <option value="lowest">price(Lowest)</option>
+            <option value="highest">price(Highest)</option>
+          </select>
+        </div>
+      </div>
+      <app-base-products
+        [allProducts]="allProducts"
+        [mainProduct]="true"
+        [pageSize]="pageSize"
+        [currentPage]="currentPage"
+        [totalItems]="totalItems"
+        [isLoding]="isLoding"
+        [inputSearch]="inputSearch"
+        [selectedCategoryName]="selectedCategoryName"
+        [selectedOption]="selectedOption"
+        [sortBy]="sortBy"
+        [ratingNumber]="ratingNumber"
+        [isClassApplied]="isClassApplied"
+        [priceRange]="priceRange"
+      ></app-base-products>
     </div>
   </div>
 </div>
-<div *ngIf="showPaginations">
+<div>
   <pagination-controls
     id="productPaginations"
     (pageChange)="pageChanged($event)"

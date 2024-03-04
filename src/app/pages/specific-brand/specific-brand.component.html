@@ -1,0 +1,41 @@
+<section
+  class="categorySections p-4 rounded-4"
+  *ngIf="specificBrand.image != undefined"
+>
+  <div class="row">
+    <div class="col-lg-2 col-md-4">
+      <figure>
+        <img
+          class="w-100 rounded-5"
+          [src]="specificBrand.image"
+          [alt]="specificBrand.name"
+        />
+      </figure>
+    </div>
+    <div class="col-10 col-md-8">
+      <div class="info-categ d-flex flex-column justify-content-between h-100">
+        <div class="head">
+          <h1 class="text-capitalize fw-bold">Brand Name:</h1>
+          <h3 class="text-capitalize mb-0 fw-medium">
+            {{ specificBrand.name }}
+          </h3>
+          <h4 class="text-lowercase text-main fw-lighter">
+            {{ specificBrand.slug }}
+          </h4>
+        </div>
+        <div class="foot">
+          <h2 class="text-capitalize fw-medium mb-0">date Brand:</h2>
+          <h3 class="text-capitalize text-main fw-lighter">
+            {{ specificBrand.createdAt | date : "medium" }}
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <app-base-products
+    [allProducts]="allProducts"
+    [selectedOption]="brandName"
+    [categoryName]="true"
+  ></app-base-products>
+</section>

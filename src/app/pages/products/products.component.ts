@@ -1,7 +1,13 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  Renderer2,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { NotifierService } from 'angular-notifier';
-import { OwlOptions } from 'ngx-owl-carousel-o';
-import { BehaviorSubject } from 'rxjs';
 import { CartService } from 'src/app/core/cart.service';
 import { ProductsDataService } from 'src/app/core/products-data.service';
 import { Products } from 'src/app/interfaces/products';
@@ -17,47 +23,34 @@ import { BtncartComponent } from 'src/app/shared/btncart/btncart.component';
 export class ProductsComponent implements OnInit {
   constructor(
     private _productsDataService: ProductsDataService,
-    private _cartService: CartService,
-    private _notifierService: NotifierService
+    private _renderer2: Renderer2
   ) {}
-  @Input() showPaginations: boolean = true;
-  @ViewChild('owlElement') owlElement: any;
+  @ViewChild('categories') chosesCategory!: ElementRef;
+  @ViewChild('stars') allStarts!: ElementRef;
 
   allProducts: Products[] = [];
+  selectedBrandName: string = '';
+  selectedCategoryName: any = '';
+  uniqeBrands: string[] = [''];
+  inputSearch: string = '';
   pageSize: number = 10;
   currentPage: number = 0;
   totalItems: number = 0;
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 600,
-    margin: 8,
-    autoplay: false,
-    responsive: {
-      0: {
-        items: 1,
-      },
-      980: {
-        items: 10,
-      },
-    },
-    nav: false,
-  };
   isLoding: boolean = false;
+  selectedOption: string = 'all';
+  sortBy: string = 'sort';
+  ratingNumber: number = 5;
+  isClassApplied: boolean = false;
+  priceRange: number = 45000;
+  productLength: number = 0;
+
   ngOnInit(): void {
     this.displayAllProducts();
-  }
-  startAutoplay() {
-    this.owlElement.options.dots = true;
-    console.log(this.owlElement.options.dots);
-  }
-
-  stopAutoplay() {
-    this.owlElement.options.dots = false;
-    console.log(this.owlElement.options.dots);
+    this._productsDataService.lengthProducts.subscribe({
+      next: (length) => {
+        this.productLength = length;
+      },
+    });
   }
 
   displayAllProducts(): void {
@@ -67,20 +60,12 @@ export class ProductsComponent implements OnInit {
         this.pageSize = response.metadata.limit;
         this.currentPage = response.metadata.currentPage;
         this.totalItems = response.results;
+        this.getOffer(response.data);
+        this.getUniqueBrandNames(this.allProducts);
       },
     });
   }
 
-  addProduct(_id: string, btnComponent: BtncartComponent): void {
-    btnComponent.isLoding = true;
-    this._cartService.addToCart(_id).subscribe({
-      next: (respons) => {
-        this._cartService.cartNumber.next(respons.numOfCartItems);
-        this._notifierService.notify('success', `${respons.message}`);
-        btnComponent.isLoding = false;
-      },
-    });
-  }
   pageChanged(event: any) {
     this._productsDataService.allProducts(event).subscribe({
       next: (response) => {
@@ -88,7 +73,70 @@ export class ProductsComponent implements OnInit {
         this.pageSize = response.metadata.limit;
         this.currentPage = response.metadata.currentPage;
         this.totalItems = response.results;
+        this.getOffer(response.data);
       },
+    });
+  }
+  getUniqueBrandNames(allItems: Products[]): void {
+    let uniqeBrand: string[] = [];
+    allItems.map((item) => {
+      if (!uniqeBrand.includes(item.brand.name)) {
+        uniqeBrand.push(item.brand.name);
+      }
+    });
+    this.uniqeBrands = uniqeBrand;
+  }
+  filterCategory(event: any): void {
+    this.selectedCategoryName = event.innerHTML.toLowerCase();
+    const liElements =
+      this.chosesCategory.nativeElement.querySelectorAll('li a ');
+    liElements.forEach((anchor: HTMLElement) => {
+      this._renderer2.removeClass(anchor, 'selectActive');
+    });
+    this._renderer2.addClass(event, 'selectActive');
+  }
+
+  onStarClick(rating: number): void {
+    this.ratingNumber = rating;
+    this.addActiveForStars(rating);
+  }
+  addActiveForStars(rating: number) {
+    const parentStar = this.allStarts.nativeElement.querySelectorAll('i');
+
+    parentStar.forEach((star: HTMLElement, index: number, arr: Array<any>) => {
+      this._renderer2.removeClass(star, 'avctiveStart');
+      if (rating >= index + 1) {
+        this._renderer2.addClass(star, 'avctiveStart');
+      }
+    });
+  }
+  resetAllOptions(): void {
+    const liElements =
+      this.chosesCategory.nativeElement.querySelectorAll('li a ');
+    const defult: string = 'all';
+    const defultelements =
+      this.chosesCategory.nativeElement.querySelector('li a ');
+    this.selectedCategoryName = 'all';
+    this.selectedBrandName = defult;
+    this.selectedOption = defult;
+    this.sortBy = 'sort';
+    this.priceRange = 45000;
+    this.addActiveForStars(5);
+    liElements.forEach((anchor: HTMLElement) => {
+      this._renderer2.removeClass(anchor, 'selectActive');
+    });
+    this._renderer2.addClass(defultelements, 'selectActive');
+  }
+  getOffer(products: Products[]) {
+    products.forEach((item) => {
+      if (item.priceAfterDiscount) {
+        item.offer = Math.round(
+          ((item.price - item.priceAfterDiscount) / item.price) * 100
+        );
+      } else {
+        const randomDiscount = Math.floor(Math.random() * 50) + 1;
+        item.offer = randomDiscount;
+      }
     });
   }
 }

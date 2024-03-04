@@ -40,3 +40,7 @@
   background-color: #99a799;
   color: black;
 }
+
+.cdk-drop-list-dragging {
+  cursor: move;
+}

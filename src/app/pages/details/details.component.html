@@ -5,7 +5,8 @@
         <img class="w-100" [src]="activeImage" [alt]="productDetails.title" />
       </figure>
       <div class="row">
-        <div
+        <figure
+          class="baseSlideItem g-2 rounded"
           #allIMages
           (click)="toggleAnimationState()"
           [ngClass]="getDinamicCols()"
@@ -17,7 +18,7 @@
             [src]="imge"
             (click)="selectImage(imge)"
           />
-        </div>
+        </figure>
       </div>
     </div>
     <div
@@ -38,9 +39,8 @@
           <del class="text-danger mat-headline-6"
             >{{ productDetails.price }} EGP</del
           >
-          <span class="mat-headline-6"
-            >{{ productDetails.priceAfterDiscount }} EGP</span
-          >
+
+          <span class="mat-headline-6">{{ offer }} </span>
         </div>
         <h3 class="mat-subtitle-1 mb-2">{{ productDetails.title }}</h3>
         <p class="text-muted mb-2">{{ productDetails.description }}</p>
@@ -61,6 +61,13 @@
             {{ productDetails.updatedAt | date }}
           </span>
         </div>
+        <figure class="me-auto w-50">
+          <img
+            class="w-100"
+            [src]="productDetails.brand.image"
+            [alt]="productDetails.brand.name"
+          />
+        </figure>
       </div>
 
       <app-btncart

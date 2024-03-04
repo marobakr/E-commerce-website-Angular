@@ -1,4 +1,4 @@
-<section *ngIf="cartProduct; else empty">
+<section *ngIf="cartProduct != null; else empty">
   <h1 class="text-capitalize fw-bolder">shop cart</h1>
   <p class="text-main">
     totla price: {{ cartProduct.data?.totalCartPrice | currency }}
@@ -91,12 +91,27 @@
   <app-btncart
     [routerLink]="['/payment', cartProduct.data?._id]"
     [fullWidth]="true"
-    [text]="'Checkout'"
+    [text]="'Online Payment'"
     [isLoding]="false"
     [bgdark]="true"
-  ></app-btncart>
+  >
+    <img src="./assets/images/visa-1.svg" alt="" />
+  </app-btncart>
+  <app-btncart
+    [routerLink]="['/cash-order', cartProduct.data?._id]"
+    [fullWidth]="true"
+    [text]="'Cash Order'"
+    [isLoding]="false"
+    [outLine]="true"
+  >
+    <img
+      class="w-40 rounded-2"
+      src="./assets/images/cash-on-delivery.png"
+      alt=""
+    />
+  </app-btncart>
 </section>
 
-<ng-template #empty class="text-center">
-  <h2>no products to show</h2>
+<ng-template #empty>
+  <app-emptycart [title]="'Your cart is currently empty'"> </app-emptycart>
 </ng-template>

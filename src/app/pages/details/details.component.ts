@@ -34,6 +34,7 @@ export class DetailsComponent implements AfterContentInit {
   isLoding: boolean = false;
   productDetails: Products = {} as Products;
   animationState: string = 'start';
+  offer: number = 0;
 
   @ViewChild('allIMages') sliderImages!: ElementRef;
 
@@ -55,6 +56,7 @@ export class DetailsComponent implements AfterContentInit {
         const lastIndex = this.productDetails.images[0];
         this.activeImage = lastIndex;
         this.getDinamicCols();
+        this.getOffer(this.productDetails);
       },
     });
   }
@@ -85,12 +87,19 @@ export class DetailsComponent implements AfterContentInit {
       },
       error: (err) => {
         this.isLoding = false;
-        console.log(err);
       },
     });
   }
 
   toggleAnimationState() {
     this.animationState = this.animationState === 'start' ? 'end' : 'start';
+  }
+
+  getOffer(detalsProduct: Products) {
+    if (!detalsProduct.priceAfterDiscount) {
+      this.offer = Math.trunc(detalsProduct.price * 0.9);
+    } else {
+      this.offer = detalsProduct.priceAfterDiscount;
+    }
   }
 }

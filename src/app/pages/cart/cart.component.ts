@@ -27,8 +27,12 @@ export class CartComponent implements AfterViewInit {
         this.cartProduct = respons;
         this._cartService.cartNumber.next(this.cartProduct.numOfCartItems);
       },
+      error: (erorr) => {
+        console.log(erorr);
+      },
     });
   }
+
   removeCartItem(id: string, Btn: BtncartComponent) {
     Btn.isLoding = true;
     this._cartService.removeCartItem(id).subscribe({
@@ -39,25 +43,35 @@ export class CartComponent implements AfterViewInit {
         this._notifierService.notify('error', 'Item removed from the cart');
         this._cartService.cartNumber.next(respons.numOfCartItems);
       },
-      error: () => {
+      error: (erorr) => {
+        console.log(erorr);
+
         Btn.isLoding = false;
       },
     });
   }
   updateCountItem(id: string, countItem: number, status: string, msg: string) {
-    this._cartService.updateCartQuantity(id, countItem).subscribe({
-      next: (respons) => {
-        this.cartProduct = respons;
-        this._cartService.cartNumber.next(respons.numOfCartItems);
-        this._notifierService.notify(`${status}`, `${msg}`);
-      },
-    });
+    if (countItem > 0) {
+      this._cartService.updateCartQuantity(id, countItem).subscribe({
+        next: (respons) => {
+          this.cartProduct = respons;
+          this._cartService.cartNumber.next(respons.numOfCartItems);
+          this._notifierService.notify(`${status}`, `${msg}`);
+        },
+        error: (erorr) => {
+          console.log(erorr);
+        },
+      });
+    }
   }
   removeAllItem() {
     this._cartService.clearCart().subscribe({
       next: (respons) => {
         this.cartProduct = null;
         this._cartService.cartNumber.next(0);
+      },
+      error: (erorr) => {
+        console.log(erorr);
       },
     });
   }

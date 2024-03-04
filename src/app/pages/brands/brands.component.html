@@ -1,0 +1,47 @@
+<section class="categories" *ngIf="brandsLength > 0">
+  <h1 class="baseTitle mb-4">all Popular Products</h1>
+  <div class="mb-4 text-main fw-medium">
+    <span class="">{{ brandsLength }} </span>
+    <span>products found</span>
+  </div>
+  <div class="row gy-4">
+    <div
+      *ngFor="
+        let item of allBrands
+          | paginate
+            : {
+                id: 'paginationsBrands',
+                itemsPerPage: pageSize,
+                currentPage: currentPage,
+                totalItems: totalItems
+              }
+      "
+      class="col-lg-3 col-md-6 item"
+    >
+      <div class="inner" [routerLink]="['/specificBrand', item._id, item.name]">
+        <h2 class="fw-medium">{{ item.name }}</h2>
+        <figure class="baseSlideItem">
+          <img class="w-100 rounded" [src]="item.image" [alt]="item.name" />
+        </figure>
+        <h4 class="fw-light">{{ item.slug }}</h4>
+
+        <hr />
+      </div>
+    </div>
+  </div>
+</section>
+<pagination-controls
+  id="paginationsBrands"
+  (pageChange)="pageChanged($event)"
+  (pageBoundsCorrection)="pageChanged($event)"
+  [maxSize]="9"
+  [directionLinks]="true"
+  [autoHide]="true"
+  [responsive]="true"
+  previousLabel="Previous"
+  nextLabel="Next"
+  screenReaderPaginationLabel="Pagination"
+  screenReaderPageLabel="page"
+  screenReaderCurrentLabel="You're on page"
+>
+</pagination-controls>

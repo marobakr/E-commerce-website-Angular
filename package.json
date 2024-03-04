@@ -25,8 +25,10 @@
     "@ngx-translate/core": "^15.0.0",
     "angular-notifier": "^14.0.0",
     "bootstrap": "^5.3.3",
+    "jwt-decode": "^4.0.0",
     "ngx-owl-carousel-o": "^16.0.0",
     "ngx-pagination": "^6.0.3",
+    "ngx-spinner": "^16.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

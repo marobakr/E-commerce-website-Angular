@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
     private notifierService: NotifierService,
     private _router: Router
   ) {}
+  private subscription!: Subscription;
   loginForm!: FormGroup;
   email!: FormControl;
   password!: FormControl;
@@ -56,6 +58,8 @@ export class LoginComponent implements OnInit {
           this.isLoding = false;
           if (respons.message === 'success') {
             localStorage.setItem('token', respons.token);
+            localStorage.setItem('username', respons.user.name);
+            loginForm.reset();
           }
         },
         error: (er) => {

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { baseUrl } from '../shared/paseApi';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -10,61 +11,55 @@ export class CartService {
   constructor(private _httpClient: HttpClient) {}
   cartNumber: BehaviorSubject<number> = new BehaviorSubject(0);
 
-  userToken: any = {
-    token: localStorage.getItem('token'),
-  };
   addToCart(prouctId: string): Observable<any> {
-    return this._httpClient.post(
-      `${baseUrl}/api/v1/cart`,
-      {
-        productId: prouctId,
-      },
-      {
-        headers: this.userToken,
-      }
-    );
+    return this._httpClient.post(`${baseUrl}/api/v1/cart`, {
+      productId: prouctId,
+    });
   }
   getCartUser(): Observable<any> {
     return this._httpClient.get(
       `${baseUrl}/api/v1/cart
-`,
-      {
-        headers: this.userToken,
-      }
+`
     );
   }
 
   removeCartItem(id: string): Observable<any> {
-    return this._httpClient.delete(`${baseUrl}/api/v1/cart/${id}`, {
-      headers: this.userToken,
-    });
+    return this._httpClient.delete(`${baseUrl}/api/v1/cart/${id}`, {});
   }
 
   updateCartQuantity(id: string, count: number): Observable<any> {
-    return this._httpClient.put(
-      `${baseUrl}/api/v1/cart/${id}`,
-      {
-        count: count,
-      },
-      { headers: this.userToken }
-    );
+    return this._httpClient.put(`${baseUrl}/api/v1/cart/${id}`, {
+      count: count,
+    });
   }
 
   clearCart(): Observable<any> {
-    return this._httpClient.delete(`${baseUrl}/api/v1/cart`, {
-      headers: this.userToken,
-    });
+    return this._httpClient.delete(`${baseUrl}/api/v1/cart`);
   }
 
   PaymentOnline(userData: object, idCart: string): Observable<any> {
     return this._httpClient.post(
       `${baseUrl}/api/v1/orders/checkout-session/${idCart}?url=http://localhost:4200`,
-      { shippingAddress: userData },
-      { headers: this.userToken }
+      { shippingAddress: userData }
     );
   }
+  cashOrder(userData: object, idCart: string): Observable<any> {
+    return this._httpClient.post(`${baseUrl}/api/v1/orders/${idCart}`, {
+      shippingAddress: userData,
+    });
+  }
 
-  getAllOrders(): Observable<any> {
-    return this._httpClient.get(`${baseUrl}/api/v1/orders/`);
+  decodeUserData(): any {
+    if (localStorage.getItem('token') !== null) {
+      const token: any = localStorage.getItem('token');
+      const decoded = jwtDecode(token);
+      return decoded;
+    }
+  }
+  getSpeicifcOrder(id: string): Observable<any> {
+    return this._httpClient.get(`${baseUrl}/api/v1/orders/${id}`);
+  }
+  getUserOrders(id: string): Observable<any> {
+    return this._httpClient.get(`${baseUrl}/api/v1/orders/user/${id}`);
   }
 }

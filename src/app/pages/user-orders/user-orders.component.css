@@ -1,0 +1,16 @@
+.allorders {
+  background-color: var(--light-color);
+}
+.fixed-side {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 10px;
+  height: 100vh;
+}
+
+.arrow-detals {
+  transition: 0.3s;
+}
+.arrow-detals i {
+  animation: bouncingLaingLeftRight 1.5s infinite;
+}

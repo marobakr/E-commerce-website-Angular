@@ -17,6 +17,7 @@ export interface Products {
   createdAt: string;
   updatedAt: string;
   id: string;
+  offer: number;
 }
 
 export interface Subcategory {

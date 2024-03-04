@@ -1,0 +1,7 @@
+.btn-mving-Y {
+  transition: all 0.5s;
+  bottom: -200px;
+}
+.parent-col:hover .btn-mving-Y {
+  bottom: 0;
+}
