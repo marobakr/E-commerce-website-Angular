@@ -51,10 +51,11 @@ export class BlanknavComponent implements OnInit {
   listenerCartItem(): void {
     this._cartService.cartNumber.subscribe({
       next: (response) => {
+        this.itemCount = response;
         if (this.itemCount > 0) {
           this.getItemCart();
         }
-        this.itemCount = response;
+        console.log(this.itemCount);
       },
     });
   }
@@ -67,6 +68,7 @@ export class BlanknavComponent implements OnInit {
           'goCartAnimations'
         );
         this.itemCount = respons.numOfCartItems;
+        console.log(this.itemCount);
       },
       error: (err) => {
         console.log(err);

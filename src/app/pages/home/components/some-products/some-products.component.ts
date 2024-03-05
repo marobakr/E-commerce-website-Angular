@@ -67,6 +67,7 @@ export class SomeProductsComponent implements OnInit {
     btnComponent.isLoding = true;
     this._cartService.addToCart(_id).subscribe({
       next: (respons) => {
+        console.log(respons);
         this._cartService.cartNumber.next(respons.numOfCartItems);
         this._notifierService.notify('success', `${respons.message}`);
         btnComponent.isLoding = false;

@@ -84,7 +84,7 @@ export class RegisterComponent {
             'success',
             `${respons.message} register`
           );
-          sessionStorage.setItem('email', registerForm.get('email')?.value);
+          localStorage.setItem('email', registerForm.get('email')?.value);
           setTimeout(() => {
             this._router.navigate(['/login']);
           }, 1000);

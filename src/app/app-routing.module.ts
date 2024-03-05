@@ -13,13 +13,13 @@ import { authGuard } from './guards/auth.guard';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { PaymentComponent } from './pages/payment/payment.component';
-import { AllordersComponent } from './pages/allorders/allorders.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { SpecificCategoryComponent } from './pages/specific-category/specific-category.component';
 import { SpecificBrandComponent } from './pages/specific-brand/specific-brand.component';
 import { CashOrderComponent } from './pages/cash-order/cash-order.component';
 import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
 import { SpecificOrderComponent } from './pages/specific-order/specific-order.component';
+import { adminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -58,6 +58,14 @@ const routes: Routes = [
     ],
   },
 
+  {
+    path: 'dashboard',
+    canActivate: [adminGuard],
+    loadChildren: () =>
+      import('./module/dashboard/dashboard.module').then(
+        (mod) => mod.DashboardModule
+      ),
+  },
   { path: '**', component: NotfoundComponent },
 ];
 

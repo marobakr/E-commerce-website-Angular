@@ -27,7 +27,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsComponent } from './pages/details/details.component';
 import { BtncartComponent } from './shared/btncart/btncart.component';
 import { PaymentComponent } from './pages/payment/payment.component';
-import { AllordersComponent } from './pages/allorders/allorders.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -75,7 +74,6 @@ import { SpecificOrderComponent } from './pages/specific-order/specific-order.co
     DetailsComponent,
     BtncartComponent,
     PaymentComponent,
-    AllordersComponent,
     ForgetPasswordComponent,
     EmptycartComponent,
     SearchPipe,

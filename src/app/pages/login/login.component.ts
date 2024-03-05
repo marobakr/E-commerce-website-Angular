@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     });
   }
   initFormControl() {
-    this.email = new FormControl(sessionStorage.getItem('email'), [
+    this.email = new FormControl(localStorage.getItem('email'), [
       Validators.required,
       Validators.email,
     ]);

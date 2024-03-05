@@ -208,3 +208,16 @@ select option {
 .w-10 {
   width: 10%;
 }
+/* bg main nav  */
+.theme-a {
+  background: #dca;
+  color: #731;
+}
+/* any content was fixed (/products,specific-order/Dashboard)  */
+
+.fixed-side {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 10px;
+  height: 100vh;
+}
