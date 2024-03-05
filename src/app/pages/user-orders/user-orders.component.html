@@ -1,147 +1,112 @@
 <section class="user-order" *ngIf="userOrder.length > 0">
+  <h1 class="text-capitalize mb-4 text-center text-main fw-bold">
+    all your's orders
+  </h1>
   <div class="row g-3">
-    <div class="col-lg-3 col-md-4" *ngFor="let user of userOrder.slice(0, 1)">
-      <div class="inner allorders rounded-3 fixed-side p-3">
-        <figure>
-          <img class="w-100 rounded-3" [src]="userImage" alt="" />
-        </figure>
-        <h4 class="text-capitalize text-black">
-          name : <span class="text-muted">{{ user.user.name }}</span>
-        </h4>
-        <h4 class="text-capitalize text-black">
-          phon number : <span class="text-muted">{{ user.user.email }}</span>
-        </h4>
-        <h4 class="text-capitalize text-black">
-          adress : <span class="text-muted">{{ user.user.phone }}</span>
-        </h4>
-      </div>
-    </div>
-    <div class="col-lg-9 col-md-8">
-      <div class="inner allorders rounded-3 p-5">
-        <h1 class="baseTitle mb-4 text-center text-main fw-bolder">
-          all your's orders
-        </h1>
-        <hr />
-        <div class="row gy-4 align-items-start" *ngFor="let order of userOrder">
-          <div class="col-8 mb-5">
-            <h2 class="text-uppercase text-main">
-              order id: <span class="text-muted">#{{ order._id }}</span>
-            </h2>
-            <div class="info-order">
-              <h4 class="text-muted text-capitalize">
-                last update:
-                {{ order.createdAt | date }}
-              </h4>
-              <div class="isDelivered">
+    <div class="inner allorders rounded-3 p-5">
+      <div
+        class="row gy-4 align-items-start justify-content-between"
+        *ngFor="let order of userOrder"
+      >
+        <div class="col-lg-9">
+          <div class="row" *ngFor="let item of order.cartItems">
+            <div class="col-lg-4 col-md-5">
+              <figure
+                class="baseSlideItem rounded-3 w-100"
+                [routerLink]="['/details', item.product.id]"
+              >
+                <img
+                  class="w-100 rounded-4"
+                  [src]="item.product.imageCover"
+                  [alt]="item.product.title"
+                />
+              </figure>
+            </div>
+            <div class="col-lg-8 col-md-7">
+              <h2 class="text-uppercase text-main">
+                order id: <span class="text-muted">#{{ order.id }}</span>
+              </h2>
+              <div class="info-order">
+                <h4 class="text-muted text-capitalize">
+                  last update:
+                  {{ order.createdAt | date }}
+                </h4>
+                <div class="isDelivered">
+                  <h4 class="text-capitalize text-muted">
+                    isDelivered:
+                    <i
+                      *ngIf="order.isDelivered"
+                      class="fa-solid fa-check text-main"
+                    ></i>
+                    <i
+                      *ngIf="!order.isDelivered"
+                      class="fa-solid fa-circle-xmark text-danger"
+                    ></i>
+                  </h4>
+                  <div class="isPaid">
+                    <h4 class="text-capitalize text-muted">
+                      isPaid:
+                      <i
+                        *ngIf="!order.isDelivered"
+                        class="fa-solid fa-circle-xmark text-danger"
+                      ></i>
+                      <i
+                        *ngIf="order.isDelivered"
+                        class="fa-solid fa-check text-main"
+                      ></i>
+                    </h4>
+                  </div>
+                </div>
+
                 <h4 class="text-capitalize text-muted">
-                  isDelivered:
-                  <i
-                    *ngIf="order.isDelivered"
-                    class="fa-solid fa-check text-main"
-                  ></i>
-                  <i
-                    *ngIf="!order.isDelivered"
-                    class="fa-solid fa-circle-xmark text-danger"
-                  ></i>
+                  data:{{ order.paidAt | date }}
+                </h4>
+                <div class="payment text-muted text-capitalize">
+                  <h4>
+                    payment Type
+                    <i
+                      *ngIf="order.paymentMethodType === 'card'"
+                      class="fa-brands fa-cc-visa fa-xl text-main"
+                    ></i>
+                    <i
+                      *ngIf="order.paymentMethodType === 'cash'"
+                      class="fa-solid fa-wallet fa-xl text-main"
+                    ></i>
+                  </h4>
+                </div>
+
+                <h4 class="text-muted text-capitalize">
+                  last update:
+                  {{ order.updatedAt | date }}
                 </h4>
               </div>
-              <div class="isPaid">
-                <h4 class="text-capitalize text-muted">
-                  isPaid:
-                  <i
-                    *ngIf="!order.isDelivered"
-                    class="fa-solid fa-circle-xmark text-danger"
-                  ></i>
-                  <i
-                    *ngIf="order.isDelivered"
-                    class="fa-solid fa-check text-main"
-                  ></i>
-                </h4>
-              </div>
-              <h4 class="text-capitalize text-muted">
-                data:{{ order.paidAt | date }}
-              </h4>
-              <div class="payment text-muted text-capitalize">
-                <h4>
-                  payment Type
-                  <i
-                    *ngIf="order.paymentMethodType === 'card'"
-                    class="fa-brands fa-cc-visa fa-xl text-main"
-                  ></i>
-                  <i
-                    *ngIf="order.paymentMethodType === 'cash'"
-                    class="fa-solid fa-wallet fa-xl text-main"
-                  ></i>
-                </h4>
-              </div>
-              <h4 class="text-muted text-capitalize">
-                shipping Price: {{ order.shippingPrice }}
-              </h4>
-              <h4 class="text-muted text-capitalize">
-                tax Price: {{ order.taxPrice }}
-              </h4>
-              <h4 class="text-muted text-capitalize">
-                total Order Price:
-                {{ order.totalOrderPrice | currency : "eg" }}
-              </h4>
-              <h4 class="text-muted text-capitalize">
-                last update:
-                {{ order.updatedAt | date }}
-              </h4>
             </div>
           </div>
-          <div
-            class="row justify-content-between align-items-start flex-wrap text-start"
-          >
-            <table class="table text-center rounded-3">
-              <thead>
-                <tr>
-                  <th scope="col">item</th>
-                  <th scope="col">price</th>
-                  <th scope="col">count</th>
-                  <th scope="col">imge</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let cart of order.cartItems; let i = index">
-                  <th scope="row">{{ i + 1 }}</th>
-                  <td>
-                    <h4 class="text-black text-capitalize">
-                      <span class="text-muted">
-                        {{ cart.price | currency : "EG" }}
-                      </span>
-                    </h4>
-                  </td>
-                  <td>
-                    <h4 class="text-black text-capitalize">
-                      <span class="text-muted"> {{ cart.count }}</span>
-                    </h4>
-                  </td>
-                  <td class="w-10">
-                    <figure
-                      class="baseSlideItem rounded-3"
-                      [routerLink]="['/details', cart.product.id]"
-                    >
-                      <img
-                        class="w-100 rounded-4"
-                        [src]="cart.product.imageCover"
-                        [alt]="cart.product.title"
-                      />
-                    </figure>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <a
-            class="arrow-detals align-self-end text-end text-main fw-bold text-capitalize"
-            [routerLink]="['/specifcOrder', order._id]"
-          >
-            <i class="fa-solid fa-angles-right"></i>
-            show order details
-          </a>
-          <hr />
         </div>
+        <div class="col-lg-3">
+          <h4 class="text-capitalize">
+            shipping Price:
+            <span class="text-muted">{{ order.shippingPrice }}</span>
+          </h4>
+          <h4 class="text-capitalize">
+            tax Price: <span class="text-muted"> {{ order.taxPrice }}</span>
+          </h4>
+          <hr />
+          <h4 class="text-capitalize">
+            total Order Price:
+            <span class="text-muted">
+              {{ order.totalOrderPrice | currency : "eg" }}
+            </span>
+          </h4>
+        </div>
+        <a
+          class="arrow-detals bg-main align-self-end text-end text-white p-3 rounded-3 fw-bold text-capitalize"
+          [routerLink]="['/specifcOrder', order._id]"
+        >
+          <i class="fa-solid fa-angles-right"></i>
+          show order details
+        </a>
+        <hr class="py-4" />
       </div>
     </div>
   </div>
