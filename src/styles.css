@@ -128,33 +128,6 @@ input:-internal-autofill-selected {
   font-weight: bold;
 }
 
-/* Options Select */
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: no;
-  outline: 0;
-  font: inherit;
-  width: 20rem;
-  padding: 1rem 4rem 1rem 1rem;
-  background: var(--main-color);
-  color: white;
-  border-radius: 0.25em;
-  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-select::-ms-expand {
-  display: none;
-}
-select:focus {
-  outline: none;
-}
-select option {
-  color: inherit;
-  background-color: var(--main-color);
-}
-
 .baseTitle {
   font-weight: 700 !important ;
   font-family: "Encode Sans Expanded", sans-serif !important;

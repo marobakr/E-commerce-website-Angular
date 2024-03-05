@@ -51,10 +51,21 @@ export class LoginComponent implements OnInit {
       this.isLoding = true;
       this._authService.signIn(loginForm.value).subscribe({
         next: (respons) => {
-          this.notifierService.notify('success', `${respons.message} Log In`);
-          setTimeout(() => {
-            this._router.navigate(['/home']);
-          }, 100);
+          if (respons.user.name === 'admin') {
+            this._router.navigate(['/dashboard']);
+            this.notifierService.notify(
+              'success',
+              `${respons.message} Log In as admin ☠️ `
+            );
+          } else {
+            setTimeout(() => {
+              this._router.navigate(['/home']);
+            }, 100);
+            this.notifierService.notify(
+              'success',
+              `${respons.message} Log In as user 👨‍💼`
+            );
+          }
           this.isLoding = false;
           if (respons.message === 'success') {
             localStorage.setItem('token', respons.token);
@@ -64,7 +75,7 @@ export class LoginComponent implements OnInit {
         },
         error: (er) => {
           this.isLoding = false;
-          this.notifierService.notify('error', `${er.error.message}`);
+          this.notifierService.notify('error', `${er.error.message} ❌`);
         },
       });
     } else {

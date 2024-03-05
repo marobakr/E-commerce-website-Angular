@@ -5,10 +5,7 @@ import { NotifierService } from 'angular-notifier';
 export const adminGuard: CanActivateFn = () => {
   const router = inject(Router);
   const notifierService = inject(NotifierService);
-  if (
-    localStorage.getItem('username') === 'admin' ||
-    localStorage.getItem('email')?.includes('admin')
-  ) {
+  if (localStorage.getItem('username') === 'admin') {
     return true;
   } else {
     router.navigate(['/home']);

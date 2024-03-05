@@ -111,3 +111,30 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]:focus::-webkit-slider-runnable-track {
   background: var(--main-color);
 }
+
+/* Options Select */
+select {
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: no;
+  outline: 0;
+  font: inherit;
+  padding: 1rem 4rem 1rem 1rem;
+  background: var(--main-color);
+  color: white;
+  border-radius: 0.25em;
+  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+select::-ms-expand {
+  display: none;
+}
+select:focus {
+  outline: none;
+}
+select option {
+  color: inherit;
+  background-color: var(--main-color);
+}

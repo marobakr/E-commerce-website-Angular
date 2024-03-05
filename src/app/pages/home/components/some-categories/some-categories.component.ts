@@ -18,11 +18,9 @@ export class SomeCategoriesComponent implements OnInit {
     loop: true,
     mouseDrag: true,
     touchDrag: true,
-    dots: false,
-    autoplay: false,
-    dragEndSpeed: 1,
     pullDrag: true,
-    autoplayTimeout: 100,
+    dots: false,
+    navSpeed: 700,
     navText: ['&#8249', '&#8250;'],
     margin: 8,
     responsive: {

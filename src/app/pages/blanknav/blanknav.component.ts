@@ -31,12 +31,12 @@ export class BlanknavComponent implements OnInit {
   userName: any = '';
   ulCategories: Categoreis[] = [];
   allIcons: string[] = [
-    'fa-brands fa-facebook',
-    'fa-brands fa-instagram',
-    'fa-brands fa-twitter',
-    'fa-brands fa-linkedin',
-    'fa-brands fa-tiktok',
-    'fa-brands fa-youtube',
+    'fa-brands fa-facebook fa-xl',
+    'fa-brands fa-instagram fa-xl',
+    'fa-brands fa-twitter fa-xl',
+    'fa-brands fa-linkedin fa-xl',
+    'fa-brands fa-tiktok fa-xl',
+    'fa-brands fa-youtube fa-xl',
   ];
   ngOnInit(): void {
     this.listenerCartItem();
