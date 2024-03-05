@@ -85,9 +85,20 @@
         </li>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-        <li class="nav-item" routerLink="/cart" role="button">
+        <li class="nav-item" routerLink="/allorders" role="button">
           <a class="nav-link position-relative" aria-current="page">
-            <i #cartIcon class="fa-solid fa-cart-shopping fa- fa-2x"></i>
+            <i class="fa-solid fa-truck fa-2x"></i>
+            <!--
+            <span
+              class="badge bg-mian position-absolute top-0 end-0 rounded-2"
+              >{{ itemCount }}</span
+            > -->
+          </a>
+        </li>
+
+        <li class="nav-item overflow-hidden" routerLink="/cart" role="button">
+          <a #cartIcon class="nav-link position-relative" aria-current="page">
+            <i class="fa-solid fa-cart-shopping fa-2x"></i>
             <span
               class="badge bg-mian position-absolute top-0 end-0 rounded-2"
               >{{ itemCount }}</span

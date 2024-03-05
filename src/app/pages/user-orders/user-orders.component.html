@@ -28,6 +28,10 @@
               order id: <span class="text-muted">#{{ order._id }}</span>
             </h2>
             <div class="info-order">
+              <h4 class="text-muted text-capitalize">
+                last update:
+                {{ order.createdAt | date }}
+              </h4>
               <div class="isDelivered">
                 <h4 class="text-capitalize text-muted">
                   isDelivered:
@@ -57,7 +61,7 @@
               <h4 class="text-capitalize text-muted">
                 data:{{ order.paidAt | date }}
               </h4>
-              <div class="payment text-muted">
+              <div class="payment text-muted text-capitalize">
                 <h4>
                   payment Type
                   <i
@@ -70,59 +74,68 @@
                   ></i>
                 </h4>
               </div>
-              <h4 class="text-muted">
+              <h4 class="text-muted text-capitalize">
                 shipping Price: {{ order.shippingPrice }}
               </h4>
-              <h4 class="text-muted">tax Price: {{ order.taxPrice }}</h4>
-              <h4 class="text-muted">
+              <h4 class="text-muted text-capitalize">
+                tax Price: {{ order.taxPrice }}
+              </h4>
+              <h4 class="text-muted text-capitalize">
                 total Order Price:
                 {{ order.totalOrderPrice | currency : "eg" }}
+              </h4>
+              <h4 class="text-muted text-capitalize">
+                last update:
+                {{ order.updatedAt | date }}
               </h4>
             </div>
           </div>
           <div
             class="row justify-content-between align-items-start flex-wrap text-start"
           >
-            <div
-              *ngFor="let cart of order.cartItems; let i = index"
-              class="col-lg-3 col-md-4"
-            >
-              <div class="info-item mb-5">
-                <h3 class="text-main">
-                  item <span class="fw-medium">{{ i + 1 }}</span>
-                </h3>
-                <h4 class="text-black">
-                  count: <span class="text-muted"> {{ cart.count }}</span>
-                </h4>
-                <h4 class="text-black">
-                  price: <span class="text-muted"> {{ cart.price }} </span>
-                </h4>
-                <h4 class="text-black">
-                  ratings Quantity:
-                  <span class="text-muted">
-                    {{ cart.product.ratingsAverage }}</span
-                  >
-                </h4>
-              </div>
-              <figure>
-                <img
-                  class="w-100 rounded-4"
-                  [src]="cart.product.imageCover"
-                  [alt]="cart.product.title"
-                />
-              </figure>
-            </div>
+            <table class="table text-center rounded-3">
+              <thead>
+                <tr>
+                  <th scope="col">item</th>
+                  <th scope="col">price</th>
+                  <th scope="col">count</th>
+                  <th scope="col">imge</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let cart of order.cartItems; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>
+                    <h4 class="text-black text-capitalize">
+                      <span class="text-muted">
+                        {{ cart.price | currency : "EG" }}
+                      </span>
+                    </h4>
+                  </td>
+                  <td>
+                    <h4 class="text-black text-capitalize">
+                      <span class="text-muted"> {{ cart.count }}</span>
+                    </h4>
+                  </td>
+                  <td class="w-10">
+                    <figure
+                      class="baseSlideItem rounded-3"
+                      [routerLink]="['/details', cart.product.id]"
+                    >
+                      <img
+                        class="w-100 rounded-4"
+                        [src]="cart.product.imageCover"
+                        [alt]="cart.product.title"
+                      />
+                    </figure>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <!-- <span
-            role="button"
-            class="arrow-detals bg-main p-2 rounded text-white overflow-hidden"
-          >
-            <i class="fa-solid fa-angles-right"></i>
-          </span> -->
-
           <a
             class="arrow-detals align-self-end text-end text-main fw-bold text-capitalize"
-            [routerLink]="['specifcOrder', order._id]"
+            [routerLink]="['/specifcOrder', order._id]"
           >
             <i class="fa-solid fa-angles-right"></i>
             show order details

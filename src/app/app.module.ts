@@ -53,6 +53,7 @@ import { BaseProductsComponent } from './pages/products/components/base-products
 import { SpecificBrandComponent } from './pages/specific-brand/specific-brand.component';
 import { CashOrderComponent } from './pages/cash-order/cash-order.component';
 import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
+import { SpecificOrderComponent } from './pages/specific-order/specific-order.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
     SpecificBrandComponent,
     CashOrderComponent,
     UserOrdersComponent,
+    SpecificOrderComponent,
   ],
 
   imports: [

@@ -19,6 +19,7 @@ import { SpecificCategoryComponent } from './pages/specific-category/specific-ca
 import { SpecificBrandComponent } from './pages/specific-brand/specific-brand.component';
 import { CashOrderComponent } from './pages/cash-order/cash-order.component';
 import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
+import { SpecificOrderComponent } from './pages/specific-order/specific-order.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,7 @@ const routes: Routes = [
         component: SpecificCategoryComponent,
       },
       { path: 'allorders', component: UserOrdersComponent },
+      { path: 'specifcOrder/:id', component: SpecificOrderComponent },
     ],
   },
   {

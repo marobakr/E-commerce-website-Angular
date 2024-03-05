@@ -51,10 +51,10 @@ export class BlanknavComponent implements OnInit {
   listenerCartItem(): void {
     this._cartService.cartNumber.subscribe({
       next: (response) => {
-        this.itemCount = response;
         if (this.itemCount > 0) {
           this.getItemCart();
         }
+        this.itemCount = response;
       },
     });
   }
@@ -62,7 +62,10 @@ export class BlanknavComponent implements OnInit {
   getItemCart(): void {
     this._cartService.getCartUser().subscribe({
       next: (respons) => {
-        this._renderer2.addClass(this.cartIcon.nativeElement, 'alarmTrue');
+        this._renderer2.addClass(
+          this.cartIcon.nativeElement,
+          'goCartAnimations'
+        );
         this.itemCount = respons.numOfCartItems;
       },
       error: (err) => {
@@ -70,7 +73,10 @@ export class BlanknavComponent implements OnInit {
       },
       complete: () => {
         setTimeout(() => {
-          this._renderer2.removeClass(this.cartIcon.nativeElement, 'alarmTrue');
+          this._renderer2.removeClass(
+            this.cartIcon.nativeElement,
+            'goCartAnimations'
+          );
         }, 3000);
       },
     });
@@ -108,7 +114,7 @@ export class BlanknavComponent implements OnInit {
       this._renderer2.addClass(this.categorLinks.nativeElement, 'd-none');
     }
   }
-  // to display Ul Links
+  // Just to display Ul Links
   subCategorie(id: string) {
     this._productsDataService.specificCategories(id).subscribe({
       next: (response) => {},

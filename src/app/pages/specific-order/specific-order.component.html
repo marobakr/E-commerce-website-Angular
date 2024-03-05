@@ -1,0 +1,147 @@
+<section class="">
+  <div class="info-allordersUser mb-5 specific-orders rounded-3 p-5">
+    <div class="isDelivered">
+      <h4 class="text-muted text-capitalize">
+        last update:
+        {{ allordersUser.createdAt | date }}
+      </h4>
+      <h4 class="text-capitalize text-muted">
+        isDelivered:
+        <i
+          *ngIf="allordersUser.isDelivered"
+          class="fa-solid fa-check text-main"
+        ></i>
+        <i
+          *ngIf="!allordersUser.isDelivered"
+          class="fa-solid fa-circle-xmark text-danger"
+        ></i>
+      </h4>
+    </div>
+    <div class="isPaid">
+      <h4 class="text-capitalize text-muted">
+        isPaid:
+        <i
+          *ngIf="!allordersUser.isDelivered"
+          class="fa-solid fa-circle-xmark text-danger"
+        ></i>
+        <i
+          *ngIf="allordersUser.isDelivered"
+          class="fa-solid fa-check text-main"
+        ></i>
+      </h4>
+    </div>
+    <h4 class="text-capitalize text-muted">
+      data:{{ allordersUser.paidAt | date }}
+    </h4>
+    <div class="payment text-muted text-capitalize">
+      <h4>
+        payment Type
+        <i
+          *ngIf="allordersUser.paymentMethodType === 'card'"
+          class="fa-brands fa-cc-visa fa-xl text-main"
+        ></i>
+        <i
+          *ngIf="allordersUser.paymentMethodType === 'cash'"
+          class="fa-solid fa-wallet fa-xl text-main"
+        ></i>
+      </h4>
+    </div>
+    <h4 class="text-muted text-capitalize">
+      shipping Price: {{ allordersUser.shippingPrice }}
+    </h4>
+    <h4 class="text-muted text-capitalize">
+      tax Price: {{ allordersUser.taxPrice }}
+    </h4>
+    <h4 class="text-muted text-capitalize">
+      total allordersUser Price:
+      {{ allordersUser.totalOrderPrice | currency : "eg" }}
+    </h4>
+    <h4 class="text-muted text-capitalize">
+      last update:
+      {{ allordersUser.updatedAt | date }}
+    </h4>
+  </div>
+  <div
+    class="row justify-content-between align-items-start flex-wrap text-start"
+  >
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th>item</th>
+          <th>Product</th>
+          <th>price</th>
+          <th>brand</th>
+          <th>count</th>
+          <th>category</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of allordersUser.cartItems; let i = index">
+          <th class="col-1">{{ i + 1 }}</th>
+          <td class="col-2">
+            <figure
+              class="baseSlideItem rounded-3"
+              [routerLink]="['/details', order.product.id]"
+            >
+              <img
+                class="w-100 rounded-4"
+                [src]="order.product.imageCover"
+                [alt]="order.product.title"
+              />
+            </figure>
+          </td>
+          <td class="col-3">
+            <h4 class="text-black text-capitalize">
+              <span class="text-muted">
+                {{ order.price | currency : "EG" }}
+              </span>
+            </h4>
+          </td>
+          <td class="col-2">
+            <figure
+              class="baseSlideItem rounded-3"
+              [routerLink]="[
+                '/specificBrand',
+                order.product.brand._id,
+                order.product.brand.name
+              ]"
+            >
+              <img
+                class="w-100 rounded-4"
+                [src]="order.product.brand.image"
+                [alt]="order.product.brand.name"
+              />
+            </figure>
+          </td>
+          <td class="col-2">
+            <h4 class="text-black text-capitalize">
+              <span class="text-muted">
+                {{ order.count }}
+              </span>
+            </h4>
+          </td>
+
+          <td class="col-2">
+            <figure
+              class="baseSlideItem rounded-3"
+              [routerLink]="[
+                '/specificCategory',
+                order.product.category._id,
+                order.product.category.name
+              ]"
+            >
+              <img
+                class="w-100 rounded-4"
+                [src]="order.product.category.image"
+                [alt]="order.product.category.name"
+              />
+            </figure>
+            <h4 class="text-black text-capitalize">
+              {{ order.product.category.name }}
+            </h4>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

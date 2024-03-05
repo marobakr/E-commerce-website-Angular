@@ -116,6 +116,7 @@ input:-internal-autofill-selected {
 .alarmTrue {
   animation: scaling 0.5s linear infinite alternate;
 }
+
 /* paginations */
 .ngx-pagination .current {
   border-radius: 50% !important;
@@ -202,4 +203,8 @@ select option {
 .up-down-animation {
   position: relative;
   animation: up-down 5s linear infinite;
+}
+/* images table orders */
+.w-10 {
+  width: 10%;
 }

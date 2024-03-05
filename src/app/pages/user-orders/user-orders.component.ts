@@ -2,6 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/core/cart.service';
 import { Allorders } from 'src/app/interfaces/allorders';
+import { ProductsDataService } from 'src/app/core/products-data.service';
 
 interface baseinfoUser {
   name: string;
@@ -15,10 +16,7 @@ interface baseinfoUser {
   styleUrls: ['./user-orders.component.css'],
 })
 export class UserOrdersComponent implements OnInit {
-  constructor(
-    private _cartService: CartService,
-    private _activatedRoute: ActivatedRoute
-  ) {}
+  constructor(private _cartService: CartService) {}
   _idCart: string = '';
   userId: any;
   userOrder: Allorders[] = [];
@@ -35,7 +33,7 @@ export class UserOrdersComponent implements OnInit {
     this._cartService.getUserOrders(this.userId).subscribe({
       next: (response) => {
         this.userOrder = response;
-        // console.log(this.userOrder);
+        console.log(response.data);
       },
       error: (err) => {
         console.log(err);

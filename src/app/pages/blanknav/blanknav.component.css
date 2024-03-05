@@ -105,3 +105,6 @@
 .arrowCateg i {
   animation: bouncingLaing 1.5s infinite;
 }
+.goCartAnimations {
+  animation: goAheadCart 2s linear alternate-reverse;
+}

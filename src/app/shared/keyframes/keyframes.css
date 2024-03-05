@@ -44,3 +44,23 @@
     top: -50px;
   }
 }
+@keyframes goAheadCart {
+  0% {
+    transform: translateX(-10%);
+  }
+  30% {
+    transform: rotateZ(327deg);
+  }
+  70% {
+    transform: translateX(200%);
+  }
+  75% {
+    transform: rotateZ(30deg);
+  }
+  95% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
