@@ -7,12 +7,9 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { NotifierService } from 'angular-notifier';
-import { CartService } from 'src/app/core/cart.service';
 import { ProductsDataService } from 'src/app/core/products-data.service';
 import { Products } from 'src/app/interfaces/products';
 import { feadToggle } from 'src/app/shared/animations/toggle-fade';
-import { BtncartComponent } from 'src/app/shared/btncart/btncart.component';
 
 @Component({
   selector: 'app-products',

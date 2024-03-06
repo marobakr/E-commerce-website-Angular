@@ -43,18 +43,22 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="price mb-4">
+        <div class="price mb-4 o">
           <h3 class="mat-h2">Price</h3>
+          <div>
+            <mat-slider
+              class="w-75"
+              id="slider"
+              name="slider"
+              min="149"
+              max="45000"
+              step="0.5"
+              value="1.5"
+            >
+              <input [(ngModel)]="priceRange" matSliderThumb />
+            </mat-slider>
+          </div>
 
-          <input
-            [(ngModel)]="priceRange"
-            id="slider"
-            name="slider"
-            type="range"
-            min="149"
-            max="45000"
-            id="customRange2"
-          />
           <label for="customRange2  " class="form-label fw-bold text-main">
             {{ priceRange | currency : "EG" }}</label
           >
@@ -104,7 +108,7 @@
       </div>
       <app-base-products
         [allProducts]="allProducts"
-        [mainProduct]="true"
+        [col_4]="true"
         [pageSize]="pageSize"
         [currentPage]="currentPage"
         [totalItems]="totalItems"

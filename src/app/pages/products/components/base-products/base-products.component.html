@@ -1,7 +1,7 @@
 <div #allItems class="row gy-5">
   <div
-    [ngClass]="{'col-lg-4 ': mainProduct,'col-lg-3 ': categoryName, }"
-    class="col-md-6 overflow-hidden item position-relative item"
+    [ngClass]="{'col-lg-4 ': col_4,'col-lg-3 ': col_3, }"
+    class="col-md-6 overflow-hidden item position-relative"
     *ngFor="
       let item of allProducts
         | categories : selectedCategoryName
@@ -25,8 +25,8 @@
     >
       <span> {{ item.offer }}% </span>
     </div>
-    <div class="inner position-relative">
-      <figure class="baseSlideItem rounded-3">
+    <div class="position-relative overflow-hidden item-Products">
+      <figure class="rounded-3 baseSlideItem">
         <img
           role="button"
           class="w-100 mb-3 img-thumbnail rounded-3"
@@ -35,6 +35,16 @@
           [routerLink]="['/details', item._id]"
         />
       </figure>
+      <i
+        *ngIf="!wishListData.includes($any(item._id))"
+        (click)="addFavourite(item._id)"
+        class="fa-regular fa-heart fa-3x heart text-main"
+      ></i>
+      <i
+        *ngIf="wishListData.includes($any(item._id))"
+        (click)="removeFavourite(item._id)"
+        class="fa-solid fa-heart fa-3x heart-added text-main"
+      ></i>
       <div class="foooter-info p-2 rounded">
         <h3 class="text-main">
           {{ item.category.name }}
@@ -61,6 +71,7 @@
         </div>
       </div>
     </div>
+
     <app-btncart
       class="w-100"
       #componentBtn

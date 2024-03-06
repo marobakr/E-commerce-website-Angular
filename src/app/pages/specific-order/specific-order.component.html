@@ -1,77 +1,89 @@
 <section class="">
   <div class="info-allordersUser mb-5 specific-orders rounded-3 p-5">
     <div class="row">
-      <h4 class="text-capitalize text-muted">
-        name : <span class="text-muted">{{ allordersUser.user.name }}</span>
-      </h4>
-      <h4 class="text-capitalize text-muted">
-        phon number :
-        <span class="text-muted">{{ allordersUser.user.email }}</span>
-      </h4>
-      <h4 class="text-capitalize text-muted">
-        adress :
-        <span class="text-muted">{{ allordersUser.user.phone }}</span>
-      </h4>
-      <div class="isDelivered">
-        <h4 class="text-muted text-capitalize">
+      <h2 class="text-capitalize text-main">
+        order id: <span class="text-muted"> #{{ allordersUser.id }}</span>
+      </h2>
+      <div class="col-lg-7 col-md-7">
+        <h4 class="text-capitalize">
+          your email :
+          <span class="text-muted">{{ allordersUser.user.email }}</span>
+        </h4>
+        <h4 class="text-capitalize">
+          your phone :
+          <span class="text-muted">{{ allordersUser.user.phone }}</span>
+        </h4>
+
+        <div class="isDelivered">
+          <h4 class="text-capitalize">
+            created At:
+            <span class="text-muted">
+              {{ allordersUser.createdAt | date }}
+            </span>
+          </h4>
+          <h4 class="text-capitalize">
+            isDelivered:
+            <i
+              *ngIf="allordersUser.isDelivered"
+              class="fa-solid fa-check text-main"
+            ></i>
+            <i
+              *ngIf="!allordersUser.isDelivered"
+              class="fa-solid fa-circle-xmark text-danger"
+            ></i>
+          </h4>
+        </div>
+        <div class="isPaid">
+          <h4 class="text-capitalize">
+            isPaid:
+            <i
+              *ngIf="!allordersUser.isDelivered"
+              class="fa-solid fa-circle-xmark text-danger"
+            ></i>
+            <i
+              *ngIf="allordersUser.isDelivered"
+              class="fa-solid fa-check text-main"
+            ></i>
+          </h4>
+        </div>
+        <h4 class="text-capitalize">data:{{ allordersUser.paidAt | date }}</h4>
+        <div class="payment text-capitalize">
+          <h4>
+            payment Type
+            <i
+              *ngIf="allordersUser.paymentMethodType === 'card'"
+              class="fa-brands fa-cc-visa fa-xl text-main"
+            ></i>
+            <i
+              *ngIf="allordersUser.paymentMethodType === 'cash'"
+              class="fa-solid fa-wallet fa-xl text-main"
+            ></i>
+          </h4>
+        </div>
+
+        <h4 class="text-capitalize">
           last update:
-          {{ allordersUser.createdAt | date }}
-        </h4>
-        <h4 class="text-capitalize text-muted">
-          isDelivered:
-          <i
-            *ngIf="allordersUser.isDelivered"
-            class="fa-solid fa-check text-main"
-          ></i>
-          <i
-            *ngIf="!allordersUser.isDelivered"
-            class="fa-solid fa-circle-xmark text-danger"
-          ></i>
+          <span class="text-muted"> {{ allordersUser.updatedAt | date }}</span>
         </h4>
       </div>
-      <div class="isPaid">
-        <h4 class="text-capitalize text-muted">
-          isPaid:
-          <i
-            *ngIf="!allordersUser.isDelivered"
-            class="fa-solid fa-circle-xmark text-danger"
-          ></i>
-          <i
-            *ngIf="allordersUser.isDelivered"
-            class="fa-solid fa-check text-main"
-          ></i>
+      <div class="col-lg-5 col-md-5">
+        <h4 class="text-capitalize">
+          shipping Price:
+          <span class="text-muted">{{ allordersUser.shippingPrice }}</span>
+        </h4>
+        <h4 class="text-capitalize">
+          tax Price:
+          <span class="text-muted"> {{ allordersUser.taxPrice }}</span>
+        </h4>
+        <hr />
+
+        <h4 class="text-capitalize">
+          total allordersUser Price:
+          <span class="text-muted">
+            {{ allordersUser.totalOrderPrice | currency : "eg" }}
+          </span>
         </h4>
       </div>
-      <h4 class="text-capitalize text-muted">
-        data:{{ allordersUser.paidAt | date }}
-      </h4>
-      <div class="payment text-muted text-capitalize">
-        <h4>
-          payment Type
-          <i
-            *ngIf="allordersUser.paymentMethodType === 'card'"
-            class="fa-brands fa-cc-visa fa-xl text-main"
-          ></i>
-          <i
-            *ngIf="allordersUser.paymentMethodType === 'cash'"
-            class="fa-solid fa-wallet fa-xl text-main"
-          ></i>
-        </h4>
-      </div>
-      <h4 class="text-muted text-capitalize">
-        shipping Price: {{ allordersUser.shippingPrice }}
-      </h4>
-      <h4 class="text-muted text-capitalize">
-        tax Price: {{ allordersUser.taxPrice }}
-      </h4>
-      <h4 class="text-muted text-capitalize">
-        total allordersUser Price:
-        {{ allordersUser.totalOrderPrice | currency : "eg" }}
-      </h4>
-      <h4 class="text-muted text-capitalize">
-        last update:
-        {{ allordersUser.updatedAt | date }}
-      </h4>
     </div>
   </div>
   <div
@@ -89,7 +101,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of allordersUser.cartItems; let i = index">
+        <tr
+          *ngFor="let order of allordersUser.cartItems; let i = index"
+          class="p-3"
+        >
           <th class="col-1">{{ i + 1 }}</th>
           <td class="col-2">
             <figure
@@ -134,7 +149,7 @@
             </h4>
           </td>
 
-          <td class="col-2">
+          <td class="d-sm-none">
             <figure
               class="baseSlideItem rounded-3"
               [routerLink]="[

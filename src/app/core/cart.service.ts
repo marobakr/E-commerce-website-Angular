@@ -10,7 +10,7 @@ import { jwtDecode } from 'jwt-decode';
 export class CartService {
   constructor(private _httpClient: HttpClient) {}
   cartNumber: BehaviorSubject<number> = new BehaviorSubject(0);
-
+  orderNumber: BehaviorSubject<number> = new BehaviorSubject(0);
   addToCart(prouctId: string): Observable<any> {
     return this._httpClient.post(`${baseUrl}/api/v1/cart`, {
       productId: prouctId,

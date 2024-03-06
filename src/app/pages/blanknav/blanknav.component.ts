@@ -27,8 +27,10 @@ export class BlanknavComponent implements OnInit {
   @ViewChild('categoriesLinks') categorLinks!: ElementRef;
   @ViewChild('cartIcon') cartIcon!: ElementRef;
   itemCount: number = 0;
+  orderCount: number = 0;
   urlImage: any = '';
   userName: any = '';
+  userId: string = '';
   ulCategories: Categoreis[] = [];
   allIcons: string[] = [
     'fa-brands fa-facebook fa-xl',
@@ -40,6 +42,8 @@ export class BlanknavComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.listenerCartItem();
+    // there was an error❌❌❌❌❌❌❌❌❌❌❌❌❌
+    // this.listenOrderItem();
     if (localStorage.getItem('imageUser') !== null) {
       this.urlImage = localStorage.getItem('imageUser');
     }
@@ -52,10 +56,18 @@ export class BlanknavComponent implements OnInit {
     this._cartService.cartNumber.subscribe({
       next: (response) => {
         this.itemCount = response;
-        if (this.itemCount > 0) {
-          this.getItemCart();
-        }
-        console.log(this.itemCount);
+        // if (this.itemCount > 0) {
+        this.getItemCart();
+        // }
+      },
+    });
+  }
+
+  listenOrderItem() {
+    this._cartService.orderNumber.subscribe({
+      next: (response) => {
+        this.updateOrderNumber();
+        this.orderCount = response;
       },
     });
   }
@@ -68,7 +80,6 @@ export class BlanknavComponent implements OnInit {
           'goCartAnimations'
         );
         this.itemCount = respons.numOfCartItems;
-        console.log(this.itemCount);
       },
       error: (err) => {
         console.log(err);
@@ -126,5 +137,15 @@ export class BlanknavComponent implements OnInit {
   @HostListener('document:click')
   onDocumentClick(): void {
     this._renderer2.addClass(this.categorLinks.nativeElement, 'd-none');
+  }
+
+  updateOrderNumber() {
+    const userData = this._cartService.decodeUserData();
+    this.userId = userData.id;
+    this._cartService.getUserOrders(this.userId).subscribe({
+      next: (response) => {
+        this._cartService.orderNumber.next(response.length);
+      },
+    });
   }
 }

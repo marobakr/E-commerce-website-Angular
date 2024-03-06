@@ -2,13 +2,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/core/cart.service';
 import { Allorders } from 'src/app/interfaces/allorders';
-import { ProductsDataService } from 'src/app/core/products-data.service';
-
-interface baseinfoUser {
-  name: string;
-  email: string;
-  phone: number;
-}
 
 @Component({
   selector: 'app-user-orders',
@@ -25,26 +18,14 @@ export class UserOrdersComponent implements OnInit {
     const userData = this._cartService.decodeUserData();
     this.userId = userData.id;
     this.displayUserOrders();
-    if (localStorage.getItem('imageUser') !== null) {
-      this.userImage = localStorage.getItem('imageUser');
-    }
   }
   displayUserOrders() {
     this._cartService.getUserOrders(this.userId).subscribe({
       next: (response) => {
         this.userOrder = response;
-        console.log(response.data);
       },
       error: (err) => {
         console.log(err);
-      },
-    });
-  }
-
-  specificOrderUser(id: string) {
-    this._cartService.getSpeicifcOrder(id).subscribe({
-      next: (response) => {
-        console.log(response);
       },
     });
   }

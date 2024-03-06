@@ -20,6 +20,7 @@ import { CashOrderComponent } from './pages/cash-order/cash-order.component';
 import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
 import { SpecificOrderComponent } from './pages/specific-order/specific-order.component';
 import { adminGuard } from './guards/admin.guard';
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,8 @@ const routes: Routes = [
       { path: 'details/:id', component: DetailsComponent },
       { path: 'payment/:idcart', component: PaymentComponent },
       { path: 'cash-order/:idcart', component: CashOrderComponent },
+      { path: 'wishlist', component: WishlistComponent },
+
       {
         path: 'specificBrand/:id/:brand-name',
         component: SpecificBrandComponent,

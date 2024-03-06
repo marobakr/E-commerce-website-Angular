@@ -8,7 +8,6 @@ import { baseUrl } from '../shared/paseApi';
 })
 export class ForgetpasswordService {
   constructor(private _httpClient: HttpClient) {}
-
   forgetPassword(userEMail: object): Observable<any> {
     return this._httpClient.post(`${baseUrl}/api/v1/auth/forgotPasswords`, {
       email: userEMail,
@@ -19,7 +18,6 @@ export class ForgetpasswordService {
       resetCode: code,
     });
   }
-
   resetPassword(newUserData: object): Observable<any> {
     return this._httpClient.put(
       `${baseUrl}/api/v1/auth/resetPassword`,

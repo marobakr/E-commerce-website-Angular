@@ -1,7 +1,5 @@
-import { EventListenerFocusTrapInertStrategy } from '@angular/cdk/a11y';
 import {
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   OnInit,
@@ -11,6 +9,7 @@ import {
 import { NotifierService } from 'angular-notifier';
 import { CartService } from 'src/app/core/cart.service';
 import { ProductsDataService } from 'src/app/core/products-data.service';
+import { WishlistService } from 'src/app/core/wishlist.service';
 import { Products } from 'src/app/interfaces/products';
 import { BtncartComponent } from 'src/app/shared/btncart/btncart.component';
 
@@ -19,13 +18,17 @@ import { BtncartComponent } from 'src/app/shared/btncart/btncart.component';
   templateUrl: './base-products.component.html',
   styleUrls: ['./base-products.component.css'],
 })
-export class BaseProductsComponent {
+export class BaseProductsComponent implements OnInit {
   constructor(
     private _cartService: CartService,
     private _notifierService: NotifierService,
-    private _ProductsDataService: ProductsDataService
+    private _ProductsDataService: ProductsDataService,
+    private _wishlistService: WishlistService
   ) {}
   previousProductLength: number | undefined;
+  wishListData: Products[] = [];
+  @Output() emitterLength = new EventEmitter();
+  @ViewChild('allItems') itemsLength!: any;
   @Input() allProducts: Products[] = [];
   @Input() selectedCategoryName: any = '';
   @Input() uniqeBrands: string[] = [''];
@@ -40,13 +43,22 @@ export class BaseProductsComponent {
   @Input() isClassApplied: boolean = false;
   @Input() priceRange: number = 45000;
   @Input() productLength: number = 0;
-  // if i import this componets in categoryName i wll convert the col to col-4
-  @Input() categoryName: boolean = false;
-  // if i import this componets in mainProduct i wll convert the col to col-3
-  @Input() mainProduct: boolean = false;
-  @Output() emitterLength = new EventEmitter();
-  @ViewChild('allItems') itemsLength!: any;
+  @Input() showWishList: boolean = false;
+  @Input() col_4: boolean = false;
+  @Input() col_3: boolean = false;
 
+  ngOnInit(): void {
+    this.dsiplayWishList();
+  }
+
+  dsiplayWishList() {
+    this._wishlistService.getWishlistItem().subscribe({
+      next: (response) => {
+        const allWishlistItem = response.data.map((item: any) => item._id);
+        this.wishListData = allWishlistItem;
+      },
+    });
+  }
   addProduct(_id: string, btnComponent: BtncartComponent): void {
     btnComponent.isLoding = true;
     this._cartService.addToCart(_id).subscribe({
@@ -60,7 +72,6 @@ export class BaseProductsComponent {
       },
     });
   }
-
   ngAfterContentChecked(): void {
     setTimeout(() => {
       if (this.itemsLength) {
@@ -75,5 +86,25 @@ export class BaseProductsComponent {
         return;
       }
     }, 0);
+  }
+  addFavourite(id: string): void {
+    this._wishlistService.addWichlist(id).subscribe({
+      next: (response) => {
+        this.wishListData = response.data;
+        this._notifierService.notify('success', `${response.message}`);
+      },
+    });
+  }
+  removeFavourite(id: string): void {
+    this._wishlistService.removeWishlist(id).subscribe({
+      next: (response) => {
+        this.wishListData = response.data;
+        const afterDelte = this.allProducts.filter((item: any) =>
+          this.wishListData.includes(item._id)
+        );
+        this.allProducts = afterDelte;
+        this._notifierService.notify('warning', `${response.message}`);
+      },
+    });
   }
 }

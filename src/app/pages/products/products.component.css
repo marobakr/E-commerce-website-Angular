@@ -138,3 +138,15 @@ select option {
   color: inherit;
   background-color: var(--main-color);
 }
+.mat-mdc-slider.mat-primary {
+  --mdc-slider-handle-color: var(--main-color);
+  --mdc-slider-focus-handle-color: var(--main-color);
+  --mdc-slider-hover-handle-color: var(--main-color);
+  --mdc-slider-active-track-color: var(--main-color);
+  --mdc-slider-inactive-track-color: var(--main-color);
+  --mdc-slider-with-tick-marks-active-container-color: #fff;
+  --mdc-slider-with-tick-marks-inactive-container-color: var(--main-color);
+  --mat-mdc-slider-ripple-color: var(--main-color);
+  --mat-mdc-slider-hover-ripple-color: rgba(52, 157, 14, 0.05);
+  --mat-mdc-slider-focus-ripple-color: rgba(52, 157, 14, 0.05);
+}
