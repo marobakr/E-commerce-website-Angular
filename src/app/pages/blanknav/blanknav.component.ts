@@ -25,11 +25,13 @@ export class BlanknavComponent implements OnInit {
     private _productsDataService: ProductsDataService,
     private _wishlistService: WishlistService
   ) {}
+  @ViewChild('settings') settings!: ElementRef;
 
   @ViewChild('categoriesLinks') categorLinks!: ElementRef;
 
   itemCount: number = 0;
   orderCount: number = 0;
+  isClick: boolean = false;
   wishListCount: number = 0;
   urlImage: any = '';
   userName: any = '';
@@ -160,6 +162,14 @@ export class BlanknavComponent implements OnInit {
       this.isScroll = true;
     } else {
       this.isScroll = false;
+    }
+  }
+
+  toggleShow() {
+    if (this.isClick) {
+      this.isClick = !this.isClick;
+    } else {
+      this.isClick = !this.isClick;
     }
   }
 

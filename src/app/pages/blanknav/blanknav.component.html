@@ -6,18 +6,6 @@
     <a class="navbar-brand mb-2" routerLink="/home">
       <img src="./assets/images/freshcart-logo.svg" alt="" />
     </a>
-
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <!-- List Min Icons In col-md -->
     <ul
       class="d-flex d-lg-none main-icons navbar-nav mx-auto pt-1 mb-2 mb-lg-0 align-items-center flex-row"
@@ -56,6 +44,17 @@
         </a>
       </li>
     </ul>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="collapse navbar-collapse my-2" id="navbarSupportedContent">
       <!-- List Anchor -->
@@ -177,8 +176,8 @@
           ></a>
         </li>
       </ul>
-      <!--User Image && UserName -->
 
+      <!--User Image && UserName -->
       <ul
         class="user-info d-flex text-black p-1 mb-lg-0 mx-2 rounded-3 navbar-nav align-items-center position-relative"
       >
@@ -198,13 +197,41 @@
           <input id="fileInput" type="file" (change)="uploadImgeUser($event)" />
         </div>
 
-        <li class="username px-3 fw-bold text-white">{{ userName }}</li>
-        <!-- <li
-          (click)="sinOut()"
-          class="sinOut mx-auto px-5 py-1 text-capitalize position-absolute rounded-pill"
+        <li
+          (click)="toggleShow()"
+          class="username px-3 fw-bold text-white position-relative"
         >
-          sinOut
-        </li> -->
+          {{ userName }}
+        </li>
+        <ul
+          *ngIf="isClick"
+          #settings
+          class="settings navbar-nav position-absolute flex-column w-100 g-2 p-2 bg-body-secondary rounded"
+        >
+          <li
+            routerLink="/settings"
+            class="nav-item d-flex align-items-center justify-content-between mb-2 bg-main rounded p-1 hover-anchor"
+          >
+            <a class="nav-link px-2 text-capitalize fw-medium text-white"
+              >settings
+            </a>
+            <i class="fa-solid fa-gear fa-xl text-white"></i>
+          </li>
+          <li
+            (click)="sinOut()"
+            class="nav-item d-flex align-items-center p-1 justify-content-between mb-2 bg-main rounded hover-anchor"
+            role="button"
+          >
+            <a
+              class="nav-link px-2 text-capitalize fw-medium text-white"
+              aria-current="page"
+              >sinOut
+            </a>
+            <i
+              class="fa-solid fa-arrow-right-from-bracket text-white fa-xl"
+            ></i>
+          </li>
+        </ul>
       </ul>
     </div>
   </div>

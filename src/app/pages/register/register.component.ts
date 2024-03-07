@@ -24,7 +24,6 @@ export class RegisterComponent {
     private _notifierService: NotifierService,
     private _router: Router
   ) {}
-  private subscription!: Subscription;
   isLoding: boolean = false;
 
   confirmPassword = (control: AbstractControl) => {

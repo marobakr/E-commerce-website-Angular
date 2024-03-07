@@ -49,24 +49,24 @@ nav {
   cursor: pointer;
   background-color: var(--main-color);
 }
-
-.sinOut {
-  text-align: center;
-  bottom: -48px;
-  left: 0;
-  right: 0;
-  background-color: var(--main-color);
-  width: fit-content;
-  color: white;
+.user-info::before {
+  content: "";
+  position: absolute;
+  border: 10px solid;
+  border-color: var(--main-color) transparent transparent transparent;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+}
+.hover-anchor {
+  transition: all 0.5s;
 }
 
-.sinOut {
-  display: none;
+.hover-anchor:hover {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
-.user-info:hover .sinOut {
-  display: block;
-}
-
 /* categories Links */
 .categoriesLinks {
   min-width: 200px;
@@ -102,4 +102,10 @@ nav {
 }
 .navbar-toggler {
   color: var(--main-color);
+}
+
+/* Settings User */
+.settings {
+  right: 0;
+  bottom: -130px;
 }

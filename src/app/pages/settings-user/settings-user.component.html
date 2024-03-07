@@ -1,0 +1,182 @@
+<section class="form py-5">
+  <div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <nav class="nav nav-borders text-main text-capitalize">
+      <a class="text-main nav-link active ms-0 fw-medium">account settings</a>
+      <a class="text-main nav-link fw-medium">Security settings</a>
+      <a class="text-main nav-link fw-medium">adresse settings</a>
+    </nav>
+    <hr class="mt-0 mb-4" />
+    <div class="row">
+      <div class="col-xl-4">
+        <!-- Profile picture card-->
+        <div class="card mb-4 mb-xl-0">
+          <div class="card-header fw-medium">Profile Picture</div>
+          <div class="card-body text-center">
+            <!-- Profile picture image-->
+            <div class="photo d-none d-lg-flex">
+              <img
+                class="w-100 rounded-3"
+                [src]="
+                  defultImage
+                    ? defultImage
+                    : 'https://www.w3schools.com/howto/img_avatar.png'
+                "
+              />
+              <div class="background position-absolute rounded-3"></div>
+              <br />
+            </div>
+            <!-- Profile picture help block-->
+            <div class="small font-italic text-muted mb-4">
+              JPG or PNG no larger than 5 MB
+            </div>
+            <!-- Profile picture upload button-->
+            <button
+              class="btn btn-main w-100 text-white"
+              (click)="selectImage()"
+            >
+              Choose Image
+            </button>
+            <input
+              type="file"
+              #fileInput
+              class="d-none"
+              (change)="uploadImage($event)"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-8">
+        <!-- Account details card-->
+        <div class="card mb-4">
+          <div class="card-header fw-medium">Account Details</div>
+          <div class="card-body">
+            <form
+              [@streatch]
+              (ngSubmit)="updateData(updateFormData)"
+              [formGroup]="updateFormData"
+            >
+              <!-- Form Group (username)-->
+              <div class="mb-3">
+                <label class="small mb-1 text-muted" for="inputUsername"
+                  >Username (how your name will appear to other users on the
+                  site)</label
+                >
+                <input
+                  class="form-control"
+                  id="inputUsername"
+                  type="text"
+                  placeholder="Enter your username"
+                  value="username"
+                  [ngClass]="{
+                    'is-valid': !name?.errors,
+                    'is-invalid': name?.errors && name?.touched
+                  }"
+                  formControlName="name"
+                />
+                <div *ngIf="name?.dirty" class="errorGroupe my-3">
+                  <p
+                    *ngIf="name?.getError('required')"
+                    class="alert alert-danger"
+                  >
+                    your name is required
+                  </p>
+                  <p
+                    *ngIf="name?.getError('maxlength')"
+                    class="alert alert-danger"
+                  >
+                    Username must be at least 20
+                  </p>
+                  <p
+                    *ngIf="name?.getError('mminlength')"
+                    class="alert alert-danger"
+                  >
+                    Username must be at least 3 characters long
+                  </p>
+                </div>
+              </div>
+
+              <!-- Form Row  -->
+              <div class="row gx-3 mb-3">
+                <!-- Form Group (email)-->
+                <div class="col-md-6">
+                  <label class="small mb-1 text-muted" for="inputemail"
+                    >email
+                  </label>
+                  <input
+                    class="form-control"
+                    id="inputemail"
+                    type="text"
+                    placeholder="Enter your email"
+                    value="Start Bootstrap"
+                    [ngClass]="{
+                      'is-valid': !email?.errors,
+                      'is-invalid': email?.errors && email?.touched
+                    }"
+                    formControlName="email"
+                  />
+                  <div *ngIf="email?.dirty" class="errorGroupe my-3">
+                    <p
+                      *ngIf="email?.getError('required')"
+                      class="alert alert-danger"
+                    >
+                      your email is required
+                    </p>
+                    <p
+                      *ngIf="email?.getError('email')"
+                      class="alert alert-danger"
+                    >
+                      your email not valid
+                    </p>
+                  </div>
+                </div>
+                <!-- Form Group (phone)-->
+                <div class="col-md-6">
+                  <label class="small mb-1 text-muted" for="inputPhone"
+                    >phone</label
+                  >
+                  <input
+                    class="form-control"
+                    id="inputPhone"
+                    type="text"
+                    placeholder="Enter your phone"
+                    value="San Francisco, CA"
+                    [ngClass]="{
+                      'is-valid': !phone?.errors,
+                      'is-invalid': phone?.errors && phone?.touched
+                    }"
+                    formControlName="phone"
+                  />
+                  <div *ngIf="phone?.dirty" class="errorGroupe my-3">
+                    <p
+                      *ngIf="phone?.getError('required')"
+                      class="alert alert-danger"
+                    >
+                      your phone is required
+                    </p>
+                    <p
+                      *ngIf="phone?.getError('pattern')"
+                      class="alert alert-danger"
+                    >
+                      Please enter a valid Egyptian phone number
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Save changes button-->
+              <app-btncart
+                [text]="'Save changes'"
+                [isLoding]="isLoding"
+                [formValid]="updateFormData.valid"
+                [isLoding]="isLoding"
+                [bgMain]="true"
+                [loderBgMain]="true"
+              ></app-btncart>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

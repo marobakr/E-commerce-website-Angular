@@ -21,6 +21,7 @@ import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
 import { SpecificOrderComponent } from './pages/specific-order/specific-order.component';
 import { adminGuard } from './guards/admin.guard';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
+import { SettingsUserComponent } from './pages/settings-user/settings-user.component';
 
 const routes: Routes = [
   {
@@ -74,6 +75,11 @@ const routes: Routes = [
         path: 'specifcOrder/:id',
         component: SpecificOrderComponent,
         title: 'Specifc Order ',
+      },
+      {
+        path: 'settings',
+        component: SettingsUserComponent,
+        title: 'Settings ',
       },
     ],
   },

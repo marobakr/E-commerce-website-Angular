@@ -55,6 +55,7 @@ import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
 import { SpecificOrderComponent } from './pages/specific-order/specific-order.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
+import { SettingsUserComponent } from './pages/settings-user/settings-user.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { WishlistComponent } from './pages/wishlist/wishlist.component';
     SpecificOrderComponent,
     UserSettingsComponent,
     WishlistComponent,
+    SettingsUserComponent,
   ],
 
   imports: [
