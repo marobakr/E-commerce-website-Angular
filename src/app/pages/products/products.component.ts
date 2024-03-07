@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -7,6 +8,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { ProductsDataService } from 'src/app/core/products-data.service';
 import { Products } from 'src/app/interfaces/products';
 import { feadToggle } from 'src/app/shared/animations/toggle-fade';
@@ -20,7 +22,9 @@ import { feadToggle } from 'src/app/shared/animations/toggle-fade';
 export class ProductsComponent implements OnInit {
   constructor(
     private _productsDataService: ProductsDataService,
-    private _renderer2: Renderer2
+    private _renderer2: Renderer2,
+    private router: Router,
+    private viewportScroller: ViewportScroller
   ) {}
   @ViewChild('categories') chosesCategory!: ElementRef;
   @ViewChild('stars') allStarts!: ElementRef;
@@ -71,6 +75,7 @@ export class ProductsComponent implements OnInit {
         this.currentPage = response.metadata.currentPage;
         this.totalItems = response.results;
         this.getOffer(response.data);
+        this.viewportScroller.scrollToPosition([0, 0]);
       },
     });
   }

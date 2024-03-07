@@ -1,63 +1,7 @@
 <div class="products py-5">
   <h1 class="baseTitle mb-3">all Popular Products</h1>
-
-  <div class="row gy-5">
-    <div
-      class="col-md-3 overflow-hidden parent-col"
-      @fead
-      *ngFor="let item of allProducts"
-    >
-      <div class="inner position-relative">
-        <owl-carousel-o #owlElement [options]="customOptions">
-          <ng-container *ngFor="let imge of item.images">
-            <ng-template carouselSlide>
-              <figure class="imge-slider baseSlideItem">
-                <img
-                  role="button"
-                  class="w-100 mb-3 img-thumbnail rounded-3"
-                  height="200"
-                  [src]="imge"
-                  [routerLink]="['/details', item._id]"
-                />
-              </figure>
-            </ng-template>
-          </ng-container>
-        </owl-carousel-o>
-        <div class="foooter-info p-2 rounded">
-          <h3 class="text-main">
-            {{ item.category.name }}
-          </h3>
-          <h4 class="h6">
-            {{ item.title.split(" ").splice(0, 2).join(" ") }}
-          </h4>
-          <div
-            class="rating-price d-flex justify-content-between align-items-center"
-          >
-            <span>{{ item.price }} EGP</span>
-            <div class="rating">
-              <span>
-                <i
-                  [ngClass]="{
-                    'rating-color': item.ratingsAverage >= star
-                  }"
-                  class="fas fa-star fa-star"
-                  *ngFor="let star of [1, 2, 3, 4, 5]"
-                ></i>
-                {{ item.ratingsAverage }}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <app-btncart
-        class="position-relative btn-mving-Y"
-        #componentBtn
-        (click)="addProduct(item._id, componentBtn)"
-        [text]="'add to cart'"
-        [fullWidth]="true"
-        [bgMain]="true"
-        [loderBgMain]="true"
-      ></app-btncart>
-    </div>
-  </div>
+  <app-base-products
+    [allProducts]="allProducts"
+    [col_3]="true"
+  ></app-base-products>
 </div>

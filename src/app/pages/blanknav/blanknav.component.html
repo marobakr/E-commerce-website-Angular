@@ -1,8 +1,9 @@
 <nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand" routerLink="/home">
+    <a class="navbar-brand mb-2" routerLink="/home">
       <img src="./assets/images/freshcart-logo.svg" alt="" />
     </a>
+
     <button
       class="navbar-toggler"
       type="button"
@@ -14,11 +15,48 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center gap-1">
+    <ul
+      class="d-flex d-lg-none main-icons navbar-nav mx-auto mb-2 mb-lg-0 align-items-center flex-row"
+    >
+      <li class="nav-item" routerLink="/allorders" role="button">
+        <a class="nav-link px-2 position-relative" aria-current="page">
+          <i class="fa-solid fa-truck fa-2x text-main"></i>
+
+          <span
+            class="badge bg-danger position-absolute top-0 end-0 rounded-2"
+            >{{ orderCount }}</span
+          >
+        </a>
+      </li>
+      <li class="nav-item" routerLink="/wishlist" role="button">
+        <a class="nav-link px-2 position-relative" aria-current="page">
+          <i class="fa-regular fa-heart fa-2x text-main"></i>
+          <span class="badge bg-danger position-absolute top-0 end-0 rounded-2"
+            >0</span
+          >
+        </a>
+      </li>
+
+      <li class="nav-item overflow-hidden" routerLink="/cart" role="button">
+        <a
+          #cartIcon
+          class="nav-link px-2 position-relative"
+          aria-current="page"
+        >
+          <i class="fa-solid fa-cart-shopping fa-2x text-main"></i>
+          <span
+            class="badge bg-danger position-absolute top-0 end-0 rounded-2"
+            >{{ itemCount }}</span
+          >
+        </a>
+      </li>
+    </ul>
+
+    <div class="collapse navbar-collapse my-2" id="navbarSupportedContent">
+      <ul class="links-page navbar-nav me-auto mb-2 mb-lg-0 gap-1">
         <li class="nav-item">
           <a
-            class="nav-link text-capitalize"
+            class="nav-link px-2 text-capitalize"
             aria-current="page"
             routerLinkActive="active-link"
             routerLink="home"
@@ -27,7 +65,7 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link text-capitalize"
+            class="nav-link px-2 text-capitalize"
             aria-current="page"
             routerLinkActive="active-link"
             routerLink="products"
@@ -37,7 +75,7 @@
         </li>
         <li class="nav-item d-flex align-items-center position-relative gap-1">
           <a
-            class="nav-link text-capitalize"
+            class="nav-link px-2 text-capitalize"
             aria-current="page"
             routerLinkActive="active-link"
             routerLink="categories"
@@ -56,7 +94,7 @@
             class="categoriesLinks d-none navbar-nav position-absolute flex-column w-100 g-2 px-1 py-2"
           >
             <li class="nav-item text-center bg-main rounded mb-3">
-              <a class="nav-link text-capitalize fw-medium text-white"
+              <a class="nav-link px-2 text-capitalize fw-medium text-white"
                 >all categories
               </a>
             </li>
@@ -67,7 +105,7 @@
               role="button"
               [routerLink]="['specificCategory', category._id, category.name]"
             >
-              <a class="nav-link text-capitalize" aria-current="page"
+              <a class="nav-link px-2 text-capitalize" aria-current="page"
                 >{{ category.name }}
               </a>
               <img class="w-15" [src]="category.image" [alt]="category.name" />
@@ -76,7 +114,7 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link text-capitalize"
+            class="nav-link px-2 text-capitalize"
             aria-current="page"
             routerLinkActive="active-link"
             routerLink="brands"
@@ -84,9 +122,11 @@
           </a>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+      <ul
+        class="d-none d-lg-flex flex-md-row main-icons navbar-nav ms-auto mb-2 mb-lg-0 align-items-center flex-row"
+      >
         <li class="nav-item" routerLink="/allorders" role="button">
-          <a class="nav-link position-relative" aria-current="page">
+          <a class="nav-link px-2 position-relative" aria-current="page">
             <i class="fa-solid fa-truck fa-2x text-main"></i>
 
             <span
@@ -96,7 +136,7 @@
           </a>
         </li>
         <li class="nav-item" routerLink="/wishlist" role="button">
-          <a class="nav-link position-relative" aria-current="page">
+          <a class="nav-link px-2 position-relative" aria-current="page">
             <i class="fa-regular fa-heart fa-2x text-main"></i>
             <span
               class="badge bg-danger position-absolute top-0 end-0 rounded-2"
@@ -106,7 +146,11 @@
         </li>
 
         <li class="nav-item overflow-hidden" routerLink="/cart" role="button">
-          <a #cartIcon class="nav-link position-relative" aria-current="page">
+          <a
+            #cartIcon
+            class="nav-link px-2 position-relative"
+            aria-current="page"
+          >
             <i class="fa-solid fa-cart-shopping fa-2x text-main"></i>
             <span
               class="badge bg-danger position-absolute top-0 end-0 rounded-2"
@@ -114,36 +158,42 @@
             >
           </a>
         </li>
-
+      </ul>
+      <ul
+        class="alt-icons d-flex flex-row d-lg-none d-xl-flex navbar-nav ms-auto mb-2 mb-lg-0 align-items-center justify-content-center"
+      >
         <li *ngFor="let icon of allIcons" class="px-1 nav-item">
-          <a class="nav-link fa-xl" aria-current="page"
+          <a class="nav-link px-1 fa-xl" aria-current="page"
             ><i [class]="icon"></i
           ></a>
         </li>
       </ul>
       <ul
-        class="user-info text-black px-3 py-2 mb-2 mb-lg-0 mx-2 rounded-5 navbar-nav align-items-center position-relative"
+        class="user-info d-flex text-black p-1 mb-2 mb-lg-0 mx-2 rounded-5 navbar-nav align-items-center position-relative"
       >
-        <label class="hoverable" for="fileInput">
-          <img
-            class="w-100"
-            [src]="
-              urlImage
-                ? urlImage
-                : 'https://www.w3schools.com/howto/img_avatar.png'
-            "
-          />
-          <div class="background"></div>
-        </label>
-        <!-- <br />
-        <input id="fileInput" type="file" (change)="uploadImgeUser($event)" />
+        <div class="photo d-none d-lg-flex">
+          <label class="hoverable" for="fileInput">
+            <img
+              class="w-100"
+              [src]="
+                urlImage
+                  ? urlImage
+                  : 'https://www.w3schools.com/howto/img_avatar.png'
+              "
+            />
+            <div class="background"></div>
+          </label>
+          <br />
+          <input id="fileInput" type="file" (change)="uploadImgeUser($event)" />
+        </div>
+
         <li class="username px-3 fw-bold">{{ userName }}</li>
         <li
           (click)="sinOut()"
           class="sinOut mx-auto px-5 py-1 text-capitalize position-absolute rounded-pill"
         >
           sinOut
-        </li> -->
+        </li>
       </ul>
     </div>
   </div>

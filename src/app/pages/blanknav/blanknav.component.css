@@ -49,7 +49,7 @@
   background-color: var(--light-color);
 }
 
-/* .user-info::before {
+.user-info::before {
   position: absolute;
   left: 50%;
   bottom: -30px;
@@ -58,7 +58,7 @@
   border-width: 15px;
   border-style: solid;
   border-color: var(--main-color) transparent transparent transparent;
-} */
+}
 .sinOut {
   text-align: center;
   bottom: -48px;
@@ -108,4 +108,7 @@
 }
 .goCartAnimations {
   animation: goAheadCart 2s linear alternate-reverse;
+}
+.navbar-toggler {
+  color: var(--main-color);
 }

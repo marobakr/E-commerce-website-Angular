@@ -3,6 +3,12 @@ body {
   color: #202020;
   font-family: "Montserrat", "Helvetica", "Open Sans", "Arial";
   font-size: 13px;
+  min-height: 50vh;
+}
+section {
+  min-height: 100vh;
+  background-color: #1b2431;
+  color: #202020;
 }
 main {
   background-color: #1b2431;

@@ -34,7 +34,7 @@ a.selectActive::before {
   border-radius: 10px;
   background-color: #d2e3c8;
   top: 10px;
-  height: 100vh;
+  min-height: 100vh;
 }
 .avctiveStart {
   color: var(--main-color);

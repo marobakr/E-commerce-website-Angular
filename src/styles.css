@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&family=Karla:wght@200..800&family=Rubik:wght@300..900&display=swap");
 @import url("./app/shared/keyframes/keyframes.css");
+
+section {
+  min-height: 75vh;
+}
+
 :root {
   --main-color: #0aad0a;
   --light-color: #f0f3f2;
@@ -145,7 +150,7 @@ input:-internal-autofill-selected {
   border-radius: 50%;
   color: white;
   top: 10px;
-  right: 20px;
+  right: 25px;
   z-index: 99999;
 }
 
@@ -169,14 +174,7 @@ input:-internal-autofill-selected {
   background: #dca;
   color: #731;
 }
-/* any content was fixed (/products,specific-order/Dashboard)  */
 
-.fixed-side {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 10px;
-  height: 100vh;
-}
 /* Item Product Col */
 .baseSlideItem {
   overflow: hidden;
@@ -209,4 +207,13 @@ input:-internal-autofill-selected {
   top: 20px;
   transform: translateX(20%);
   transition: all 0.5s;
+}
+
+/* Style Paginations */
+.ngx-pagination.responsive .small-screen {
+  display: none !important;
+}
+.ngx-pagination.responsive
+  li:not(.small-screen):not(.pagination-previous):not(.pagination-next) {
+  display: inline-block !important;
 }

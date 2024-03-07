@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/core/cart.service';
 import { Allorders } from 'src/app/interfaces/allorders';
@@ -8,7 +9,10 @@ import { Allorders } from 'src/app/interfaces/allorders';
   styleUrls: ['./allorders.component.css'],
 })
 export class AllordersComponent implements OnInit {
-  constructor(private _cartService: CartService) {}
+  constructor(
+    private _cartService: CartService,
+    private _viewportScroller: ViewportScroller
+  ) {}
   allOrders: Allorders[] = [];
   pageSize: number = 0;
   currentPage: number = 0;
@@ -45,6 +49,7 @@ export class AllordersComponent implements OnInit {
         this.pageSize = response.metadata.limit;
         this.currentPage = response.metadata.currentPage;
         this.totalItems = response.results;
+        this._viewportScroller.scrollToPosition([0, 0]);
       },
     });
   }

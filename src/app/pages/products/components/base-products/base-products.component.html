@@ -23,7 +23,7 @@
     <div
       class="offer-item bg-main position-absolute d-flex justify-content-center align-items-center fw-bold"
     >
-      <span> {{ item.offer }}% </span>
+      <span> -{{ item.offer }}% </span>
     </div>
     <div class="position-relative overflow-hidden item-Products">
       <figure class="rounded-3 baseSlideItem">
@@ -36,11 +36,13 @@
         />
       </figure>
       <i
+        role="button"
         *ngIf="!wishListData.includes($any(item._id))"
         (click)="addFavourite(item._id)"
         class="fa-regular fa-heart fa-3x heart text-main"
       ></i>
       <i
+        role="button"
         *ngIf="wishListData.includes($any(item._id))"
         (click)="removeFavourite(item._id)"
         class="fa-solid fa-heart fa-3x heart-added text-main"

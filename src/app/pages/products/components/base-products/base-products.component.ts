@@ -31,6 +31,7 @@ export class BaseProductsComponent implements OnInit {
   @ViewChild('allItems') itemsLength!: any;
   @Input() allProducts: Products[] = [];
   @Input() selectedCategoryName: any = '';
+  @Input() InWshListPadge: boolean = false;
   @Input() uniqeBrands: string[] = [''];
   @Input() inputSearch: string = '';
   @Input() pageSize: number = 10;
@@ -99,10 +100,12 @@ export class BaseProductsComponent implements OnInit {
     this._wishlistService.removeWishlist(id).subscribe({
       next: (response) => {
         this.wishListData = response.data;
-        const afterDelte = this.allProducts.filter((item: any) =>
-          this.wishListData.includes(item._id)
-        );
-        this.allProducts = afterDelte;
+        if (this.InWshListPadge) {
+          const afterDelte = this.allProducts.filter((item: any) =>
+            this.wishListData.includes(item._id)
+          );
+          this.allProducts = afterDelte;
+        }
         this._notifierService.notify('warning', `${response.message}`);
       },
     });

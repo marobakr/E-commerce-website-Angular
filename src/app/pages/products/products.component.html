@@ -1,6 +1,5 @@
-<div class="products py-5">
+<section class="products py-5">
   <h1 class="baseTitle mb-4">all Popular Products</h1>
-
   <div class="row g-2 justify-content-around">
     <div class="col-lg-3 col-md-4">
       <div class="fixed-side">
@@ -65,6 +64,9 @@
         </div>
 
         <h3 class="mat-h2">Rating</h3>
+        <p class="fw-medium text-muted text-capitalize mb-3">
+          the result includes min Rating to your chose
+        </p>
         <div #stars class="rating d-flex align-items-center gap-2 mb-5">
           <i
             role="button"
@@ -123,7 +125,7 @@
       ></app-base-products>
     </div>
   </div>
-</div>
+</section>
 <div>
   <pagination-controls
     id="productPaginations"

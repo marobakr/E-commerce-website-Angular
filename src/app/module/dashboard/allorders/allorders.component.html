@@ -18,8 +18,8 @@
     </li>
   </ul>
 </nav>
-<div class="container-fluid">
-  <div class="row justify-content-between">
+<section class="container-fluid">
+  <div class="row justify-content-between parent">
     <nav class="col-md-3 col-lg-2 sidebar fixed-side">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
@@ -170,21 +170,21 @@
                   <div class="member-info">
                     <p>
                       {{
-                        order.shippingAddress.city
+                        order.shippingAddress?.city
                           ? order.shippingAddress.city
                           : "unknown"
                       }}
                     </p>
                     <p>
                       {{
-                        order.shippingAddress.details
+                        order.shippingAddress?.details
                           ? order.shippingAddress.details
                           : "unknown"
                       }}
                     </p>
                     <p>
                       {{
-                        order.shippingAddress.phone
+                        order.shippingAddress?.phone
                           ? order.shippingAddress.phone
                           : "unknown"
                       }}
@@ -213,4 +213,4 @@
       </pagination-controls>
     </main>
   </div>
-</div>
+</section>

@@ -89,87 +89,89 @@
   <div
     class="row justify-content-between align-items-start flex-wrap text-start"
   >
-    <table class="table text-center">
-      <thead>
-        <tr>
-          <th>item</th>
-          <th>Product</th>
-          <th>price</th>
-          <th>brand</th>
-          <th>count</th>
-          <th>category</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="let order of allordersUser.cartItems; let i = index"
-          class="p-3"
-        >
-          <th class="col-1">{{ i + 1 }}</th>
-          <td class="col-2">
-            <figure
-              class="baseSlideItem rounded-3"
-              [routerLink]="['/details', order.product.id]"
-            >
-              <img
-                class="w-100 rounded-4"
-                [src]="order.product.imageCover"
-                [alt]="order.product.title"
-              />
-            </figure>
-          </td>
-          <td class="col-3">
-            <h4 class="text-black text-capitalize">
-              <span class="text-muted">
-                {{ order.price | currency : "EG" }}
-              </span>
-            </h4>
-          </td>
-          <td class="col-2">
-            <figure
-              class="baseSlideItem rounded-3"
-              [routerLink]="[
-                '/specificBrand',
-                order.product.brand._id,
-                order.product.brand.name
-              ]"
-            >
-              <img
-                class="w-100 rounded-4"
-                [src]="order.product.brand.image"
-                [alt]="order.product.brand.name"
-              />
-            </figure>
-          </td>
-          <td class="col-2">
-            <h4 class="text-black text-capitalize">
-              <span class="text-muted">
-                {{ order.count }}
-              </span>
-            </h4>
-          </td>
+    <div class="table-responsive">
+      <table class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>Product</th>
+            <th>price</th>
+            <th>brand</th>
+            <th>count</th>
+            <th>category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let order of allordersUser.cartItems; let i = index"
+            class="p-3"
+          >
+            <th class="col-1">{{ i + 1 }}</th>
+            <td class="col-2">
+              <figure
+                class="baseSlideItem rounded-3"
+                [routerLink]="['/details', order.product.id]"
+              >
+                <img
+                  class="w-100 rounded-4"
+                  [src]="order.product.imageCover"
+                  [alt]="order.product.title"
+                />
+              </figure>
+            </td>
+            <td class="col-3">
+              <h4 class="text-black text-capitalize">
+                <span class="text-muted">
+                  {{ order.price | currency : "EG" }}
+                </span>
+              </h4>
+            </td>
+            <td class="col-2">
+              <figure
+                class="baseSlideItem rounded-3"
+                [routerLink]="[
+                  '/specificBrand',
+                  order.product.brand._id,
+                  order.product.brand.name
+                ]"
+              >
+                <img
+                  class="w-100 rounded-4"
+                  [src]="order.product.brand.image"
+                  [alt]="order.product.brand.name"
+                />
+              </figure>
+            </td>
+            <td class="col-2">
+              <h4 class="text-black text-capitalize">
+                <span class="text-muted">
+                  {{ order.count }}
+                </span>
+              </h4>
+            </td>
 
-          <td class="d-sm-none">
-            <figure
-              class="baseSlideItem rounded-3"
-              [routerLink]="[
-                '/specificCategory',
-                order.product.category._id,
-                order.product.category.name
-              ]"
-            >
-              <img
-                class="w-100 rounded-4"
-                [src]="order.product.category.image"
-                [alt]="order.product.category.name"
-              />
-            </figure>
-            <h4 class="text-black text-capitalize">
-              {{ order.product.category.name }}
-            </h4>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <td>
+              <figure
+                class="baseSlideItem rounded-3"
+                [routerLink]="[
+                  '/specificCategory',
+                  order.product.category._id,
+                  order.product.category.name
+                ]"
+              >
+                <img
+                  class="w-100 rounded-4"
+                  [src]="order.product.category.image"
+                  [alt]="order.product.category.name"
+                />
+              </figure>
+              <h4 class="text-black text-capitalize">
+                {{ order.product.category.name }}
+              </h4>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>

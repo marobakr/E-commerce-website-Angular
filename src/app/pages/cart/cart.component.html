@@ -16,7 +16,7 @@
       <i id="i-cart" class="fa-solid fa-trash fa-lg"></i>
     </div>
   </div>
-  <div cdkDropList (cdkDropListDropped)="drop($event)">
+  <div class="mb-5" cdkDropList (cdkDropListDropped)="drop($event)">
     <div
       *ngFor="
         let item of cartProduct.data.products;
@@ -25,7 +25,7 @@
       "
       [ngClass]="{ 'bg-even': even, 'bg-odd': odd }"
       @fade
-      class="row mb-4 py-2 rounded"
+      class="row mb-4 py-3 rounded"
       cdkDrag
     >
       <div class="col-lg-1 col-md-2">
