@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg">
+<nav
+  class="navbar navbar-expand-lg position-fixed w-100"
+  [class]="isScroll ? 'py-0 shadow' : 'py-4'"
+>
   <div class="container">
     <a class="navbar-brand mb-2" routerLink="/home">
       <img src="./assets/images/freshcart-logo.svg" alt="" />

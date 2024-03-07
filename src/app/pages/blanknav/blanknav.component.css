@@ -1,7 +1,12 @@
+nav {
+  z-index: 999999;
+  background-color: var(--mat-select-panel-background-color);
+  transition: all 0.5s;
+}
+
 .badge {
   background-color: var(--main-color);
 }
-
 .user-info img {
   height: 100%;
   width: 100%;

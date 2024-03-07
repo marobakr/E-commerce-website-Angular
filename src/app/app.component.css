@@ -1,3 +1,11 @@
 .w-200 {
   width: 280px;
 }
+button {
+  bottom: 20px;
+  right: 20px;
+}
+.up-top-animation {
+  position: relative;
+  animation: bouncingLaing 1.5s infinite;
+}

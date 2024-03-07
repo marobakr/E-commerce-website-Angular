@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -9,17 +9,20 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Ecommerce';
-  constructor(
-    private router: Router,
-    private viewportScroller: ViewportScroller
-  ) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.scrollToTop();
-      }
-    });
-  }
+  constructor(private viewportScroller: ViewportScroller) {}
   scrollToTop() {
     this.viewportScroller.scrollToPosition([0, 0]);
+  }
+  isScroll: boolean = false;
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: Event): void {
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    if (scrollY > 150) {
+      // Adjust the scroll threshold as needed
+      this.isScroll = true;
+    } else {
+      this.isScroll = false;
+    }
   }
 }

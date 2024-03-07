@@ -145,8 +145,8 @@ input:-internal-autofill-selected {
 
 /* Item Products Offer*/
 .item .offer-item {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   color: white;
   top: 10px;

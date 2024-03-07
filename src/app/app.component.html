@@ -9,3 +9,10 @@
 >
   <img class="w-200" src="../assets/images/freshcart-logo.svg" alt="" />
 </ngx-spinner>
+<button
+  *ngIf="isScroll"
+  (click)="scrollToTop()"
+  class="btn bg-main rounded-2 position-fixed overflow-hidden"
+>
+  <i class="fa-solid fa-angles-up text-white up-top-animation"></i>
+</button>

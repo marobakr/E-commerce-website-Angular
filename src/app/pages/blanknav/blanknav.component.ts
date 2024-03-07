@@ -35,6 +35,8 @@ export class BlanknavComponent implements OnInit {
   urlImage: any = '';
   userName: any = '';
   userId: string = '';
+  isScroll: boolean = false;
+
   ulCategories: Categoreis[] = [];
   allIcons: string[] = [
     'fa-brands fa-facebook fa-xl',
@@ -164,6 +166,16 @@ export class BlanknavComponent implements OnInit {
   @HostListener('document:click')
   onDocumentClick(): void {
     this._renderer2.addClass(this.categorLinks.nativeElement, 'd-none');
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: Event): void {
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    if (scrollY > 150) {
+      this.isScroll = true;
+    } else {
+      this.isScroll = false;
+    }
   }
 
   sinOut(): void {
