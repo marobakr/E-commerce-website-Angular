@@ -217,3 +217,21 @@ input:-internal-autofill-selected {
   li:not(.small-screen):not(.pagination-previous):not(.pagination-next) {
   display: inline-block !important;
 }
+
+/* Stlye For Browser */
+::selection {
+  background-color: var(--main-color);
+  color: #ffffff;
+}
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  border-radius: 30px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--light-color);
+}

@@ -27,7 +27,6 @@ export class BlanknavComponent implements OnInit {
   ) {}
 
   @ViewChild('categoriesLinks') categorLinks!: ElementRef;
-  @ViewChild('cartIcon') cartIcon!: ElementRef;
 
   itemCount: number = 0;
   orderCount: number = 0;
@@ -65,8 +64,6 @@ export class BlanknavComponent implements OnInit {
     this._cartService.cartNumber.subscribe({
       next: (response) => {
         this.itemCount = response;
-        // if (this.itemCount > 0) {
-        // }
       },
     });
   }
@@ -92,21 +89,9 @@ export class BlanknavComponent implements OnInit {
     this._cartService.getCartUser().subscribe({
       next: (respons) => {
         this.itemCount = respons.numOfCartItems;
-        this._renderer2.addClass(
-          this.cartIcon.nativeElement,
-          'goCartAnimations'
-        );
       },
       error: (err) => {
         console.log(err);
-      },
-      complete: () => {
-        setTimeout(() => {
-          this._renderer2.removeClass(
-            this.cartIcon.nativeElement,
-            'goCartAnimations'
-          );
-        }, 3000);
       },
     });
   }

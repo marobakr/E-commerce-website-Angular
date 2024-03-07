@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
   Output,
+  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
@@ -102,6 +103,7 @@ export class BaseProductsComponent implements OnInit {
       next: (response) => {
         this.wishListData = response.data;
         this._wishlistService.wishListNumber.next(response.data.length);
+        // Remove From Dom
         if (this.InWshListPadge) {
           const afterDelte = this.allProducts.filter((item: any) =>
             this.wishListData.includes(item._id)
