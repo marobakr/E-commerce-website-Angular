@@ -96,8 +96,7 @@ export class BlanknavComponent implements OnInit {
         );
       },
       error: (err) => {
-        console.log(err, 'cart');
-        return;
+        console.log(err);
       },
       complete: () => {
         setTimeout(() => {
@@ -123,7 +122,6 @@ export class BlanknavComponent implements OnInit {
     this._cartService.getUserOrders(this.userId).subscribe({
       next: (response) => {
         this._cartService.orderNumber.next(response.length);
-        console.log(response, 'casggggg');
       },
     });
   }

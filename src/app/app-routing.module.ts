@@ -28,48 +28,79 @@ const routes: Routes = [
     component: LayoutblankComponent,
     canActivate: [authGuard],
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
-      { path: 'cart', component: CartComponent },
-      { path: 'products', component: ProductsComponent },
-      { path: 'brands', component: BrandsComponent },
-      { path: 'categories', component: CategoriesComponent },
-      { path: 'details/:id', component: DetailsComponent },
-      { path: 'payment/:idcart', component: PaymentComponent },
-      { path: 'cash-order/:idcart', component: CashOrderComponent },
-      { path: 'wishlist', component: WishlistComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full', title: 'home' },
+      { path: 'home', component: HomeComponent, title: 'home' },
+      { path: 'cart', component: CartComponent, title: 'Cart' },
+      { path: 'products', component: ProductsComponent, title: 'Products' },
+      { path: 'brands', component: BrandsComponent, title: 'Brands' },
+      {
+        path: 'categories',
+        component: CategoriesComponent,
+        title: 'Categories',
+      },
+      { path: 'details/:id', component: DetailsComponent, title: 'Details' },
+      {
+        path: 'payment/:idcart',
+        component: PaymentComponent,
+        title: 'Payment',
+      },
+      {
+        path: 'cash-order/:idcart',
+        component: CashOrderComponent,
+        title: 'Cash Order',
+      },
+      {
+        path: 'wishlist',
+        component: WishlistComponent,
+        title: 'Favorites Item',
+      },
 
       {
         path: 'specificBrand/:id/:brand-name',
         component: SpecificBrandComponent,
+        title: 'Specific Brand',
       },
       {
         path: 'specificCategory/:id-category/:name',
         component: SpecificCategoryComponent,
+        title: 'Specific Category',
       },
-      { path: 'allorders', component: UserOrdersComponent },
-      { path: 'specifcOrder/:id', component: SpecificOrderComponent },
+      {
+        path: 'allorders',
+        component: UserOrdersComponent,
+        title: 'All User Orders',
+      },
+      {
+        path: 'specifcOrder/:id',
+        component: SpecificOrderComponent,
+        title: 'Specifc Order ',
+      },
     ],
   },
   {
     path: '',
     component: LayoutauthComponent,
     children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'forgetpassword', component: ForgetPasswordComponent },
+      { path: 'login', component: LoginComponent, title: ' Login ' },
+      { path: 'register', component: RegisterComponent, title: ' Register ' },
+      {
+        path: 'forgetpassword',
+        component: ForgetPasswordComponent,
+        title: ' Forget Password ',
+      },
     ],
   },
 
   {
     path: 'dashboard',
     canActivate: [adminGuard],
+    title: ' DahBoard  ',
     loadChildren: () =>
       import('./module/dashboard/dashboard.module').then(
         (mod) => mod.DashboardModule
       ),
   },
-  { path: '**', component: NotfoundComponent },
+  { path: '**', component: NotfoundComponent, title: ' NotFound  ' },
 ];
 
 @NgModule({
