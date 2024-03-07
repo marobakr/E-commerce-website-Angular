@@ -45,8 +45,6 @@ export class DetailsComponent implements AfterContentInit {
   getIdPrameter(): void {
     this._activatedRoute.paramMap.subscribe({
       next: (respons: any) => {
-        console.log(respons);
-
         this.displayDetails(respons.params.id);
       },
     });

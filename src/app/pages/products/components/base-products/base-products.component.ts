@@ -92,6 +92,7 @@ export class BaseProductsComponent implements OnInit {
     this._wishlistService.addWichlist(id).subscribe({
       next: (response) => {
         this.wishListData = response.data;
+        this._wishlistService.wishListNumber.next(response.data.length);
         this._notifierService.notify('success', `${response.message}`);
       },
     });
@@ -100,6 +101,7 @@ export class BaseProductsComponent implements OnInit {
     this._wishlistService.removeWishlist(id).subscribe({
       next: (response) => {
         this.wishListData = response.data;
+        this._wishlistService.wishListNumber.next(response.data.length);
         if (this.InWshListPadge) {
           const afterDelte = this.allProducts.filter((item: any) =>
             this.wishListData.includes(item._id)

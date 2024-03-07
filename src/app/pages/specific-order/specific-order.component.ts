@@ -28,7 +28,6 @@ export class SpecificOrderComponent implements OnInit {
     this._cartService.getSpeicifcOrder(id).subscribe({
       next: (reponse) => {
         this.allordersUser = reponse.data;
-        console.log(reponse.data);
       },
     });
   }

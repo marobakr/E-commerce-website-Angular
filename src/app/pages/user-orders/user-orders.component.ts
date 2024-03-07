@@ -23,6 +23,7 @@ export class UserOrdersComponent implements OnInit {
     this._cartService.getUserOrders(this.userId).subscribe({
       next: (response) => {
         this.userOrder = response;
+        this._cartService.orderNumber.next(response.length);
       },
       error: (err) => {
         console.log(err);

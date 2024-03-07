@@ -9,6 +9,7 @@ import {
 import { AuthService } from 'src/app/core/auth.service';
 import { CartService } from 'src/app/core/cart.service';
 import { ProductsDataService } from 'src/app/core/products-data.service';
+import { WishlistService } from 'src/app/core/wishlist.service';
 import { Categoreis } from 'src/app/interfaces/categoreis';
 
 @Component({
@@ -21,13 +22,16 @@ export class BlanknavComponent implements OnInit {
     private _authService: AuthService,
     private _cartService: CartService,
     private _renderer2: Renderer2,
-    private _productsDataService: ProductsDataService
+    private _productsDataService: ProductsDataService,
+    private _wishlistService: WishlistService
   ) {}
 
   @ViewChild('categoriesLinks') categorLinks!: ElementRef;
   @ViewChild('cartIcon') cartIcon!: ElementRef;
+
   itemCount: number = 0;
   orderCount: number = 0;
+  wishListCount: number = 0;
   urlImage: any = '';
   userName: any = '';
   userId: string = '';
@@ -42,8 +46,11 @@ export class BlanknavComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.listenerCartItem();
-    // there was an error❌❌❌❌❌❌❌❌❌❌❌❌❌
-    // this.listenOrderItem();
+    this.getItemCart();
+    this.listenerWishList();
+    this.getWishlist();
+    this.listenOrderItem();
+    this.getOrderNumber();
     if (localStorage.getItem('imageUser') !== null) {
       this.urlImage = localStorage.getItem('imageUser');
     }
@@ -51,23 +58,30 @@ export class BlanknavComponent implements OnInit {
       this.userName = localStorage.getItem('username');
     }
   }
-
+  //*  listene to BehaviorSubject
   listenerCartItem(): void {
     this._cartService.cartNumber.subscribe({
       next: (response) => {
         this.itemCount = response;
         // if (this.itemCount > 0) {
-        this.getItemCart();
         // }
       },
     });
   }
 
-  listenOrderItem() {
+  listenOrderItem(): void {
     this._cartService.orderNumber.subscribe({
       next: (response) => {
-        this.updateOrderNumber();
         this.orderCount = response;
+      },
+    });
+  }
+
+  listenerWishList(): void {
+    this._wishlistService.wishListNumber.subscribe({
+      next: (response) => {
+        // console.log(response);
+        this.wishListCount = response;
       },
     });
   }
@@ -75,14 +89,15 @@ export class BlanknavComponent implements OnInit {
   getItemCart(): void {
     this._cartService.getCartUser().subscribe({
       next: (respons) => {
+        this.itemCount = respons.numOfCartItems;
         this._renderer2.addClass(
           this.cartIcon.nativeElement,
           'goCartAnimations'
         );
-        this.itemCount = respons.numOfCartItems;
       },
       error: (err) => {
-        console.log(err);
+        console.log(err, 'cart');
+        return;
       },
       complete: () => {
         setTimeout(() => {
@@ -95,8 +110,22 @@ export class BlanknavComponent implements OnInit {
     });
   }
 
-  sinOut(): void {
-    this._authService.sinOut();
+  getWishlist(): void {
+    this._wishlistService.getWishlistItem().subscribe({
+      next: (response) => {
+        this._wishlistService.wishListNumber.next(response.count);
+      },
+    });
+  }
+  getOrderNumber() {
+    const userData = this._cartService.decodeUserData();
+    this.userId = userData.id;
+    this._cartService.getUserOrders(this.userId).subscribe({
+      next: (response) => {
+        this._cartService.orderNumber.next(response.length);
+        console.log(response, 'casggggg');
+      },
+    });
   }
   uploadImgeUser(event: any) {
     if (event.target?.files) {
@@ -139,13 +168,7 @@ export class BlanknavComponent implements OnInit {
     this._renderer2.addClass(this.categorLinks.nativeElement, 'd-none');
   }
 
-  updateOrderNumber() {
-    const userData = this._cartService.decodeUserData();
-    this.userId = userData.id;
-    this._cartService.getUserOrders(this.userId).subscribe({
-      next: (response) => {
-        this._cartService.orderNumber.next(response.length);
-      },
-    });
+  sinOut(): void {
+    this._authService.sinOut();
   }
 }

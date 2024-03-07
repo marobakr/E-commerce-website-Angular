@@ -31,8 +31,9 @@
       <li class="nav-item" routerLink="/wishlist" role="button">
         <a class="nav-link px-2 position-relative" aria-current="page">
           <i class="fa-regular fa-heart fa-2x text-main"></i>
-          <span class="badge bg-danger position-absolute top-0 end-0 rounded-2"
-            >0</span
+          <span
+            class="badge bg-danger position-absolute top-0 end-0 rounded-2"
+            >{{ wishListCount }}</span
           >
         </a>
       </li>
@@ -140,7 +141,7 @@
             <i class="fa-regular fa-heart fa-2x text-main"></i>
             <span
               class="badge bg-danger position-absolute top-0 end-0 rounded-2"
-              >0</span
+              >{{ wishListCount }}</span
             >
           </a>
         </li>

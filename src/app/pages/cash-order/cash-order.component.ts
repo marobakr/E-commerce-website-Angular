@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/core/cart.service';
+import { WishlistService } from 'src/app/core/wishlist.service';
 
 @Component({
   selector: 'app-cash-order',
@@ -12,7 +13,8 @@ export class CashOrderComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private _cartService: CartService,
-    private _router: Router
+    private _router: Router,
+    private _wishlistService: WishlistService
   ) {}
 
   cachOrderForm!: FormGroup;
@@ -21,6 +23,7 @@ export class CashOrderComponent implements OnInit {
   details!: FormControl;
   _idCart: string = '';
   isLoding: boolean = false;
+  userId: string = '';
 
   ngOnInit(): void {
     this.initFormControl();
@@ -63,7 +66,6 @@ export class CashOrderComponent implements OnInit {
       this.isLoding = true;
       this._cartService.cashOrder(userInfo.value, this._idCart).subscribe({
         next: (respons) => {
-          console.log(respons);
           this._cartService.cartNumber.next(0);
           this._router.navigate(['/allorders']);
           this.isLoding = false;
@@ -77,6 +79,3 @@ export class CashOrderComponent implements OnInit {
     }
   }
 }
-
-// guetuserorders=> id decode => all orders for each useer
-// alloders=>

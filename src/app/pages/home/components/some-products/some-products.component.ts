@@ -52,7 +52,6 @@ export class SomeProductsComponent implements OnInit {
 
   getOffer(products: Products[]) {
     products.forEach((item) => {
-      console.log(item);
       if (item.priceAfterDiscount) {
         item.offer = Math.round(
           ((item.price - item.priceAfterDiscount) / item.price) * 100

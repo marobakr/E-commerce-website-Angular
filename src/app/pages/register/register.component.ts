@@ -79,7 +79,6 @@ export class RegisterComponent {
       this.isLoding = true;
       this._authService.signUp(registerForm.value).subscribe({
         next: (respons) => {
-          console.log(respons);
           this._notifierService.notify(
             'success',
             `${respons.message} register`

@@ -39,9 +39,8 @@ export class CartComponent implements AfterViewInit {
       next: (respons) => {
         Btn.isLoding = false;
         this.cartProduct = respons;
-
-        this._notifierService.notify('error', 'Item removed from the cart');
         this._cartService.cartNumber.next(respons.numOfCartItems);
+        this._notifierService.notify('error', 'Item removed from the cart');
       },
       error: (erorr) => {
         console.log(erorr);
@@ -67,8 +66,10 @@ export class CartComponent implements AfterViewInit {
   removeAllItem() {
     this._cartService.clearCart().subscribe({
       next: (respons) => {
-        this.cartProduct = null;
-        this._cartService.cartNumber.next(0);
+        if (respons.message === 'success') {
+          this.cartProduct = null;
+          this._cartService.cartNumber.next(0);
+        }
       },
       error: (erorr) => {
         console.log(erorr);

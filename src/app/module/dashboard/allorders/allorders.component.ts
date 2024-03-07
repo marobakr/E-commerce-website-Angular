@@ -31,7 +31,6 @@ export class AllordersComponent implements OnInit {
     this._cartService.allOrders().subscribe({
       next: (response) => {
         this.totaOrders = response.results;
-        console.log(response);
         this.allOrders = response.data;
         this.getTotalPrice(response.data);
       },
