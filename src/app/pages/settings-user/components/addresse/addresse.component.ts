@@ -20,10 +20,6 @@ export class AddresseComponent implements OnInit {
     private _notifierService: NotifierService
   ) {}
 
-  defaultHome: string = '';
-  defaultDetails: string = '';
-  defaultCity: string = '';
-
   isLoding: boolean = false;
   disabled: boolean = false;
   readonly: boolean = true;
@@ -46,11 +42,14 @@ export class AddresseComponent implements OnInit {
     this._userSettingsService.defualtUserData().subscribe({
       next: (response: any) => {
         console.log(response);
-        const length: number = response.data.addresses.length;
+        const length: number = response.data?.addresses.length;
         const baseNested: any = response.data?.addresses[length - 1];
-        this.defaultHome = response.data.name;
-        this.defaultDetails = baseNested.details;
-        this.defaultCity = baseNested.city;
+        const defaultCity = baseNested?.city;
+        const defaultDetails = baseNested?.details;
+        const defaultHome = response.data?.name;
+        this.city?.setValue(defaultCity);
+        this.house?.setValue(defaultHome);
+        this.details?.setValue(defaultDetails);
       },
     });
   }
@@ -90,5 +89,8 @@ export class AddresseComponent implements OnInit {
   }
   get house(): AbstractControl<any, any> | null {
     return this.addAddresseForm.get('name');
+  }
+  get details(): AbstractControl<any, any> | null {
+    return this.addAddresseForm.get('details');
   }
 }

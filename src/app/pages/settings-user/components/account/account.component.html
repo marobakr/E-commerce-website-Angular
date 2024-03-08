@@ -19,7 +19,6 @@
             class="form-control"
             id="inputUsername"
             type="text"
-            [value]="defaultName"
             [readonly]="readonly"
             placeholder="Enter your username"
             [ngClass]="{
@@ -51,7 +50,6 @@
               class="form-control"
               id="inputemail"
               type="tel"
-              [value]="defaultEmail"
               [readonly]="readonly"
               placeholder="Enter your email"
               [ngClass]="{
@@ -79,7 +77,6 @@
               [readonly]="readonly"
               type="text"
               placeholder="Enter your phone"
-              [value]="defaultPhone"
               [ngClass]="{
                 'is-valid': !phone?.errors && disabled,
                 'is-invalid': phone?.errors && phone?.touched && disabled

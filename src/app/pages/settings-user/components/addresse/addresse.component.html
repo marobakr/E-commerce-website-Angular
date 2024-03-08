@@ -16,7 +16,6 @@
             class="form-control"
             id="inputhome"
             type="text"
-            [value]="defaultHome"
             [readonly]="readonly"
             placeholder="Enter your House"
             [ngClass]="{}"
@@ -56,7 +55,6 @@
               id="inputCity"
               [readonly]="readonly"
               type="text"
-              [value]="defaultCity"
               placeholder="Enter your city"
               [ngClass]="{
                 'is-valid': !city?.errors && disabled,
@@ -96,7 +94,6 @@
               class="form-control"
               id="inputdetails"
               [readonly]="readonly"
-              [value]="defaultDetails"
               type="text"
               placeholder="Enter your details (Option)"
               formControlName="details"

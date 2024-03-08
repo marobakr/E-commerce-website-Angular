@@ -28,18 +28,21 @@ export class AccountComponent implements OnInit {
   disabled: boolean = false;
   readonly: boolean = true;
   allDefualtUserData: any = {};
-
-  updateFormData: FormGroup = this._formBuilder.group({
-    name: [, [Validators.minLength(3), Validators.maxLength(20)]],
-    email: [, Validators.email],
-    phone: ['', [Validators.pattern(/^01[0125][0-9]{8}$/)]],
-  });
+  updateFormData!: FormGroup;
 
   ngOnInit() {
     // here i should wright this line in subscriptionUserName() but it wasn't work so i will learn more about rxjs to reslove this bug
     this.defaultName = localStorage.getItem('username');
     this.getdefaultData();
     this.subscriptionUserName();
+    this.updateFormData = this._formBuilder.group({
+      name: [
+        this.defaultName,
+        [Validators.minLength(3), Validators.maxLength(20)],
+      ],
+      email: [, Validators.email],
+      phone: [, [Validators.pattern(/^01[0125][0-9]{8}$/)]],
+    });
   }
 
   subscriptionUserName() {
@@ -84,12 +87,18 @@ export class AccountComponent implements OnInit {
         this.defaultName = response.data.name;
         this.defaultEmail = response.data.email;
         this.defaultPhone = response.data.phone;
+        this.name?.setValue(this.defaultName);
+        this.email?.setValue(this.defaultEmail);
+        this.phone?.setValue(this.defaultPhone);
       },
     });
   }
   // remove property disabled and readonly from all input to update
   removedisable(): void {
-    const dumyData: object = { email: 'test@test123456.com' };
+    const random: string = Math.floor(Math.random() * 1000).toString();
+    const dumyData: object = {
+      email: `marwantest${random}@gmail.com`,
+    };
     this._userSettingsService.updateUserData(dumyData).subscribe({
       next: (response) => {
         console.log(response);

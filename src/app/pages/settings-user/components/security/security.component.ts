@@ -57,7 +57,6 @@ export class SecurityComponent implements OnInit {
           this.isLoding = false;
           this._notifierService.notify('success', `${response.message}data`);
           localStorage.removeItem('token');
-
           localStorage.setItem('token', response.token);
           // To Inable The Btn
           this.removedisable();
@@ -73,7 +72,6 @@ export class SecurityComponent implements OnInit {
       form.markAllAsTouched();
     }
   }
-
   // remove property disabled and readonly from all input to update
   removedisable(): void {
     this.disabled = !this.disabled;
