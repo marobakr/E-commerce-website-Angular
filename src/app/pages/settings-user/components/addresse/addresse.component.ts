@@ -45,9 +45,10 @@ export class AddresseComponent implements OnInit {
   getdefaultData() {
     this._userSettingsService.defualtUserData().subscribe({
       next: (response: any) => {
+        console.log(response);
         const length: number = response.data.addresses.length;
-        const baseNested: any = response.data.addresses[length - 1];
-        this.defaultHome = baseNested.name;
+        const baseNested: any = response.data?.addresses[length - 1];
+        this.defaultHome = response.data.name;
         this.defaultDetails = baseNested.details;
         this.defaultCity = baseNested.city;
       },

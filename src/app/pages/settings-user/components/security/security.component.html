@@ -4,7 +4,7 @@
     <div class="card-header fw-medium">Change Password</div>
     <div class="card-body">
       <form
-        (ngSubmit)="updateData(updateFormPassword)"
+        (ngSubmit)="changePassword(updateFormPassword)"
         [formGroup]="updateFormPassword"
       >
         <!-- Form control (Current Password)-->
@@ -23,7 +23,7 @@
               'is-invalid':
                 currPassowrd?.errors && currPassowrd?.touched && disabled
             }"
-            formControlName="current"
+            formControlName="currentPassword"
           />
           <div *ngIf="currPassowrd?.dirty" class="errorGroupe my-3">
             <p
@@ -32,13 +32,6 @@
             >
               your password is required
             </p>
-            <!-- this when i ckeck is pass was true  -->
-            <!-- <p
-              *ngIf="currPassowrd?.getError('mminlength')"
-              class="alert alert-danger"
-            >
-              Username must be at least 3 characters long
-            </p> -->
           </div>
         </div>
 
@@ -99,13 +92,13 @@
               *ngIf="reNewPassword?.getError('required')"
               class="alert alert-danger"
             >
-              your rePassword not mathces
+              Confirm Password is required
             </p>
             <p
               *ngIf="reNewPassword?.getError('noMatch')"
               class="alert alert-danger"
             >
-              Username must be at least 20
+              your rePassword not mathces
             </p>
           </div>
         </div>

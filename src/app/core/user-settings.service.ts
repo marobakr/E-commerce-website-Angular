@@ -29,4 +29,10 @@ export class UserSettingsService {
   addAdsress(userData: object): Observable<any> {
     return this._httpClient.post(`${baseUrl}/api/v1/addresses`, userData);
   }
+  updatePassword(newPassword: object): Observable<any> {
+    return this._httpClient.put(
+      `${baseUrl}/api/v1/users/changeMyPassword`,
+      newPassword
+    );
+  }
 }

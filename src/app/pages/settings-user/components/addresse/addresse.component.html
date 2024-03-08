@@ -19,10 +19,7 @@
             [value]="defaultHome"
             [readonly]="readonly"
             placeholder="Enter your House"
-            [ngClass]="{
-              'is-valid': !house && disabled,
-              'is-invalid': house?.errors && house?.touched && disabled
-            }"
+            [ngClass]="{}"
             formControlName="name"
           />
           <div *ngIf="house?.dirty" class="errorGroupe my-3">
