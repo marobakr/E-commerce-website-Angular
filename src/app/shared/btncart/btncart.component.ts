@@ -17,5 +17,6 @@ export class BtncartComponent {
   @Input() even: boolean = false;
   @Input() odd: boolean = false;
   @Input() bgdark: boolean = false;
+  @Input() disabled: boolean = false;
   @Input() loderBgMain: boolean = false;
 }

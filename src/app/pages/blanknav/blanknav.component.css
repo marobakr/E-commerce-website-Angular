@@ -108,4 +108,7 @@ nav {
 .settings {
   right: 0;
   bottom: -130px;
+  min-width: 200px;
+  left: 50%;
+  transform: translateX(-50%);
 }

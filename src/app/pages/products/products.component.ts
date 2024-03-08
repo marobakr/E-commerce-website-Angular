@@ -23,7 +23,6 @@ export class ProductsComponent implements OnInit {
   constructor(
     private _productsDataService: ProductsDataService,
     private _renderer2: Renderer2,
-    private router: Router,
     private viewportScroller: ViewportScroller
   ) {}
   @ViewChild('categories') chosesCategory!: ElementRef;

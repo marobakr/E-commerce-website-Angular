@@ -235,3 +235,9 @@ input:-internal-autofill-selected {
 ::-webkit-scrollbar-track {
   background-color: var(--light-color);
 }
+
+/* btn main */
+.even {
+  background-color: #99a799 !important;
+  border-bottom-color: #99a799;
+}

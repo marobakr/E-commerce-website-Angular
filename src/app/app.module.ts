@@ -56,6 +56,9 @@ import { SpecificOrderComponent } from './pages/specific-order/specific-order.co
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { SettingsUserComponent } from './pages/settings-user/settings-user.component';
+import { SecurityComponent } from './pages/settings-user/components/security/security.component';
+import { AccountComponent } from './pages/settings-user/components/account/account.component';
+import { AddresseComponent } from './pages/settings-user/components/addresse/addresse.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +99,9 @@ import { SettingsUserComponent } from './pages/settings-user/settings-user.compo
     UserSettingsComponent,
     WishlistComponent,
     SettingsUserComponent,
+    SecurityComponent,
+    AccountComponent,
+    AddresseComponent,
   ],
 
   imports: [

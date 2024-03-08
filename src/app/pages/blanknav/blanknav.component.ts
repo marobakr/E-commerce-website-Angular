@@ -1,3 +1,4 @@
+import { UserSettingsService } from 'src/app/core/user-settings.service';
 import {
   Component,
   ElementRef,
@@ -23,7 +24,8 @@ export class BlanknavComponent implements OnInit {
     private _cartService: CartService,
     private _renderer2: Renderer2,
     private _productsDataService: ProductsDataService,
-    private _wishlistService: WishlistService
+    private _wishlistService: WishlistService,
+    private _userSettingsService: UserSettingsService
   ) {}
   @ViewChild('settings') settings!: ElementRef;
 
@@ -54,14 +56,10 @@ export class BlanknavComponent implements OnInit {
     this.getWishlist();
     this.listenOrderItem();
     this.getOrderNumber();
-    if (localStorage.getItem('imageUser') !== null) {
-      this.urlImage = localStorage.getItem('imageUser');
-    }
-    if (localStorage.getItem('imageUser') !== null) {
-      this.userName = localStorage.getItem('username');
-    }
+    this.subscriptionUserImage();
+    this.subscriptionUserName();
   }
-  //*  listene to BehaviorSubject
+  //*  subScription to BehaviorSubject
   listenerCartItem(): void {
     this._cartService.cartNumber.subscribe({
       next: (response) => {
@@ -70,6 +68,26 @@ export class BlanknavComponent implements OnInit {
     });
   }
 
+  subscriptionUserImage(): void {
+    this._userSettingsService.userImagePath.subscribe({
+      next: (response) => {
+        this.urlImage = response;
+      },
+    });
+    if (localStorage.getItem('imageUser') !== null) {
+      this.urlImage = localStorage.getItem('imageUser');
+    }
+  }
+  subscriptionUserName(): void {
+    this._userSettingsService.userName.subscribe({
+      next: (username) => {
+        this.userName = username;
+      },
+    });
+    if (localStorage.getItem('username') !== null) {
+      this.userName = localStorage.getItem('username');
+    }
+  }
   listenOrderItem(): void {
     this._cartService.orderNumber.subscribe({
       next: (response) => {
@@ -77,16 +95,13 @@ export class BlanknavComponent implements OnInit {
       },
     });
   }
-
   listenerWishList(): void {
     this._wishlistService.wishListNumber.subscribe({
       next: (response) => {
-        // console.log(response);
         this.wishListCount = response;
       },
     });
   }
-
   getItemCart(): void {
     this._cartService.getCartUser().subscribe({
       next: (respons) => {
@@ -97,7 +112,6 @@ export class BlanknavComponent implements OnInit {
       },
     });
   }
-
   getWishlist(): void {
     this._wishlistService.getWishlistItem().subscribe({
       next: (response) => {
@@ -121,7 +135,7 @@ export class BlanknavComponent implements OnInit {
       reader.onload = (event) => {
         this.urlImage = event.target?.result;
         localStorage.setItem('imageUser', this.urlImage);
-        window.location.reload();
+        this._userSettingsService.userImagePath.next(this.urlImage);
       };
     }
   }
@@ -166,11 +180,7 @@ export class BlanknavComponent implements OnInit {
   }
 
   toggleShow() {
-    if (this.isClick) {
-      this.isClick = !this.isClick;
-    } else {
-      this.isClick = !this.isClick;
-    }
+    this.isClick = !this.isClick;
   }
 
   sinOut(): void {

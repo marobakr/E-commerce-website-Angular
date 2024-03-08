@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
@@ -7,6 +8,7 @@ import {
 } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { CartService } from 'src/app/core/cart.service';
+import { UserSettingsService } from 'src/app/core/user-settings.service';
 
 @Component({
   selector: 'app-settings-user',
@@ -15,10 +17,13 @@ import { CartService } from 'src/app/core/cart.service';
 })
 export class SettingsUserComponent implements OnInit {
   constructor(
-    private _notifierService: NotifierService,
-    private _cartService: CartService
+    private _viewportScroller: ViewportScroller,
+    private _userSettingsService: UserSettingsService
   ) {}
   isLoding: boolean = false;
+  account: boolean = true;
+  addresse: boolean = false;
+  security: boolean = false;
   name!: FormControl;
   phone!: FormControl;
   email!: FormControl;
@@ -27,59 +32,17 @@ export class SettingsUserComponent implements OnInit {
   @ViewChild('fileInput') fileInput: any;
 
   ngOnInit(): void {
-    this.initFormControl();
-    this.initFormGroup();
-    this.fillDefuletData();
+    this.subscriptionUserImage();
   }
 
-  initFormControl(): void {
-    this.name = new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-    ]);
-    this.phone = new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^01[0125][0-9]{8}$/),
-    ]);
-    this.email = new FormControl('', [Validators.required, Validators.email]);
-  }
-
-  initFormGroup(): void {
-    this.updateFormData = new FormGroup({
-      name: this.name,
-      email: this.email,
-      phone: this.phone,
+  subscriptionUserImage(): void {
+    this._userSettingsService.userImagePath.subscribe({
+      next: (path) => {
+        this.defultImage = path;
+      },
     });
-  }
-
-  updateData(form: FormGroup) {
-    if (form.valid && !this.isLoding) {
-      this.isLoding = true;
-      // this._authService.signUp(registerForm.value).subscribe({
-      //   next: (respons) => {
-      //     this._notifierService.notify(
-      //       'success',
-      //       `${respons.message} register`
-      //     );
-
-      //     this.isLoding = false;
-      //     form.reset();
-      //   },
-      //   error: (error: any) => {
-      //     this.isLoding = false;
-      //     this._notifierService.notify('error', `${error.error.message}`);
-      //   },
-      // });
-    } else {
-      form.markAllAsTouched();
-    }
-  }
-
-  fillDefuletData(): void {
     if (localStorage.getItem('imageUser') !== null) {
       this.defultImage = localStorage.getItem('imageUser');
-      const data = this._cartService.decodeUserData();
     }
   }
 
@@ -91,8 +54,28 @@ export class SettingsUserComponent implements OnInit {
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (event) => {
       this.defultImage = event.target?.result;
+      this._userSettingsService.userImagePath.next(this.defultImage);
       localStorage.setItem('imageUser', this.defultImage);
-      window.location.reload();
+      this._viewportScroller.scrollToPosition([0, 0]);
     };
+  }
+  toggleLinks(word: string): void {
+    switch (word) {
+      case 'account':
+        this.account = true;
+        this.addresse = false;
+        this.security = false;
+        break;
+      case 'security':
+        this.account = false;
+        this.addresse = false;
+        this.security = true;
+        break;
+      case 'addresse':
+        this.account = false;
+        this.addresse = true;
+        this.security = false;
+        break;
+    }
   }
 }

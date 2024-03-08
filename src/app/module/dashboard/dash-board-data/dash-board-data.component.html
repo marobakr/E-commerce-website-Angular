@@ -1,0 +1,119 @@
+<nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0">
+  <a
+    class="px-3 py-2 navbar-brand col-sm-3 col-md-3 col-lg-2 mr-0"
+    routerLink="/home"
+  >
+    <img src="./assets/images/logo.png" alt="" />
+  </a>
+  <input
+    class="form-control form-control-dark w-100 mb-4"
+    type="text"
+    placeholder="Search"
+    aria-label="Search"
+    [(ngModel)]="inputSearch"
+  />
+</nav>
+<section class="container-fluid">
+  <div class="row justify-content-between parent">
+    <nav class="col-md-3 col-lg-2 sidebar fixed-side">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li (click)="toggleLinks('orders')" class="nav-item mb-3">
+            <a
+              [ngClass]="{ active: showOrderse }"
+              class="nav-link position-relative"
+              routerLink="/dashboard"
+            >
+              <i class="zmdi zmdi-widgets"></i>
+              All Orders <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li (click)="toggleLinks('users')" class="nav-item">
+            <a
+              [ngClass]="{ active: showUsers }"
+              class="nav-link position-relative"
+              routerLink="/dashboard"
+            >
+              <i class="zmdi zmdi-widgets"></i>
+              All Userses <span class="sr-only"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 col-lg-10">
+      <div class="card-list my-3">
+        <div class="row my-3">
+          <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+            <div class="card blue">
+              <div class="title">all Orders</div>
+              <i class="zmdi zmdi-upload"></i>
+              <div class="value">{{ couterOrders }}</div>
+              <div class="stat"><b>13</b>% increase</div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+            <div class="card green">
+              <div class="title">Total Price</div>
+              <i class="zmdi zmdi-upload"></i>
+              <div class="value">{{ totalPrice | currency : "EG" }}</div>
+              <div class="stat"><b>4</b>% increase</div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+            <div class="card orange">
+              <div class="title">Total Price after Discount</div>
+              <i class="zmdi zmdi-download"></i>
+              <div class="value">{{ totalPrice * 0.8 | currency : "EG" }}</div>
+              <div class="stat"><b>13</b>% decrease</div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+            <div class="card red">
+              <div class="title">new customers</div>
+              <i class="zmdi zmdi-download"></i>
+              <div class="value">0</div>
+              <div class="stat"><b>13</b>% decrease</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="projects mb-4">
+        <app-all-orders
+          *ngIf="showOrderse"
+          [allOrders]="allOrders"
+          [currentPage]="currentPage"
+          [inputSearch]="inputSearch"
+          [pageSize]="pageSize"
+          [totalItems]="totalItems"
+          [idPagination]="'orders'"
+        ></app-all-orders>
+        <app-all-user
+          *ngIf="showUsers"
+          [allUsers]="allUseres"
+          [currentPage]="currentPage"
+          [inputSearch]="inputSearch"
+          [pageSize]="pageSize"
+          [totalItems]="totalItems"
+          [idPagination]="'users'"
+        ></app-all-user>
+      </div>
+      <pagination-controls
+        (pageChange)="pageChanged($event)"
+        (pageBoundsCorrection)="pageChanged($event)"
+        [id]="idPagination"
+        [maxSize]="9"
+        [directionLinks]="true"
+        [autoHide]="true"
+        [responsive]="true"
+        previousLabel="Previous"
+        nextLabel="Next"
+        screenReaderPaginationLabel="Pagination"
+        screenReaderPageLabel="page"
+        screenReaderCurrentLabel="You're on page"
+      >
+      </pagination-controls>
+    </main>
+  </div>
+</section>

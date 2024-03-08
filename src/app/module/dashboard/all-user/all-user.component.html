@@ -1,0 +1,53 @@
+<div class="projects-inner">
+  <header class="projects-header">
+    <div class="title">Ongoing users</div>
+    <div class="count">| {{ allUsers.length }} users</div>
+    <i class="zmdi zmdi-download"></i>
+  </header>
+  <table class="projects-table mb-0 table text-center">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>created At</th>
+        <th>name</th>
+        <th>email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="danger-item"
+        *ngFor="
+          let user of allUsers
+            | namedashBoard : inputSearch
+            | paginate
+              : {
+                  id: idPagination,
+                  itemsPerPage: pageSize,
+                  currentPage: currentPage,
+                  totalItems: totalItems
+                };
+          let i = index
+        "
+      >
+        <td>
+          <p>
+            <span class="fw-bold">{{ i + 1 }}: </span>#{{ user._id }}
+          </p>
+        </td>
+        <td>
+          <p>create in {{ user.createdAt | date : "short" }}</p>
+        </td>
+        <td>
+          <p>create in {{ user }}</p>
+        </td>
+        <td>
+          <!-- <p>create in {{ | date : "short" }}</p> -->
+        </td>
+
+        <td class="member">
+          <!-- <p>{{ user._id }}</p> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

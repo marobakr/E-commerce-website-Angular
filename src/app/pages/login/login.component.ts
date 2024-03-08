@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
           if (respons.user.name === 'admin') {
             this._router.navigate(['/dashboard']);
             this.notifierService.notify(
-              'success',
+              'warning',
               `${respons.message} Log In as admin ☠️ `
             );
           } else {

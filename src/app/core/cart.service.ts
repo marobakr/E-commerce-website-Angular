@@ -63,8 +63,4 @@ export class CartService {
   getUserOrders(id: string): Observable<any> {
     return this._httpClient.get(`${baseUrl}/api/v1/orders/user/${id}`);
   }
-
-  allOrders(numOfPadge: number = 1): Observable<any> {
-    return this._httpClient.get(`${baseUrl}/api/v1/orders?page=${numOfPadge}`);
-  }
 }

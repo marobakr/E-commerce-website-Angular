@@ -1,0 +1,22 @@
+a {
+  color: var(--main-color);
+  cursor: pointer;
+  position: relative;
+}
+a:hover {
+  color: var(--main-color);
+}
+
+nav a::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: -1px;
+  background-color: var(--main-color);
+  height: 3px;
+  transition: all 0.5s;
+  width: 0;
+}
+a.selectActive::before {
+  width: 100% !important;
+}

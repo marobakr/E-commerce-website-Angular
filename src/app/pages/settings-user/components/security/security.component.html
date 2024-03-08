@@ -1,0 +1,132 @@
+<section>
+  <!-- Account details card-->
+  <div class="card mb-4">
+    <div class="card-header fw-medium">Change Password</div>
+    <div class="card-body">
+      <form
+        (ngSubmit)="updateData(updateFormPassword)"
+        [formGroup]="updateFormPassword"
+      >
+        <!-- Form control (Current Password)-->
+        <div class="mb-3">
+          <label class="small mb-1 text-muted" for="currentPassword"
+            >Current Password</label
+          >
+          <input
+            class="form-control"
+            id="currentPassword"
+            type="password"
+            [readonly]="readonly"
+            placeholder="Enter current password"
+            [ngClass]="{
+              'is-valid': !currPassowrd?.errors && disabled,
+              'is-invalid':
+                currPassowrd?.errors && currPassowrd?.touched && disabled
+            }"
+            formControlName="current"
+          />
+          <div *ngIf="currPassowrd?.dirty" class="errorGroupe my-3">
+            <p
+              *ngIf="currPassowrd?.getError('required')"
+              class="alert alert-danger"
+            >
+              your password is required
+            </p>
+            <!-- this when i ckeck is pass was true  -->
+            <!-- <p
+              *ngIf="currPassowrd?.getError('mminlength')"
+              class="alert alert-danger"
+            >
+              Username must be at least 3 characters long
+            </p> -->
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="small mb-1 text-muted" for="newPassword"
+            >New Password</label
+          >
+          <input
+            class="form-control"
+            id="newPassword"
+            type="password"
+            [readonly]="readonly"
+            placeholder="Enter new password"
+            value="username"
+            [ngClass]="{
+              'is-valid': !newPassword?.errors && disabled,
+              'is-invalid':
+                newPassword?.errors && newPassword?.touched && disabled
+            }"
+            formControlName="password"
+          />
+          <div *ngIf="newPassword?.dirty" class="errorGroupe my-3">
+            <p
+              *ngIf="newPassword?.getError('required')"
+              class="alert alert-danger"
+            >
+              your newPassword is required
+            </p>
+            <p
+              *ngIf="newPassword?.getError('pattern')"
+              class="alert alert-danger"
+            >
+              Password must start with an uppercase letter, followed by 6 to 20
+              lowercase letters or digits.
+            </p>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="small mb-1 text-muted" for="confirmPassword"
+            >Confirm Password</label
+          >
+          <input
+            class="form-control"
+            id="confirmPassword"
+            type="password"
+            [readonly]="readonly"
+            placeholder="Confirm new password"
+            value="username"
+            [ngClass]="{
+              'is-valid': !reNewPassword?.errors && disabled,
+              'is-invalid':
+                reNewPassword?.errors && reNewPassword?.touched && disabled
+            }"
+            formControlName="rePassword"
+          />
+          <div *ngIf="reNewPassword?.dirty" class="errorGroupe my-3">
+            <p
+              *ngIf="reNewPassword?.getError('required')"
+              class="alert alert-danger"
+            >
+              your rePassword not mathces
+            </p>
+            <p
+              *ngIf="reNewPassword?.getError('noMatch')"
+              class="alert alert-danger"
+            >
+              Username must be at least 20
+            </p>
+          </div>
+        </div>
+        <!-- Save changes button-->
+
+        <app-btncart
+          *ngIf="disabled"
+          [isLoding]="isLoding"
+          [text]="'Save changes'"
+          [bgMain]="true"
+          [loderBgMain]="true"
+          [fullWidth]="true"
+        ></app-btncart>
+      </form>
+      <button
+        (click)="removedisable()"
+        type="menu"
+        class="my-3 btn py-2 ms-auto text-white text-capitalize even w-100"
+      >
+        <span class="fw-bolder px-2">edite info</span>
+      </button>
+    </div>
+  </div>
+</section>
