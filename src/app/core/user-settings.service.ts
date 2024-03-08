@@ -25,4 +25,8 @@ export class UserSettingsService {
   defualtUserData(): Observable<any> {
     return this._httpClient.get(`${baseUrl}/api/v1/users/${this.userdata.id}`);
   }
+
+  addAdsress(userData: object): Observable<any> {
+    return this._httpClient.post(`${baseUrl}/api/v1/addresses`, userData);
+  }
 }

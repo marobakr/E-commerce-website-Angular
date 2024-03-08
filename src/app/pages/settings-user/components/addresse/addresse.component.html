@@ -3,32 +3,108 @@
   <div class="card mb-4">
     <div class="card-header fw-medium">Addresse Details</div>
     <div class="card-body">
-      <form (ngSubmit)="addAddresse()" [formGroup]="addAddresseForm">
-        <!-- Form Group (username)-->
+      <form
+        (ngSubmit)="addAddresse(addAddresseForm)"
+        [formGroup]="addAddresseForm"
+      >
+        <!-- Form Group (home)-->
         <div class="mb-3">
-          <label class="small mb-1 text-muted" for="inputUsername">
-            add more adresse</label
+          <label class="small mb-1 text-muted text-capitalize" for="inputhome">
+            add your home locations</label
           >
           <input
             class="form-control"
-            id="inputUsername"
+            id="inputhome"
             type="text"
+            [value]="defaultHome"
             [readonly]="readonly"
-            placeholder="Enter your Addresse"
+            placeholder="Enter your House"
             [ngClass]="{
-              'is-valid': !addresse && disabled,
-              'is-invalid': addresse?.errors && addresse?.touched && disabled
+              'is-valid': !house && disabled,
+              'is-invalid': house?.errors && house?.touched && disabled
             }"
             formControlName="name"
           />
-          <!-- <div *ngIf="addresse?.dirty" class="errorGroupe my-3">
-            <p *ngIf="addresse?.getError('maxlength')" class="alert alert-danger">
-              Username must be at least 20
+          <div *ngIf="house?.dirty" class="errorGroupe my-3">
+            <p
+              *ngIf="house?.getError('required')"
+              class="alert alert-danger text-capitalize"
+            >
+              Please enter your City
             </p>
-            <p *ngIf="addresse?.getError('mminlength')" class="alert alert-danger">
-              Username must be at least 3 characters long
+            <p
+              *ngIf="house?.getError('maxlength')"
+              class="alert alert-danger text-capitalize"
+            >
+              house house must be at least 20
             </p>
-          </div> -->
+            <p
+              *ngIf="house?.getError('minlength')"
+              class="alert alert-danger text-capitalize"
+            >
+              house location must be at least 3
+            </p>
+          </div>
+        </div>
+
+        <!-- Form Group (city,details)-->
+        <div class="row gx-3 mb-1">
+          <!-- Form Group (city)-->
+          <div class="col-md-6">
+            <label class="small mb-1 text-muted text-capitalize" for="inputCity"
+              >City</label
+            >
+            <input
+              class="form-control"
+              id="inputCity"
+              [readonly]="readonly"
+              type="text"
+              [value]="defaultCity"
+              placeholder="Enter your city"
+              [ngClass]="{
+                'is-valid': !city?.errors && disabled,
+                'is-invalid': city?.errors && city?.touched && disabled
+              }"
+              formControlName="city"
+            />
+            <div *ngIf="city?.dirty" class="errorGroupe my-3">
+              <p
+                *ngIf="city?.getError('required')"
+                class="alert alert-danger text-capitalize"
+              >
+                Please enter your City
+              </p>
+              <p
+                *ngIf="city?.getError('minlength')"
+                class="alert alert-danger text-capitalize"
+              >
+                your City must be at least 3
+              </p>
+              <p
+                *ngIf="city?.getError('maxlength')"
+                class="alert alert-danger text-capitalize"
+              >
+                your City must be at least 20
+              </p>
+            </div>
+          </div>
+          <!-- Form Group (details)-->
+          <div class="col-md-6">
+            <label
+              class="small mb-1 text-muted text-capitalize"
+              for="inputdetails"
+              >more details</label
+            >
+            <input
+              class="form-control"
+              id="inputdetails"
+              [readonly]="readonly"
+              [value]="defaultDetails"
+              type="text"
+              placeholder="Enter your details (Option)"
+              formControlName="details"
+            />
+          </div>
         </div>
 
         <app-btncart

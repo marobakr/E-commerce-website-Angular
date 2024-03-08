@@ -89,6 +89,12 @@ export class AccountComponent implements OnInit {
   }
   // remove property disabled and readonly from all input to update
   removedisable(): void {
+    const dumyData: object = { email: 'test@test123456.com' };
+    this._userSettingsService.updateUserData(dumyData).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+    });
     this.disabled = !this.disabled;
     this.readonly = !this.readonly;
   }
