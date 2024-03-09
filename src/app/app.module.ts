@@ -53,7 +53,6 @@ import { SpecificBrandComponent } from './pages/specific-brand/specific-brand.co
 import { CashOrderComponent } from './pages/cash-order/cash-order.component';
 import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
 import { SpecificOrderComponent } from './pages/specific-order/specific-order.component';
-import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { SettingsUserComponent } from './pages/settings-user/settings-user.component';
 import { SecurityComponent } from './pages/settings-user/components/security/security.component';
@@ -96,7 +95,6 @@ import { AddresseComponent } from './pages/settings-user/components/addresse/add
     CashOrderComponent,
     UserOrdersComponent,
     SpecificOrderComponent,
-    UserSettingsComponent,
     WishlistComponent,
     SettingsUserComponent,
     SecurityComponent,

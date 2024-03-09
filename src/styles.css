@@ -120,9 +120,6 @@ input:-internal-autofill-selected {
   color: white;
 }
 /* Form */
-.alarmTrue {
-  animation: scaling 0.5s linear infinite alternate;
-}
 
 /* paginations */
 .ngx-pagination .current {
@@ -170,11 +167,6 @@ input:-internal-autofill-selected {
 /* images table orders */
 .w-10 {
   width: 10%;
-}
-/* bg main nav  */
-.theme-a {
-  background: #dca;
-  color: #731;
 }
 
 /* Item Product Col */

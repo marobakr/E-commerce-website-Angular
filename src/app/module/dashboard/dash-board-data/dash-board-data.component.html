@@ -13,29 +13,18 @@
     [(ngModel)]="inputSearch"
   />
 </nav>
-<section class="container-fluid">
+<section class="container-fluid py-0">
   <div class="row justify-content-between parent">
     <nav class="col-md-3 col-lg-2 sidebar fixed-side">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
-          <li (click)="toggleLinks('orders')" class="nav-item mb-3">
+          <li class="nav-item mb-3">
             <a
-              [ngClass]="{ active: showOrderse }"
-              class="nav-link position-relative"
+              class="nav-link active position-relative"
               routerLink="/dashboard"
             >
               <i class="zmdi zmdi-widgets"></i>
               All Orders <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li (click)="toggleLinks('users')" class="nav-item">
-            <a
-              [ngClass]="{ active: showUsers }"
-              class="nav-link position-relative"
-              routerLink="/dashboard"
-            >
-              <i class="zmdi zmdi-widgets"></i>
-              All Userses <span class="sr-only"></span>
             </a>
           </li>
         </ul>
@@ -80,29 +69,127 @@
         </div>
       </div>
       <div class="projects mb-4">
-        <app-all-orders
-          *ngIf="showOrderse"
-          [allOrders]="allOrders"
-          [currentPage]="currentPage"
-          [inputSearch]="inputSearch"
-          [pageSize]="pageSize"
-          [totalItems]="totalItems"
-          [idPagination]="'orders'"
-        ></app-all-orders>
-        <app-all-user
-          *ngIf="showUsers"
-          [allUsers]="allUseres"
-          [currentPage]="currentPage"
-          [inputSearch]="inputSearch"
-          [pageSize]="pageSize"
-          [totalItems]="totalItems"
-          [idPagination]="'users'"
-        ></app-all-user>
+        <div class="projects-inner">
+          <header class="projects-header">
+            <div class="title">Ongoing Orders</div>
+            <div class="count">| {{ allOrders.length }} Orders</div>
+            <i class="zmdi zmdi-download"></i>
+          </header>
+          <table class="projects-table mb-0 table text-center">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Deadline</th>
+                <th>Customer</th>
+                <th>IsPaid</th>
+                <th>Payment Type</th>
+                <th class="text-right">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                class="danger-item"
+                *ngFor="
+                  let order of allOrders
+                    | namedashBoard : inputSearch
+                    | paginate
+                      : {
+                          id: 'paginations-Orders',
+                          itemsPerPage: pageSize,
+                          currentPage: currentPage,
+                          totalItems: totalItems
+                        };
+                  let i = index
+                "
+              >
+                <td>
+                  <p>
+                    <span class="fw-bold">{{ i + 1 }}: </span>#{{ order.id }}
+                  </p>
+                </td>
+                <td>
+                  <p>create in {{ order.createdAt | date : "short" }}</p>
+                  <p class="text-danger">
+                    deadline {{ order.updatedAt | date }}
+                  </p>
+                </td>
+                <td class="member">
+                  <div class="member-info">
+                    <p>{{ order.user.name }}</p>
+                    <p>{{ order.user.email }}</p>
+                  </div>
+                </td>
+                <td>
+                  <p>{{ order.totalOrderPrice }}</p>
+
+                  <p>
+                    isPaid:
+                    <i
+                      *ngIf="!order.isPaid"
+                      class="fa-solid fa-circle-xmark text-danger"
+                    ></i>
+                    <i
+                      *ngIf="order.isPaid"
+                      class="fa-solid fa-check text-main"
+                    ></i>
+                  </p>
+                </td>
+                <td>
+                  <i
+                    *ngIf="order.paymentMethodType === 'card'"
+                    class="fa-brands fa-cc-visa fa-xl cash"
+                  ></i>
+                  <i
+                    *ngIf="order.paymentMethodType === 'cash'"
+                    class="fa-solid fa-wallet fa-xl visa"
+                  ></i>
+
+                  <p>
+                    isDelivered:
+                    <i
+                      *ngIf="!order.isDelivered"
+                      class="fa-solid fa-circle-xmark text-danger"
+                    ></i>
+                    <i
+                      *ngIf="order.isDelivered"
+                      class="fa-solid fa-check text-main"
+                    ></i>
+                  </p>
+                </td>
+                <td>
+                  <div class="member-info">
+                    <p>
+                      {{
+                        order.shippingAddress?.city
+                          ? order.shippingAddress.city
+                          : "unknown"
+                      }}
+                    </p>
+                    <p>
+                      {{
+                        order.shippingAddress?.details
+                          ? order.shippingAddress.details
+                          : "unknown"
+                      }}
+                    </p>
+                    <p>
+                      {{
+                        order.shippingAddress?.phone
+                          ? order.shippingAddress.phone
+                          : "unknown"
+                      }}
+                    </p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <pagination-controls
         (pageChange)="pageChanged($event)"
         (pageBoundsCorrection)="pageChanged($event)"
-        [id]="idPagination"
+        [id]="'paginations-Orders'"
         [maxSize]="9"
         [directionLinks]="true"
         [autoHide]="true"
