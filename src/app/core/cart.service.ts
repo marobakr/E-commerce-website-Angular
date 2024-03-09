@@ -40,7 +40,7 @@ export class CartService {
 
   PaymentOnline(userData: object, idCart: string): Observable<any> {
     return this._httpClient.post(
-      `${baseUrl}/api/v1/orders/checkout-session/${idCart}?url=https://e-commerce-website-angular-seven.vercel.app`,
+      `${baseUrl}/api/v1/orders/checkout-session/${idCart}?url=https://e-commerce-website-angular-seven.vercel.app/`,
       { shippingAddress: userData }
     );
   }
