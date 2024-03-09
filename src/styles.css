@@ -3,6 +3,8 @@
 
 section {
   min-height: 75vh;
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
 }
 
 :root {

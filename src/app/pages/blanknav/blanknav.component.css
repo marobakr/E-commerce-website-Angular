@@ -95,7 +95,7 @@ nav {
   transition: 0.3s;
 }
 .arrowCateg i {
-  animation: bouncingLaing 1.5s infinite;
+  animation: bouncingLaing 2s infinite;
 }
 .goCartAnimations {
   animation: goAheadCart 2s linear alternate-reverse;
