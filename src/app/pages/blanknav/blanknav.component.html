@@ -185,11 +185,7 @@
           <label class="hoverable" for="fileInput">
             <img
               class="w-100 rounded-3"
-              [src]="
-                urlImage
-                  ? urlImage
-                  : 'https://www.w3schools.com/howto/img_avatar.png'
-              "
+              [src]="urlImage | userImage : avatar"
             />
             <div class="background position-absolute rounded-3"></div>
           </label>
