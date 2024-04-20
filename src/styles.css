@@ -235,8 +235,3 @@ input:-internal-autofill-selected {
   background-color: #99a799 !important;
   border-bottom-color: #99a799;
 }
-
-/* tesssssssssssssssssssssssssst */
-.alarmTrue {
-  animation: scaling 0.5s linear infinite forwards;
-}
