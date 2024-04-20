@@ -36,6 +36,7 @@ export class BlanknavComponent implements OnInit {
   isClick: boolean = false;
   wishListCount: number = 0;
   urlImage: any = '';
+  avatar: any = 'https://www.w3schools.com/howto/img_avatar.png';
   userName: any = '';
   userId: string = '';
   isScroll: boolean = false;

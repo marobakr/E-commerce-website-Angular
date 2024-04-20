@@ -58,6 +58,7 @@ import { SettingsUserComponent } from './pages/settings-user/settings-user.compo
 import { SecurityComponent } from './pages/settings-user/components/security/security.component';
 import { AccountComponent } from './pages/settings-user/components/account/account.component';
 import { AddresseComponent } from './pages/settings-user/components/addresse/addresse.component';
+import { UserImagePipe } from './pipes/user-image.pipe';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { AddresseComponent } from './pages/settings-user/components/addresse/add
     SecurityComponent,
     AccountComponent,
     AddresseComponent,
+    UserImagePipe,
   ],
 
   imports: [
