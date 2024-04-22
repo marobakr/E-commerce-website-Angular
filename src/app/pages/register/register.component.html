@@ -6,6 +6,7 @@
     [formGroup]="registerForm"
   >
     <!-- user name -->
+    {{ phone?.errors | json }}
     <div class="form-floating mb-3">
       <input
         type="text"
@@ -126,7 +127,13 @@
         <p *ngIf="phone?.getError('required')" class="alert alert-danger">
           your phone is required
         </p>
-        <p *ngIf="phone?.getError('pattern')" class="alert alert-danger">
+        <p *ngIf="phone?.getError('havestring')" class="alert alert-danger">
+          your phone dosn't contain string
+        </p>
+        <p
+          *ngIf="phone?.getError('pattern') && !phone?.getError('havestring')"
+          class="alert alert-danger"
+        >
           Please enter a valid Egyptian phone number
         </p>
       </div>

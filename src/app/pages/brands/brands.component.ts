@@ -34,6 +34,7 @@ export class BrandsComponent implements OnInit {
     });
   }
   pageChanged(event: any) {
+    console.log(event);
     this._productsDataService.allBrand(event).subscribe({
       next: (response) => {
         this.allBrands = response.data;

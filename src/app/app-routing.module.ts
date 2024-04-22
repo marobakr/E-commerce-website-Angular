@@ -96,7 +96,6 @@ const routes: Routes = [
       },
     ],
   },
-
   {
     path: 'dashboard',
     canActivate: [adminGuard],
