@@ -8,7 +8,7 @@ import { AbstractControl, ValidatorFn, FormGroup } from '@angular/forms';
  * @function confirmPassword
  * @param {control} controlName1
  * @param {control} controlName2
- * @returns {ValidatorFn }
+ * @returns {ValidatorFn}
 
  * @arrowFunction
  * @param {formGroup}
