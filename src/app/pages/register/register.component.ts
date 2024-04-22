@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/core/auth.service';
 import { NotifierService } from 'angular-notifier';
 import { Router } from '@angular/router';
 import { streatch } from 'src/app/shared/animations/toggle-fade';
-import { Subscription } from 'rxjs';
+import { confirmPassword, validNumber } from './customValidations';
 
 @Component({
   selector: 'app-register',
@@ -26,15 +26,13 @@ export class RegisterComponent {
   ) {}
   isLoding: boolean = false;
 
-  confirmPassword = (control: AbstractControl) => {
-    const password = control.get('password')?.value;
-    const rePassword = control.get('rePassword')?.value;
-    if (rePassword !== password) {
-      control.get('rePassword')?.setErrors({ noMatch: true });
-    }
-  };
   registerForm: FormGroup = this._formBuilder.group(
     {
+      /**
+       * here i was replace inital value from null to empty string
+       * to i make custom validations so when the function invoke
+       * he git null value and throw an error so i replace it
+       * */
       name: [
         '',
         [
@@ -50,11 +48,15 @@ export class RegisterComponent {
       ],
       rePassword: [null, [Validators.required]],
       phone: [
-        null,
-        [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)],
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^01[0125][0-9]{8}$/),
+          validNumber,
+        ],
       ],
     },
-    { validators: [this.confirmPassword] }
+    { validators: [confirmPassword] }
   );
 
   //^ suger syntax
