@@ -5,6 +5,7 @@
     (ngSubmit)="handleForm(registerForm)"
     [formGroup]="registerForm"
   >
+    {{ name?.errors | json }}
     <!-- user name -->
     <div class="form-floating mb-3">
       <input

@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/core/auth.service';
 import { NotifierService } from 'angular-notifier';
 import { Router } from '@angular/router';
 import { streatch } from 'src/app/shared/animations/toggle-fade';
-import { confirmPassword, validNumber } from './customValidations';
+import { confirmPassword, minLength, validNumber } from './customValidations';
 
 @Component({
   selector: 'app-register',
@@ -38,7 +38,8 @@ export class RegisterComponent {
         [
           Validators.required,
           Validators.maxLength(20),
-          Validators.minLength(3),
+          // Validators.minLength(3),
+          minLength(3),
         ],
       ],
       email: [null, [Validators.required, Validators.email]],
