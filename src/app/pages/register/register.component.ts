@@ -29,25 +29,17 @@ export class RegisterComponent {
   registerForm: FormGroup = this._formBuilder.group(
     {
       /**
-       * here i was replace inital value from null to empty string
+       * here i was replace initial value from null to empty string
        * to i make custom validations so when the function invoke
        * he git null value and throw an error so i replace it
        * */
-      name: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(20),
-          // Validators.minLength(3),
-          minLength(3),
-        ],
-      ],
+      name: ['', [Validators.required, Validators.maxLength(20), minLength(3)]],
       email: [null, [Validators.required, Validators.email]],
       password: [
-        null,
+        '',
         [Validators.required, Validators.pattern(/^[A-Z][a-z0-9]{6,20}$/)],
       ],
-      rePassword: [null, [Validators.required]],
+      rePassword: ['', [Validators.required]],
       phone: [
         '',
         [
@@ -57,7 +49,7 @@ export class RegisterComponent {
         ],
       ],
     },
-    { validators: [confirmPassword] }
+    { validators: [confirmPassword('password', 'rePassword')] }
   );
 
   //^ suger syntax
