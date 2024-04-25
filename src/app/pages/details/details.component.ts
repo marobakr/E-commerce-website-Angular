@@ -3,6 +3,7 @@ import {
   AfterContentInit,
   Component,
   ElementRef,
+  OnInit,
   Renderer2,
   ViewChild,
 } from '@angular/core';
@@ -23,7 +24,7 @@ import { ProductsComponent } from '../products/products.component';
   styleUrls: ['./details.component.css'],
   animations: [cartSlideLeft, cartSlideRight, slidUp],
 })
-export class DetailsComponent implements AfterContentInit {
+export class DetailsComponent implements OnInit {
   constructor(
     private _productsDataService: ProductsDataService,
     private _activatedRoute: ActivatedRoute,
@@ -41,21 +42,10 @@ export class DetailsComponent implements AfterContentInit {
 
   @ViewChild('allIMages') sliderImages!: ElementRef;
 
-  ngAfterContentInit(): void {
-    this.getIdPrameter();
-  }
-  getIdPrameter(): void {
-    this._activatedRoute.paramMap.subscribe({
-      next: (respons: any) => {
-        this.idProduct = respons.params.id;
-        this.displayDetails(respons.params.id);
-      },
-    });
-  }
-  displayDetails(id: string): void {
-    this._productsDataService.getDetails(id).subscribe({
-      next: (respons) => {
-        this.productDetails = respons.data;
+  ngOnInit(): void {
+    this._activatedRoute.data.subscribe({
+      next: (params: any) => {
+        this.productDetails = params.mydetails.data;
         const lastIndex = this.productDetails.images[0];
         this.activeImage = lastIndex;
         this.getDinamicCols();
