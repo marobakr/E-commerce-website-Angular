@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { BrandsComponent } from './pages/brands/brands.component';
@@ -23,7 +23,7 @@ import { adminGuard } from './guards/admin.guard';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { SettingsUserComponent } from './pages/settings-user/settings-user.component';
 import { lodingGuard } from './guards/loding.guard';
-import { productResolver } from './pipes/product.resolver';
+import { productResolver } from './guards/product.resolver';
 
 const routes: Routes = [
   {
@@ -122,7 +122,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
