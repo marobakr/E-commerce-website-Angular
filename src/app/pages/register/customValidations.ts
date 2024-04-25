@@ -12,7 +12,7 @@ import { AbstractControl, ValidatorFn, FormGroup } from '@angular/forms';
 
  * @arrowFunction
  * @param {formGroup}
- * @returns {null  || {[key: string]: boolean } }
+ * @returns {null | {[key: string]: boolean } }
  */
 export function confirmPassword(controlName1: string, controlName2: string) {
   return (FormGroup: FormGroup): null | { [key: string]: boolean } => {

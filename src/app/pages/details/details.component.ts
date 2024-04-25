@@ -6,7 +6,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/core/cart.service';
 import { ProductsDataService } from 'src/app/core/products-data.service';
 import { Products } from 'src/app/interfaces/products';
@@ -15,6 +15,7 @@ import {
   cartSlideRight,
   slidUp,
 } from 'src/app/shared/animations/toggle-fade';
+import { ProductsComponent } from '../products/products.component';
 
 @Component({
   selector: 'app-details',
@@ -27,24 +28,26 @@ export class DetailsComponent implements AfterContentInit {
     private _productsDataService: ProductsDataService,
     private _activatedRoute: ActivatedRoute,
     private _cartService: CartService,
-    private _notifierService: NotifierService
+    private _notifierService: NotifierService,
+    private _router: Router
   ) {}
+  productDetails: Products = {} as Products;
   selectedImage: string = '';
   activeImage: string = '';
-  isLoding: boolean = false;
-  productDetails: Products = {} as Products;
   animationState: string = 'start';
+  idProduct: string = '';
   offer: number = 0;
+  isLoding: boolean = false;
 
   @ViewChild('allIMages') sliderImages!: ElementRef;
 
   ngAfterContentInit(): void {
     this.getIdPrameter();
   }
-
   getIdPrameter(): void {
     this._activatedRoute.paramMap.subscribe({
       next: (respons: any) => {
+        this.idProduct = respons.params.id;
         this.displayDetails(respons.params.id);
       },
     });
@@ -101,5 +104,46 @@ export class DetailsComponent implements AfterContentInit {
     } else {
       this.offer = detalsProduct.priceAfterDiscount;
     }
+  }
+
+  next() {
+    this._productsDataService.allProducts().subscribe({
+      next: (arr) => {
+        let startFromLength = arr.data.findIndex(
+          (obj: Products) => obj.id === this.idProduct
+        );
+
+        if (startFromLength >= 39) {
+          /* minus one to will i incress it with 1 */
+          startFromLength = -1;
+        }
+        console.log(startFromLength);
+        /* get the init id when i open details padge */
+        let nextId = arr.data[startFromLength + 1].id;
+
+        this._router.navigate(['/details', nextId]);
+        /* update idProduct with the prev id */
+        this.idProduct = nextId;
+      },
+    });
+  }
+  prev() {
+    this._productsDataService.allProducts().subscribe({
+      next: (arr) => {
+        let startFromLength = arr.data.findIndex(
+          (obj: Products) => obj.id === this.idProduct
+        );
+        if (startFromLength <= 0) {
+          /* minus one to will i incress it with 1 */
+          startFromLength = arr.data.length - 1;
+        }
+        /* get the init id when i open details padge */
+        let nextId = arr.data[startFromLength - 1].id;
+
+        this._router.navigate(['/details', nextId]);
+        // /* update idProduct with the prev id */
+        this.idProduct = nextId;
+      },
+    });
   }
 }

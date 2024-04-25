@@ -1,3 +1,8 @@
 img.active {
   border: 2px solid #88ab8e;
 }
+.navigate {
+  .btn__prev {
+    width: fit-content;
+  }
+}

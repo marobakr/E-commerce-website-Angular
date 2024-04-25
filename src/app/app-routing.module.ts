@@ -31,6 +31,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full', title: 'home' },
       { path: 'home', component: HomeComponent, title: 'home' },
+      { path: 'home/new', component: HomeComponent, title: 'home' },
       { path: 'cart', component: CartComponent, title: 'Cart' },
       { path: 'products', component: ProductsComponent, title: 'Products' },
       { path: 'brands', component: BrandsComponent, title: 'Brands' },

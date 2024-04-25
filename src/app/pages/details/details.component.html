@@ -1,5 +1,6 @@
 <section class="w-75 mx-auto" *ngIf="productDetails.images">
   <div class="row align-item-center justify-content-center">
+    <!-- <button class="btn__prev btn btn-main align-self-end">prev</button> -->
     <div @slidLeft class="col-lg-4 mb-5">
       <figure [@slide]="animationState">
         <img class="w-100" [src]="activeImage" [alt]="productDetails.title" />
@@ -79,5 +80,21 @@
         [loderBgMain]="true"
       ></app-btncart>
     </div>
+  </div>
+  <div
+    class="py-4 navigate d-flex justify-content-between gap-5 align-items-center"
+  >
+    <button
+      (click)="prev()"
+      class="btn__prev btn btn-main text-white align-self-end text-capitalize"
+    >
+      prev
+    </button>
+    <button
+      (click)="next()"
+      class="btn__prev btn btn-main text-white align-self-end text-capitalize"
+    >
+      next
+    </button>
   </div>
 </section>
