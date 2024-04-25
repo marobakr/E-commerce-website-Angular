@@ -22,6 +22,7 @@ import { SpecificOrderComponent } from './pages/specific-order/specific-order.co
 import { adminGuard } from './guards/admin.guard';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { SettingsUserComponent } from './pages/settings-user/settings-user.component';
+import { lodingGuard } from './guards/loding.guard';
 
 const routes: Routes = [
   {
@@ -33,7 +34,11 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent, title: 'home' },
       { path: 'home/new', component: HomeComponent, title: 'home' },
       { path: 'cart', component: CartComponent, title: 'Cart' },
-      { path: 'products', component: ProductsComponent, title: 'Products' },
+      {
+        path: 'products',
+        component: ProductsComponent,
+        title: 'Products',
+      },
       { path: 'brands', component: BrandsComponent, title: 'Brands' },
       {
         path: 'categories',
@@ -42,6 +47,7 @@ const routes: Routes = [
       },
       { path: 'details/:id', component: DetailsComponent, title: 'Details' },
       {
+        canDeactivate: [lodingGuard],
         path: 'payment/:idcart',
         component: PaymentComponent,
         title: 'Payment',
