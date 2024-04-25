@@ -23,7 +23,7 @@ import { adminGuard } from './guards/admin.guard';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { SettingsUserComponent } from './pages/settings-user/settings-user.component';
 import { lodingGuard } from './guards/loding.guard';
-import { productResolver } from './pipes/product.resolver';
+import { productResolver } from './guards/product.resolver';
 
 const routes: Routes = [
   {
