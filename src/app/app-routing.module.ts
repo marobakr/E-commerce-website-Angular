@@ -23,6 +23,7 @@ import { adminGuard } from './guards/admin.guard';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { SettingsUserComponent } from './pages/settings-user/settings-user.component';
 import { lodingGuard } from './guards/loding.guard';
+import { productResolver } from './pipes/product.resolver';
 
 const routes: Routes = [
   {
@@ -45,7 +46,12 @@ const routes: Routes = [
         component: CategoriesComponent,
         title: 'Categories',
       },
-      { path: 'details/:id', component: DetailsComponent, title: 'Details' },
+      {
+        path: 'details/:id',
+        component: DetailsComponent,
+        title: 'Details',
+        resolve: { mydetails: productResolver },
+      },
       {
         canDeactivate: [lodingGuard],
         path: 'payment/:idcart',
