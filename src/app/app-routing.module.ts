@@ -113,6 +113,7 @@ const routes: Routes = [
     path: 'dashboard',
     canActivate: [adminGuard],
     title: ' DahBoard  ',
+    data: { role: 'admin' },
     loadChildren: () =>
       import('./module/dashboard/dashboard.module').then(
         (mod) => mod.DashboardModule
