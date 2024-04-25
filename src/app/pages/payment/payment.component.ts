@@ -20,6 +20,7 @@ export class PaymentComponent implements OnInit {
   details!: FormControl;
   _idCart: string = '';
   isLoding: boolean = false;
+  canDeActivate: boolean = false;
   ngOnInit(): void {
     this.initFormControl();
     this.initFormGroup();
@@ -62,6 +63,7 @@ export class PaymentComponent implements OnInit {
       this._cartService.PaymentOnline(userInfo.value, this._idCart).subscribe({
         next: (respons) => {
           this._cartService.cartNumber.next(0);
+          this.canDeActivate = true;
           window.open(respons.session.url);
           this.isLoding = false;
         },
