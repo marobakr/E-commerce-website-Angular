@@ -1,6 +1,5 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
