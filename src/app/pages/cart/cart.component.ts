@@ -27,9 +27,6 @@ export class CartComponent implements AfterViewInit {
         this.cartProduct = respons;
         this._cartService.cartNumber.next(this.cartProduct.numOfCartItems);
       },
-      error: (erorr) => {
-        console.log(erorr);
-      },
     });
   }
 
@@ -43,8 +40,6 @@ export class CartComponent implements AfterViewInit {
         this._notifierService.notify('error', 'Item removed from the cart');
       },
       error: (erorr) => {
-        console.log(erorr);
-
         Btn.isLoding = false;
       },
     });
@@ -57,9 +52,6 @@ export class CartComponent implements AfterViewInit {
           this._cartService.cartNumber.next(respons.numOfCartItems);
           this._notifierService.notify(`${status}`, `${msg}`);
         },
-        error: (erorr) => {
-          console.log(erorr);
-        },
       });
     }
   }
@@ -70,9 +62,6 @@ export class CartComponent implements AfterViewInit {
           this.cartProduct = null;
           this._cartService.cartNumber.next(0);
         }
-      },
-      error: (erorr) => {
-        console.log(erorr);
       },
     });
   }

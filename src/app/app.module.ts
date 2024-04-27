@@ -59,6 +59,7 @@ import { SecurityComponent } from './pages/settings-user/components/security/sec
 import { AccountComponent } from './pages/settings-user/components/account/account.component';
 import { AddresseComponent } from './pages/settings-user/components/addresse/addresse.component';
 import { UserImagePipe } from './pipes/user-image.pipe';
+import { HandleGlobalErorrInterceptor } from './core/interceptors/handle-global-erorr.interceptor';
 
 @NgModule({
   declarations: [
@@ -133,6 +134,11 @@ import { UserImagePipe } from './pipes/user-image.pipe';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LodingInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HandleGlobalErorrInterceptor,
       multi: true,
     },
   ],

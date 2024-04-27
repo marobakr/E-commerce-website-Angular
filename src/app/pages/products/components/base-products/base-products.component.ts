@@ -69,9 +69,6 @@ export class BaseProductsComponent implements OnInit {
         this._notifierService.notify('success', `${respons.message}`);
         btnComponent.isLoding = false;
       },
-      error: (erorr) => {
-        console.log(erorr);
-      },
     });
   }
   ngAfterContentChecked(): void {
