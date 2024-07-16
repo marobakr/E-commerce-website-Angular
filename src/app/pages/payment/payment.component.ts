@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { NotifierService } from 'angular-notifier';
 import { CartService } from 'src/app/core/cart.service';
 
 @Component({

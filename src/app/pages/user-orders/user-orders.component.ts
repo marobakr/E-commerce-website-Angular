@@ -1,4 +1,3 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/core/cart.service';
 import { Allorders } from 'src/app/interfaces/allorders';

@@ -1,6 +1,6 @@
-import { ForgetpasswordService } from './../../core/forgetpassword.service';
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ForgetpasswordService } from './../../core/forgetpassword.service';
 
 import {
   AbstractControl,
@@ -8,9 +8,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { toggleFade } from 'src/app/shared/animations/toggle-fade';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forget-password',

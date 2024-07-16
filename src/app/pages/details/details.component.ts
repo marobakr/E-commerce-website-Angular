@@ -1,13 +1,6 @@
-import { NotifierService } from 'angular-notifier';
-import {
-  AfterContentInit,
-  Component,
-  ElementRef,
-  OnInit,
-  Renderer2,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { CartService } from 'src/app/core/cart.service';
 import { ProductsDataService } from 'src/app/core/products-data.service';
 import { Products } from 'src/app/interfaces/products';
@@ -16,7 +9,6 @@ import {
   cartSlideRight,
   slidUp,
 } from 'src/app/shared/animations/toggle-fade';
-import { ProductsComponent } from '../products/products.component';
 
 @Component({
   selector: 'app-details',

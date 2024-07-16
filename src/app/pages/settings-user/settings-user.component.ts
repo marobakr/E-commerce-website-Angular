@@ -1,13 +1,6 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { NotifierService } from 'angular-notifier';
-import { CartService } from 'src/app/core/cart.service';
+import { FormControl, FormGroup } from '@angular/forms';
 import { UserSettingsService } from 'src/app/core/user-settings.service';
 
 @Component({

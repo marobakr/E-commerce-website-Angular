@@ -1,7 +1,7 @@
-import { Allorders } from './../../interfaces/allorders';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/core/cart.service';
+import { Allorders } from './../../interfaces/allorders';
 
 @Component({
   selector: 'app-specific-order',

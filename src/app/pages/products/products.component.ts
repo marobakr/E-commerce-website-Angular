@@ -2,13 +2,10 @@ import { ViewportScroller } from '@angular/common';
 import {
   Component,
   ElementRef,
-  Input,
   OnInit,
   Renderer2,
   ViewChild,
-  ViewChildren,
 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 import { ProductsDataService } from 'src/app/core/products-data.service';
 import { Products } from 'src/app/interfaces/products';
 import { feadToggle } from 'src/app/shared/animations/toggle-fade';

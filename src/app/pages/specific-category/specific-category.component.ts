@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsDataService } from 'src/app/core/products-data.service';
 import { Categoreis } from 'src/app/interfaces/categoreis';

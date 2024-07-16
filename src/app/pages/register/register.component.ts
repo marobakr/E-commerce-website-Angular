@@ -5,9 +5,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { AuthService } from 'src/app/core/auth.service';
-import { NotifierService } from 'angular-notifier';
 import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
+import { AuthService } from 'src/app/core/auth.service';
 import { streatch } from 'src/app/shared/animations/toggle-fade';
 import { confirmPassword, minLength, validNumber } from './customValidations';
 

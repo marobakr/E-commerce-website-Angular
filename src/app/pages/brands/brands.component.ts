@@ -1,8 +1,7 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ProductsDataService } from 'src/app/core/products-data.service';
 import { Categoreis } from 'src/app/interfaces/categoreis';
-import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-brands',
